@@ -1,1 +1,1 @@
-# task_shop
+# intexsoft_shop
