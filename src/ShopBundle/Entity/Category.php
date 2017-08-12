@@ -2,16 +2,15 @@
 
 namespace ShopBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\categoryRepository")
  */
-class Category
+class category
 {
     /**
      * @var int
@@ -19,8 +18,6 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Product.php")
-     * @ORM\JoinColumn(name="id", referencedColumnName="category_id")
      */
     private $id;
 
@@ -32,9 +29,10 @@ class Category
     private $title;
 
     /**
-     * @var Image
+     * @var image
      *
-     * @ORM\Column(name="image", type="integer")
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\image")
+     * @ORM\JoinColumn(name="image", referencedColumnName="id")
      */
     private $image;
 
@@ -47,17 +45,10 @@ class Category
     }
 
     /**
-     * @var ArrayCollection[]
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="idCategory")
-     * @ORM\JoinColumn(name="id_category", referencedColumnName="id")
-     */
-    protected $products;
-
-    /**
      * Set title
      *
      * @param string $title
-     * @return Category
+     * @return category
      */
     public function setTitle($title)
     {
@@ -77,25 +68,19 @@ class Category
     }
 
     /**
-     * Set image
-     *
-     * @param integer $image
-     * @return Category
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return Image
+     * @return image
      */
     public function getImage()
     {
         return $this->image;
     }
-}
+
+    /**
+     * @param image $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    }

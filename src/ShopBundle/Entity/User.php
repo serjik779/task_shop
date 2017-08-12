@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * user
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\userRepository")
  */
-class User
+class user
 {
     /**
      * @var int
@@ -57,16 +57,12 @@ class User
     private $phone;
 
     /**
-     * @var Roles
+     * @var roles
      *
-     * @ORM\OneToOne(targetEntity="Roles")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="role_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToOne(targetEntity="ShopBundle\Entity\roles")
+     * @ORM\JoinColumn(name="id_role", referencedColumnName="id")
      */
-    private $roleId;
-
-
+    private $id_role;
     /**
      * Get id
      *
@@ -81,7 +77,7 @@ class User
      * Set name
      *
      * @param string $name
-     * @return User
+     * @return user
      */
     public function setName($name)
     {
@@ -104,7 +100,7 @@ class User
      * Set password
      *
      * @param string $password
-     * @return User
+     * @return user
      */
     public function setPassword($password)
     {
@@ -127,7 +123,7 @@ class User
      * Set email
      *
      * @param string $email
-     * @return User
+     * @return user
      */
     public function setEmail($email)
     {
@@ -150,7 +146,7 @@ class User
      * Set address
      *
      * @param string $address
-     * @return User
+     * @return user
      */
     public function setAddress($address)
     {
@@ -173,7 +169,7 @@ class User
      * Set phone
      *
      * @param string $phone
-     * @return User
+     * @return user
      */
     public function setPhone($phone)
     {
@@ -191,4 +187,22 @@ class User
     {
         return $this->phone;
     }
+
+    /**
+     * @return roles
+     */
+    public function getIdRole()
+    {
+        return $this->id_role;
+    }
+
+    /**
+     * @param roles $id_role
+     * @return self
+     */
+    public function setIdRole($id_role)
+    {
+        $this->id_role = $id_role;
+    }
+
 }

@@ -2,17 +2,15 @@
 
 namespace ShopBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Tests\Common\Cache\CacheTest;
 
 /**
- * Product
+ * product
  *
  * @ORM\Table(name="product")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\ProductRepository")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\productRepository")
  */
-class Product
+class product
 {
     /**
      * @var int
@@ -45,12 +43,10 @@ class Product
     private $cost;
 
     /**
-     * @var Category
+     * @var category
      *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $categoryId;
 
@@ -75,22 +71,6 @@ class Product
      */
     private $systemId;
 
-    /**
-     * @var ArrayCollection[]
-     *
-     * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Image", inversedBy="productImage")
-     * @ORM\JoinTable(name="product_image")
-     */
-    protected $image;
-
-
-    /**
-     * @param $image Image
-     */
-    public function addImage(Image $image) {
-        $this->image[] = $image;
-    }
 
     /**
      * Get id
@@ -106,7 +86,7 @@ class Product
      * Set title
      *
      * @param string $title
-     * @return Product
+     * @return product
      */
     public function setTitle($title)
     {
@@ -129,7 +109,7 @@ class Product
      * Set description
      *
      * @param string $description
-     * @return Product
+     * @return product
      */
     public function setDescription($description)
     {
@@ -152,7 +132,7 @@ class Product
      * Set cost
      *
      * @param float $cost
-     * @return Product
+     * @return product
      */
     public function setCost($cost)
     {
@@ -172,22 +152,7 @@ class Product
     }
 
     /**
-     * Set categoryId
-     *
-     * @param integer $categoryId
-     * @return Product
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
-
-        return $this;
-    }
-
-    /**
-     * Get categoryId
-     *
-     * @return Category
+     * @return category
      */
     public function getCategoryId()
     {
@@ -195,10 +160,18 @@ class Product
     }
 
     /**
+     * @param category $categoryId
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
+    }
+
+    /**
      * Set amount
      *
      * @param integer $amount
-     * @return Product
+     * @return product
      */
     public function setAmount($amount)
     {
@@ -221,7 +194,7 @@ class Product
      * Set brand
      *
      * @param string $brand
-     * @return Product
+     * @return product
      */
     public function setBrand($brand)
     {
@@ -244,7 +217,7 @@ class Product
      * Set systemId
      *
      * @param integer $systemId
-     * @return Product
+     * @return product
      */
     public function setSystemId($systemId)
     {
