@@ -3,14 +3,15 @@
 namespace ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Monolog\Handler\DebugHandler;
 
 /**
- * order_iterms
+ * OrderIterms
  *
  * @ORM\Table(name="order_iterms")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\order_itermsRepository")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrderItemsRepository")
  */
-class order_iterms
+class OrderItems
 {
     /**
      * @var int
@@ -50,9 +51,9 @@ class order_iterms
     private $discount;
 
     /**
-     * @var order_info
+     * @var OrderItems
      *
-     * @ORM\OneToOne(targetEntity="ShopBundle\Entity\order_info")
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\OrderInfo")
      * @ORM\JoinColumn(name="id_order_info", referencedColumnName="id")
      */
     private $idOrderInfo;
@@ -65,9 +66,9 @@ class order_iterms
     private $amount;
 
     /**
-     * @var delivery_type
+     * @var DeliveryType
      *
-     * @ORM\OneToOne(targetEntity="ShopBundle\Entity\delivery_type")
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\DeliveryType")
      * @ORM\JoinColumn(name="id_delivery_type", referencedColumnName="id")
      */
     private $idDeliveryType;
@@ -87,7 +88,7 @@ class order_iterms
      * Set systemId
      *
      * @param integer $systemId
-     * @return order_iterms
+     * @return OrderItems
      */
     public function setSystemId($systemId)
     {
@@ -110,7 +111,7 @@ class order_iterms
      * Set title
      *
      * @param string $title
-     * @return order_iterms
+     * @return OrderItems
      */
     public function setTitle($title)
     {
@@ -133,7 +134,7 @@ class order_iterms
      * Set cost
      *
      * @param float $cost
-     * @return order_iterms
+     * @return OrderItems
      */
     public function setCost($cost)
     {
@@ -156,7 +157,7 @@ class order_iterms
      * Set discount
      *
      * @param float $discount
-     * @return order_iterms
+     * @return OrderItems
      */
     public function setDiscount($discount)
     {
@@ -176,7 +177,7 @@ class order_iterms
     }
 
     /**
-     * @return order_info
+     * @return OrderItems
      */
     public function getIdOrderInfo()
     {
@@ -184,12 +185,13 @@ class order_iterms
     }
 
     /**
-     * @param order_info $idOrderInfo
-     * @return self
+     * @param OrderItems $idOrderInfo
+     * @return OrderItems
      */
     public function setIdOrderInfo($idOrderInfo)
     {
         $this->idOrderInfo = $idOrderInfo;
+        return $this;
     }
 
 
@@ -197,7 +199,7 @@ class order_iterms
      * Set amount
      *
      * @param integer $amount
-     * @return order_iterms
+     * @return OrderItems
      */
     public function setAmount($amount)
     {
@@ -217,7 +219,7 @@ class order_iterms
     }
 
     /**
-     * @return delivery_type
+     * @return DeliveryType
      */
     public function getIdDeliveryType()
     {
@@ -225,12 +227,13 @@ class order_iterms
     }
 
     /**
-     * @param delivery_type $idDeliveryType
-     * @return self
+     * @param DeliveryType $idDeliveryType
+     * @return OrderItems
      */
     public function setIdDeliveryType($idDeliveryType)
     {
         $this->idDeliveryType = $idDeliveryType;
+        return $this;
     }
 
 }

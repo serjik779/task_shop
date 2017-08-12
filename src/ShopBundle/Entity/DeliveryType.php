@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * pages
+ * DeliveryType
  *
- * @ORM\Table(name="pages")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\pagesRepository")
+ * @ORM\Table(name="delivery_type")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\DeliveryTypeRepository")
  */
-class pages
+class DeliveryType
 {
     /**
      * @var int
@@ -29,11 +29,11 @@ class pages
     private $title;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="comment", type="string", length=255)
+     * @ORM\Column(name="cost", type="float")
      */
-    private $comment;
+    private $cost;
 
 
     /**
@@ -50,7 +50,7 @@ class pages
      * Set title
      *
      * @param string $title
-     * @return pages
+     * @return DeliveryType
      */
     public function setTitle($title)
     {
@@ -70,25 +70,25 @@ class pages
     }
 
     /**
-     * Set comment
+     * Set cost
      *
-     * @param string $comment
-     * @return pages
+     * @param float $cost
+     * @return DeliveryType
      */
-    public function setComment($comment)
+    public function setCost($cost)
     {
-        $this->comment = $comment;
+        $this->cost = $cost;
 
         return $this;
     }
 
     /**
-     * Get comment
+     * Get cost
      *
-     * @return string 
+     * @return float 
      */
-    public function getComment()
+    public function getCost()
     {
-        return $this->comment;
+        return $this->cost;
     }
 }

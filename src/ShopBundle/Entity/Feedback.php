@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * feedpack
+ * Feedback
  *
- * @ORM\Table(name="feedpack")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\feedpackRepository")
+ * @ORM\Table(name="feedback")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\FeedpackRepository")
  */
-class feedpack
+class Feedback
 {
     /**
      * @var int
@@ -50,7 +50,7 @@ class feedpack
      * Set name
      *
      * @param string $name
-     * @return feedpack
+     * @return Feedback
      */
     public function setName($name)
     {
@@ -73,7 +73,7 @@ class feedpack
      * Set email
      *
      * @param string $email
-     * @return feedpack
+     * @return Feedback
      */
     public function setEmail($email)
     {

@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * cart
+ * Cart
  *
  * @ORM\Table(name="cart")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\cartRepository")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\CartRepository")
  */
-class cart
+class Cart
 {
     /**
      * @var int
@@ -57,7 +57,7 @@ class cart
     private $amount;
 
     /**
-     * @var int
+     * @var DeliveryType
      *
      * @ORM\Column(name="id_delivery", type="integer")
      */
@@ -101,7 +101,7 @@ class cart
      * Set title
      *
      * @param string $title
-     * @return cart
+     * @return Cart
      */
     public function setTitle($title)
     {
@@ -124,7 +124,7 @@ class cart
      * Set cost
      *
      * @param float $cost
-     * @return cart
+     * @return Cart
      */
     public function setCost($cost)
     {
@@ -147,7 +147,7 @@ class cart
      * Set discount
      *
      * @param float $discount
-     * @return cart
+     * @return Cart
      */
     public function setDiscount($discount)
     {
@@ -170,7 +170,7 @@ class cart
      * Set amount
      *
      * @param integer $amount
-     * @return cart
+     * @return Cart
      */
     public function setAmount($amount)
     {
@@ -193,7 +193,7 @@ class cart
      * Set idDelivery
      *
      * @param integer $idDelivery
-     * @return cart
+     * @return Cart
      */
     public function setIdDelivery($idDelivery)
     {
@@ -205,7 +205,7 @@ class cart
     /**
      * Get idDelivery
      *
-     * @return integer 
+     * @return DeliveryType
      */
     public function getIdDelivery()
     {

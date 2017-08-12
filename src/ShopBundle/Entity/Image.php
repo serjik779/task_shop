@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * image
+ * Image
  *
- * @ORM\Table(name="image")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\imageRepository")
+ * @ORM\Table(name="Image")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\ImageRepository")
  */
-class image
+class Image
 {
     /**
      * @var int
@@ -42,6 +42,11 @@ class image
      */
     private $created;
 
+    /**
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Product", inversedBy="image")
+     */
+    protected $productImage;
 
     /**
      * Get id
@@ -57,7 +62,7 @@ class image
      * Set title
      *
      * @param string $title
-     * @return image
+     * @return Image
      */
     public function setTitle($title)
     {
@@ -80,7 +85,7 @@ class image
      * Set filename
      *
      * @param string $filename
-     * @return image
+     * @return Image
      */
     public function setFilename($filename)
     {
@@ -103,7 +108,7 @@ class image
      * Set created
      *
      * @param \DateTime $created
-     * @return image
+     * @return Image
      */
     public function setCreated($created)
     {

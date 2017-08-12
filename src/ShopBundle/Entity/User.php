@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * user
+ * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\userRepository")
  */
-class user
+class User
 {
     /**
      * @var int
@@ -56,6 +56,16 @@ class user
      */
     private $phone;
 
+    /**
+     * @var Roles
+     *
+     * @ORM\OneToOne(targetEntity="Roles")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * })
+     */
+    private $roleId;
+
 
     /**
      * Get id
@@ -71,7 +81,7 @@ class user
      * Set name
      *
      * @param string $name
-     * @return user
+     * @return User
      */
     public function setName($name)
     {
@@ -94,7 +104,7 @@ class user
      * Set password
      *
      * @param string $password
-     * @return user
+     * @return User
      */
     public function setPassword($password)
     {
@@ -117,7 +127,7 @@ class user
      * Set email
      *
      * @param string $email
-     * @return user
+     * @return User
      */
     public function setEmail($email)
     {
@@ -140,7 +150,7 @@ class user
      * Set address
      *
      * @param string $address
-     * @return user
+     * @return User
      */
     public function setAddress($address)
     {
@@ -163,7 +173,7 @@ class user
      * Set phone
      *
      * @param string $phone
-     * @return user
+     * @return User
      */
     public function setPhone($phone)
     {

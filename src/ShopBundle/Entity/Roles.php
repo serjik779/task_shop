@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * roles
+ * Roles
  *
  * @ORM\Table(name="roles")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\rolesRepository")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\RolesRepository")
  */
-class roles
+class Roles
 {
     /**
      * @var int
@@ -18,8 +18,6 @@ class roles
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToOne(targetEntity="ShopBundle\Entity\user")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id_role")
      */
     private $id;
 
@@ -43,7 +41,7 @@ class roles
      * Set type
      *
      * @param string $type
-     * @return roles
+     * @return Roles
      */
     public function setType($type)
     {

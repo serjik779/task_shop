@@ -5,12 +5,12 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * order_info
+ * OrderInfo
  *
  * @ORM\Table(name="order_info")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\order_infoRepository")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrderInfoRepository")
  */
-class order_info
+class OrderInfo
 {
     /**
      * @var int
@@ -71,7 +71,7 @@ class order_info
      * Set idUser
      *
      * @param integer $idUser
-     * @return order_info
+     * @return OrderInfo
      */
     public function setIdUser($idUser)
     {
@@ -94,7 +94,7 @@ class order_info
      * Set date
      *
      * @param \DateTime $date
-     * @return order_info
+     * @return OrderInfo
      */
     public function setDate($date)
     {
@@ -117,7 +117,7 @@ class order_info
      * Set address
      *
      * @param string $address
-     * @return order_info
+     * @return OrderInfo
      */
     public function setAddress($address)
     {
@@ -140,7 +140,7 @@ class order_info
      * Set phone
      *
      * @param string $phone
-     * @return order_info
+     * @return OrderInfo
      */
     public function setPhone($phone)
     {
@@ -163,7 +163,7 @@ class order_info
      * Set userName
      *
      * @param string $userName
-     * @return order_info
+     * @return OrderInfo
      */
     public function setUserName($userName)
     {
