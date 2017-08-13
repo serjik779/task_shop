@@ -1,0 +1,4 @@
+categories_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Categories:index" }
+    methods:  GET
