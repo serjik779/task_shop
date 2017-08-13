@@ -10,4 +10,11 @@ class DefaultController extends Controller
     {
         return $this->render('ShopBundle:home:index.html.twig');
     }
+
+    public function contactVendorAction()
+    {
+        return $this->render('ShopBundle:Default:contactVendor.html.twig', array(
+            'navigation_active' => 'others',
+        ));
+    }
 }

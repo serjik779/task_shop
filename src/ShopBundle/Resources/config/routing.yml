@@ -1,6 +1,12 @@
 shop_homepage:
     path:     /
     defaults: { _controller: ShopBundle:Default:index }
+
+contact_vendor:
+    path:     /vendor-contact
+    defaults: { _controller: ShopBundle:Default:contactVendor }
+
 shop_categories:
     resource: "@ShopBundle/Resources/config/routing/categories.yml"
     prefix:   /categories
+
