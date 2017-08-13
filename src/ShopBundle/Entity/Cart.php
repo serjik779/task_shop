@@ -7,61 +7,37 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Cart
  *
- * @ORM\Table(name="cart")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\CartRepository")
+ * @ORM\Table(name="cart", indexes={@ORM\Index(name="fk_user", columns={"user_id"})})
+ * @ORM\Entity
  */
 class Cart
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\Column(name="system_id", type="integer")
+     * @ORM\Column(name="created", type="datetime", nullable=true)
      */
-    private $systemId;
+    private $created;
 
     /**
-     * @var string
+     * @var Users
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
-    private $title;
+    private $user;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="cost", type="float")
-     */
-    private $cost;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="discount", type="float")
-     */
-    private $discount;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="amount", type="integer")
-     */
-    private $amount;
-
-    /**
-     * @var DeliveryType
-     *
-     * @ORM\Column(name="id_delivery", type="integer")
-     */
-    private $idDelivery;
 
 
     /**
@@ -75,140 +51,48 @@ class Cart
     }
 
     /**
-     * Set systemId
+     * Set created
      *
-     * @param integer $systemId
-     * @return cart
-     */
-    public function setSystemId($systemId)
-    {
-        $this->systemId = $systemId;
-
-        return $this;
-    }
-
-    /**
-     * Get systemId
-     *
-     * @return integer 
-     */
-    public function getSystemId()
-    {
-        return $this->systemId;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
+     * @param \DateTime $created
      * @return Cart
      */
-    public function setTitle($title)
+    public function setCreated($created)
     {
-        $this->title = $title;
+        $this->created = $created;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get created
      *
-     * @return string 
+     * @return \DateTime 
      */
-    public function getTitle()
+    public function getCreated()
     {
-        return $this->title;
+        return $this->created;
     }
 
     /**
-     * Set cost
+     * Set user
      *
-     * @param float $cost
+     * @param \ShopBundle\Entity\Users $user
      * @return Cart
      */
-    public function setCost($cost)
+    public function setUser(\ShopBundle\Entity\Users $user = null)
     {
-        $this->cost = $cost;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get cost
+     * Get user
      *
-     * @return float 
+     * @return \ShopBundle\Entity\Users 
      */
-    public function getCost()
+    public function getUser()
     {
-        return $this->cost;
-    }
-
-    /**
-     * Set discount
-     *
-     * @param float $discount
-     * @return Cart
-     */
-    public function setDiscount($discount)
-    {
-        $this->discount = $discount;
-
-        return $this;
-    }
-
-    /**
-     * Get discount
-     *
-     * @return float 
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-
-    /**
-     * Set amount
-     *
-     * @param integer $amount
-     * @return Cart
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Get amount
-     *
-     * @return integer 
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
-    /**
-     * Set idDelivery
-     *
-     * @param integer $idDelivery
-     * @return Cart
-     */
-    public function setIdDelivery($idDelivery)
-    {
-        $this->idDelivery = $idDelivery;
-
-        return $this;
-    }
-
-    /**
-     * Get idDelivery
-     *
-     * @return DeliveryType
-     */
-    public function getIdDelivery()
-    {
-        return $this->idDelivery;
+        return $this->user;
     }
 }

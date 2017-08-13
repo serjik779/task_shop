@@ -3,81 +3,74 @@
 namespace ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Monolog\Handler\DebugHandler;
 
 /**
- * OrderIterms
+ * OrderItems
  *
- * @ORM\Table(name="order_iterms")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrderItemsRepository")
+ * @ORM\Table(name="order_items", indexes={@ORM\Index(name="fk_order_info", columns={"order_info_id"}), @ORM\Index(name="fk_delivery_type", columns={"delivery_type_id"}), @ORM\Index(name="fk_product", columns={"product_id"})})
+ * @ORM\Entity
  */
 class OrderItems
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="system_id", type="integer")
-     */
-    private $systemId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="cost", type="float")
-     */
-    private $cost;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="discount", type="float")
+     * @ORM\Column(name="discount", type="integer", nullable=true)
      */
     private $discount;
 
     /**
-     * @var OrderItems
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\OrderInfo")
-     * @ORM\JoinColumn(name="id_order_info", referencedColumnName="id")
-     */
-    private $idOrderInfo;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="amount", type="integer")
+     * @ORM\Column(name="amount", type="integer", nullable=false)
      */
     private $amount;
 
     /**
      * @var DeliveryType
      *
-     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\DeliveryType")
-     * @ORM\JoinColumn(name="id_delivery_type", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="DeliveryType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="delivery_type_id", referencedColumnName="id")
+     * })
      */
-    private $idDeliveryType;
+    private $deliveryType;
+
+    /**
+     * @var OrdersInfo
+     *
+     * @ORM\ManyToOne(targetEntity="OrdersInfo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="order_info_id", referencedColumnName="id")
+     * })
+     */
+    private $orderInfo;
+
+    /**
+     * @var Products
+     *
+     * @ORM\ManyToOne(targetEntity="Products")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     * })
+     */
+    private $product;
+
 
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -85,78 +78,9 @@ class OrderItems
     }
 
     /**
-     * Set systemId
-     *
-     * @param integer $systemId
-     * @return OrderItems
-     */
-    public function setSystemId($systemId)
-    {
-        $this->systemId = $systemId;
-
-        return $this;
-    }
-
-    /**
-     * Get systemId
-     *
-     * @return integer
-     */
-    public function getSystemId()
-    {
-        return $this->systemId;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return OrderItems
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set cost
-     *
-     * @param float $cost
-     * @return OrderItems
-     */
-    public function setCost($cost)
-    {
-        $this->cost = $cost;
-
-        return $this;
-    }
-
-    /**
-     * Get cost
-     *
-     * @return float
-     */
-    public function getCost()
-    {
-        return $this->cost;
-    }
-
-    /**
      * Set discount
      *
-     * @param float $discount
+     * @param integer $discount
      * @return OrderItems
      */
     public function setDiscount($discount)
@@ -169,31 +93,12 @@ class OrderItems
     /**
      * Get discount
      *
-     * @return float
+     * @return integer 
      */
     public function getDiscount()
     {
         return $this->discount;
     }
-
-    /**
-     * @return OrderItems
-     */
-    public function getIdOrderInfo()
-    {
-        return $this->idOrderInfo;
-    }
-
-    /**
-     * @param OrderItems $idOrderInfo
-     * @return OrderItems
-     */
-    public function setIdOrderInfo($idOrderInfo)
-    {
-        $this->idOrderInfo = $idOrderInfo;
-        return $this;
-    }
-
 
     /**
      * Set amount
@@ -211,7 +116,7 @@ class OrderItems
     /**
      * Get amount
      *
-     * @return integer
+     * @return integer 
      */
     public function getAmount()
     {
@@ -219,21 +124,71 @@ class OrderItems
     }
 
     /**
-     * @return DeliveryType
-     */
-    public function getIdDeliveryType()
-    {
-        return $this->idDeliveryType;
-    }
-
-    /**
-     * @param DeliveryType $idDeliveryType
+     * Set deliveryType
+     *
+     * @param \ShopBundle\Entity\DeliveryType $deliveryType
      * @return OrderItems
      */
-    public function setIdDeliveryType($idDeliveryType)
+    public function setDeliveryType(\ShopBundle\Entity\DeliveryType $deliveryType = null)
     {
-        $this->idDeliveryType = $idDeliveryType;
+        $this->deliveryType = $deliveryType;
+
         return $this;
     }
 
+    /**
+     * Get deliveryType
+     *
+     * @return \ShopBundle\Entity\DeliveryType 
+     */
+    public function getDeliveryType()
+    {
+        return $this->deliveryType;
+    }
+
+    /**
+     * Set orderInfo
+     *
+     * @param \ShopBundle\Entity\OrdersInfo $orderInfo
+     * @return OrderItems
+     */
+    public function setOrderInfo(\ShopBundle\Entity\OrdersInfo $orderInfo = null)
+    {
+        $this->orderInfo = $orderInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get orderInfo
+     *
+     * @return \ShopBundle\Entity\OrdersInfo 
+     */
+    public function getOrderInfo()
+    {
+        return $this->orderInfo;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \ShopBundle\Entity\Products $product
+     * @return OrderItems
+     */
+    public function setProduct(\ShopBundle\Entity\Products $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \ShopBundle\Entity\Products 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
 }

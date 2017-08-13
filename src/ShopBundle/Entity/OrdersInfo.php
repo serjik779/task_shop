@@ -5,56 +5,50 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * OrderInfo
+ * OrdersInfo
  *
- * @ORM\Table(name="order_info")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrderInfoRepository")
+ * @ORM\Table(name="orders_info")
+ * @ORM\Entity
  */
-class OrderInfo
+class OrdersInfo
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer")
-     */
-    private $idUser;
-
-    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=false)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=50, nullable=false)
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $userName;
+    private $name;
+
 
 
     /**
@@ -68,33 +62,10 @@ class OrderInfo
     }
 
     /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     * @return OrderInfo
-     */
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    /**
-     * Get idUser
-     *
-     * @return integer 
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
      * Set date
      *
      * @param \DateTime $date
-     * @return OrderInfo
+     * @return OrdersInfo
      */
     public function setDate($date)
     {
@@ -117,7 +88,7 @@ class OrderInfo
      * Set address
      *
      * @param string $address
-     * @return OrderInfo
+     * @return OrdersInfo
      */
     public function setAddress($address)
     {
@@ -140,7 +111,7 @@ class OrderInfo
      * Set phone
      *
      * @param string $phone
-     * @return OrderInfo
+     * @return OrdersInfo
      */
     public function setPhone($phone)
     {
@@ -160,25 +131,25 @@ class OrderInfo
     }
 
     /**
-     * Set userName
+     * Set name
      *
-     * @param string $userName
-     * @return OrderInfo
+     * @param string $name
+     * @return OrdersInfo
      */
-    public function setUserName($userName)
+    public function setName($name)
     {
-        $this->userName = $userName;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get userName
+     * Get name
      *
      * @return string 
      */
-    public function getUserName()
+    public function getName()
     {
-        return $this->userName;
+        return $this->name;
     }
 }

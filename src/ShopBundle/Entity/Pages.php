@@ -7,33 +7,34 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pages
  *
- * @ORM\Table(name="pages")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\PagesRepository")
+ * @ORM\Table(name="Pages")
+ * @ORM\Entity
  */
 class Pages
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="string", length=255)
+     * @ORM\Column(name="content", type="text", length=65535, nullable=true)
      */
-    private $comment;
+    private $content;
+
 
 
     /**
@@ -70,25 +71,25 @@ class Pages
     }
 
     /**
-     * Set comment
+     * Set content
      *
-     * @param string $comment
+     * @param string $content
      * @return Pages
      */
-    public function setComment($comment)
+    public function setContent($content)
     {
-        $this->comment = $comment;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get comment
+     * Get content
      *
      * @return string 
      */
-    public function getComment()
+    public function getContent()
     {
-        return $this->comment;
+        return $this->content;
     }
 }
