@@ -8,32 +8,33 @@ use Doctrine\ORM\Mapping as ORM;
  * DeliveryType
  *
  * @ORM\Table(name="delivery_type")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\DeliveryTypeRepository")
+ * @ORM\Entity
  */
 class DeliveryType
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="cost", type="float")
+     * @ORM\Column(name="cost", type="float", precision=10, scale=0, nullable=false)
      */
     private $cost;
+
 
 
     /**

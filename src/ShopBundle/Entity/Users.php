@@ -5,64 +5,66 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * user
+ * Users
  *
- * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\userRepository")
+ * @ORM\Table(name="users", indexes={@ORM\Index(name="fk_roles", columns={"role_id"})})
+ * @ORM\Entity
  */
-class user
+class Users
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=50, nullable=true)
      */
     private $phone;
 
     /**
-     * @var roles
+     * @var Roles
      *
-     * @ORM\OneToOne(targetEntity="ShopBundle\Entity\roles")
-     * @ORM\JoinColumn(name="id_role", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Roles")
      */
-    private $id_role;
+    private $role;
+
+
+
     /**
      * Get id
      *
@@ -77,7 +79,7 @@ class user
      * Set name
      *
      * @param string $name
-     * @return user
+     * @return Users
      */
     public function setName($name)
     {
@@ -100,7 +102,7 @@ class user
      * Set password
      *
      * @param string $password
-     * @return user
+     * @return Users
      */
     public function setPassword($password)
     {
@@ -123,7 +125,7 @@ class user
      * Set email
      *
      * @param string $email
-     * @return user
+     * @return Users
      */
     public function setEmail($email)
     {
@@ -146,7 +148,7 @@ class user
      * Set address
      *
      * @param string $address
-     * @return user
+     * @return Users
      */
     public function setAddress($address)
     {
@@ -169,7 +171,7 @@ class user
      * Set phone
      *
      * @param string $phone
-     * @return user
+     * @return Users
      */
     public function setPhone($phone)
     {
@@ -189,20 +191,25 @@ class user
     }
 
     /**
-     * @return roles
+     * Set role
+     *
+     * @param \ShopBundle\Entity\Roles $role
+     * @return Users
      */
-    public function getIdRole()
+    public function setRole(\ShopBundle\Entity\Roles $role = null)
     {
-        return $this->id_role;
+        $this->role = $role;
+
+        return $this;
     }
 
     /**
-     * @param roles $id_role
-     * @return self
+     * Get role
+     *
+     * @return \ShopBundle\Entity\Roles 
      */
-    public function setIdRole($id_role)
+    public function getRole()
     {
-        $this->id_role = $id_role;
+        return $this->role;
     }
-
 }
