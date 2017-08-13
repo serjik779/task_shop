@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Categories
  *
  * @ORM\Table(name="categories", indexes={@ORM\Index(name="fk_image", columns={"image_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\CategoriesRepository")
  */
 class Categories
 {

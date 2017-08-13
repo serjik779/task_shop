@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Feedback
  *
  * @ORM\Table(name="Feedback")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\FeedbackRepository")
  */
 class Feedback
 {
