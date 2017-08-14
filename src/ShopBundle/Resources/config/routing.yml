@@ -10,3 +10,6 @@ shop_categories:
     resource: "@ShopBundle/Resources/config/routing/categories.yml"
     prefix:   /categories
 
+product-single:
+    resource: "@ShopBundle/Resources/config/routing/single-product.yml"
+    prefix:   /single-product
