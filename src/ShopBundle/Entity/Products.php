@@ -82,6 +82,21 @@ class Products
     protected $images;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="on_main", type="boolean", nullable=false)
+     */
+    private $onMain = false;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_visible", type="boolean", nullable=false)
+     */
+    private $isVisible = true;
+
+
+    /**
      * Products constructor.
      */
     public function __construct()
@@ -284,5 +299,41 @@ class Products
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getOnMain()
+    {
+        return $this->onMain;
+    }
+
+    /**
+     * @param bool $onMain
+     * @return Products
+     */
+    public function setOnMain($onMain)
+    {
+        $this->onMain = $onMain;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
+    }
+
+    /**
+     * @param bool $isVisible
+     * @return Products
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->isVisible = $isVisible;
+        return $this;
     }
 }
