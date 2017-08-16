@@ -48,7 +48,7 @@ class OrderItems
     /**
      * @var OrdersInfo
      *
-     * @ORM\ManyToOne(targetEntity="OrdersInfo")
+     * @ORM\ManyToOne(targetEntity="OrdersInfo", inversedBy="ordersItems", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="order_info_id", referencedColumnName="id")
      * })

@@ -4,15 +4,21 @@ namespace ShopBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ShopBundle\Repository\ImagesRepository;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Images
  *
  * @ORM\Table(name="images")
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\ImagesRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Images
 {
+
+    const SERVER_PATH_TO_IMAGE_FOLDER = '%kernel.root_dir%/../web/uploads/categories/';
     /**
      * @var integer
      *
@@ -25,24 +31,114 @@ class Images
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="filename", type="string", length=255, nullable=false)
      */
     private $filename;
     /**
      * @var ArrayCollection|Products[]
      *
-     * Many Users have Many Groups.
      * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Products", inversedBy="images")
-     * @ORM\JoinTable(name="images_products")
+     * @ORM\JoinTable(name="images_products",
+     *     joinColumns={
+     *       @ORM\JoinColumn(name="images_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *       @ORM\JoinColumn(name="products_id", referencedColumnName="id")
+     *     }
+     * )
      */
     protected $products;
+
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param DateTime $updated
+     * @return Images
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+        return $this;
+    }
+    /**
+     * Unmapped property to handle file uploads
+     */
+    private $file;
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Manages the copying of the file to the relevant place on the server
+     */
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        $this->getFile()->move(
+            self::SERVER_PATH_TO_IMAGE_FOLDER,
+            $this->getFile()->getClientOriginalName()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->filename = $this->getFile()->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+        $this->setFile(null);
+    }
+
+    public function refreshUpdated()
+    {
+        $this->setUpdated(new \DateTime());
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function lifecycleFileUpload()
+    {
+        $this->upload();
+    }
+
 
     /**
      * Constructor
@@ -63,29 +159,6 @@ class Images
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Images
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
      * Set filename
      *
      * @param string $filename
@@ -101,7 +174,7 @@ class Images
     /**
      * Get filename
      *
-     * @return string 
+     * @return string
      */
     public function getFilename()
     {
@@ -112,13 +185,11 @@ class Images
      * Add products
      *
      * @param \ShopBundle\Entity\Products $products
-     * @return Images
      */
     public function addProduct(\ShopBundle\Entity\Products $products)
     {
         $this->products[] = $products;
-
-        return $this;
+        #$products->addImage($this);
     }
 
     /**
@@ -139,5 +210,14 @@ class Images
     public function getProducts()
     {
         return $this->products;
+    }
+
+    public function getWebPath() {
+        return Images::SERVER_PATH_TO_IMAGE_FOLDER.$this->getFilename();
+    }
+
+    public function __toString()
+    {
+        return $this->getFilename() ?: '';
     }
 }
