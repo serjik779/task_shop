@@ -32,7 +32,7 @@ class Categories
     /**
      * @var Images
      *
-     * @ORM\ManyToOne(targetEntity="Images")
+     * @ORM\ManyToOne(targetEntity="Images", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      * })
@@ -137,5 +137,10 @@ class Categories
     public function getProducts()
     {
         return $this->products;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle() ?: '';
     }
 }

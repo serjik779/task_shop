@@ -1,0 +1,4 @@
+auth_login:
+    path:     /login
+    defaults: { _controller: "FOSBundle::index" }
+    methods:  GET

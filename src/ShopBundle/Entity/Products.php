@@ -4,6 +4,7 @@ namespace ShopBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ShopBundle\ShopBundle;
 
 /**
  * Products
@@ -67,7 +68,7 @@ class Products
     /**
      * @var Categories
      *
-     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="products", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * })
@@ -77,7 +78,7 @@ class Products
     /**
      * @var ArrayCollection|Images[]
      * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products")
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"})
      */
     protected $images;
 
@@ -96,16 +97,9 @@ class Products
     private $isVisible = true;
 
 
-    /**
-     * Products constructor.
-     */
-    public function __construct()
-    {
-        $this->images[] = new ArrayCollection();
-    }
-
-    public function addImage(Images $image) {
+    public function addImage(\ShopBundle\Entity\Images $image) {
         $this->images[] = $image;
+        $image->addProduct($this);
     }
 
 

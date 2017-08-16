@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,51 @@ class OrdersInfo
      */
     private $name;
 
+    /**
+     * @var ArrayCollection|OrderItems[]
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="orderInfoId", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $orderItems;
+
+    /**
+     * @return ArrayCollection|OrderItems[]
+     */
+    public function getOrdersItem()
+    {
+        return $this->orderItems;
+    }
+
+    /**
+     * @param ArrayCollection|OrderItems[] $ordersItem
+     */
+    public function setOrdersItem($ordersItem)
+    {
+        if (count($ordersItem) > 0) {
+            foreach ($ordersItem as $oi) {
+                $this->addOrdersItem($oi);
+            }
+        }
+        return $this;
+    }
+
+    public function addOrdersItem(OrderItems $orderItems) {
+        $orderItems->setOrderInfo($this);
+        $this->orderItems->add($orderItems);
+    }
+
+    public function removeOrdersItem(OrderItems $orderItems)
+    {
+        $this->orderItems->removeElement($orderItems);
+    }
+
+    /**
+     * OrdersInfo constructor.
+     * @param ArrayCollection|OrderItems[] $ordersItem
+     */
+    public function __construct()
+    {
+        $this->orderItems = new ArrayCollection();
+    }
 
 
     /**
