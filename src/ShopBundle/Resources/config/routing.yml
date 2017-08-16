@@ -13,3 +13,7 @@ shop_categories:
 product-single:
     resource: "@ShopBundle/Resources/config/routing/single-product.yml"
     prefix:   /single-product
+
+about_us:
+    path:     /about
+    defaults: { _controller: ShopBundle:Default:about }

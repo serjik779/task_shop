@@ -3,9 +3,15 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-12">
+        <div  class="text-center">
             <p>Test and stuff.</p>
         </div>
     </div>
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+    {{ form_start(form) }}
+    <p>Feedback</p>
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}
