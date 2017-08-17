@@ -1,10 +1,7 @@
 <?php
-
 namespace ShopBundle\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * OrderItems
  *
@@ -21,21 +18,18 @@ class OrderItems
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="discount", type="integer", nullable=true)
      */
     private $discount;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="amount", type="integer", nullable=false)
      */
     private $amount;
-
     /**
      * @var DeliveryType
      *
@@ -45,7 +39,6 @@ class OrderItems
      * })
      */
     private $deliveryType;
-
     /**
      * @var OrdersInfo
      *
@@ -55,7 +48,6 @@ class OrderItems
      * })
      */
     private $ordersInfo;
-
     /**
      * @var Products
      *
@@ -65,23 +57,19 @@ class OrderItems
      * })
      */
     private $products;
-
-
     public function __construct()
     {
         $this->products = new Products();
     }
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Set discount
      *
@@ -91,20 +79,17 @@ class OrderItems
     public function setDiscount($discount)
     {
         $this->discount = $discount;
-
         return $this;
     }
-
     /**
      * Get discount
      *
-     * @return integer 
+     * @return integer
      */
     public function getDiscount()
     {
         return $this->discount;
     }
-
     /**
      * Set amount
      *
@@ -114,20 +99,17 @@ class OrderItems
     public function setAmount($amount)
     {
         $this->amount = $amount;
-
         return $this;
     }
-
     /**
      * Get amount
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmount()
     {
         return $this->amount;
     }
-
     /**
      * Set deliveryType
      *
@@ -137,20 +119,17 @@ class OrderItems
     public function setDeliveryType(\ShopBundle\Entity\DeliveryType $deliveryType = null)
     {
         $this->deliveryType = $deliveryType;
-
         return $this;
     }
-
     /**
      * Get deliveryType
      *
-     * @return \ShopBundle\Entity\DeliveryType 
+     * @return \ShopBundle\Entity\DeliveryType
      */
     public function getDeliveryType()
     {
         return $this->deliveryType;
     }
-
     /**
      * Set ordersInfo
      *
@@ -160,20 +139,17 @@ class OrderItems
     public function setOrdersInfo(\ShopBundle\Entity\OrdersInfo $ordersInfo = null)
     {
         $this->ordersInfo = $ordersInfo;
-
         return $this;
     }
-
     /**
      * Get ordersInfo
      *
-     * @return \ShopBundle\Entity\OrdersInfo 
+     * @return \ShopBundle\Entity\OrdersInfo
      */
     public function getOrdersInfo()
     {
         return $this->ordersInfo;
     }
-
     /**
      * Set products
      *
@@ -183,14 +159,12 @@ class OrderItems
     public function setProducts(\ShopBundle\Entity\Products $products = null)
     {
         $this->products = $products;
-
         return $this;
     }
-
     /**
      * Get products
      *
-     * @return \ShopBundle\Entity\Products 
+     * @return \ShopBundle\Entity\Products
      */
     public function getProducts()
     {

@@ -1,0 +1,4 @@
+cart_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Cart:index" }
+    methods:  GET

@@ -1,17 +1,138 @@
+
 <div class="header-area">
+
     <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                        <li><a href="#myModalshow"  data-toggle="modal"> My account</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                        <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
+                        <li><a href="{{ path('cart_index') }}"><i class="fa fa-user"></i> My Cart</a></li>
                         <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                        <li><a href="#myModallog"  data-toggle="modal"> Login</a></li>
+                        <li><a href="#myModalReg"  data-toggle="modal"> Register</a></li>
                     </ul>
+                    <!-- HTML-код модального окна LOG -->
+                    <form action="{{ path('login_login_default_index') }}" method="POST">
+                    <div id="myModallog" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Заголовок модального окна -->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Заголовок модального окна</h4>
+                                </div>
+                                <!-- Основное содержимое модального окна -->
+                                <div class="modal-body">
+                                    Содержимое модального окна... <br>
+                                    <input type="text"  class="input-block-level"  name="email" placeholder="Email" data-trigger="change" data-required="true" data-type="email">
+                                    <input type="password" class="input-block-level" name="password" placeholder="Password" data-trigger="change" data-required="true">
+
+                                </div>
+                                <!-- Футер модального окна -->
+                                <div class="modal-footer">
+                                    <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </form>
+
+            <!-- HTML-код модального окна SHOW -->
+            <form action="{{ path('login_login_default_show') }}" method="post">
+            <div id="myModalshow" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Заголовок модального окна -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Заголовок модального окна</h4>
+                        </div>
+                        <!-- Основное содержимое модального окна -->
+                        <div class="modal-body">
+                            <div class="container">
+
+
+                                {% if user is defined%}
+                                <h2>ID: {{ user.id }}  </h2>
+                                <h2>NAME: {{ user.name}}  </h2>
+                                <h2>PASSWORD: {{ user.password }}  </h2>
+                                <h2>EMAIL: {{ user.email }}  </h2>
+                                <h2>ADDRESS: {{ user.address }}  </h2>
+                                <h2>PHONE: {{ user.phone }}  </h2>
+                                {%endif%}
+                                {#{% include "LoginLoginBundle:Default:table.html.twig"%}#}
+                            </div>
+                            Содержимое модального окна...
+                        </div>
+                        <!-- Футер модального окна -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+
+
+
+            {#<!-- HTML-код модального окна REG -->#}
+            {#<form action="{{ path('login_login_default_index') }}" method="POST">#}
+                {#<div id="myModallog" class="modal fade">#}
+                    {#<div class="modal-dialog">#}
+                        {#<div class="modal-content">#}
+                            {#<!-- Заголовок модального окна -->#}
+                            {#<div class="modal-header">#}
+                                {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+                                {#<h4 class="modal-title">Заголовок модального окна</h4>#}
+                            {#</div>#}
+                            {#<!-- Основное содержимое модального окна -->#}
+                            {#<div class="modal-body">#}
+                                {#Содержимое модального окна... <br>#}
+                                {#<input type="text"  class="input-block-level"  name="email" placeholder="Email" data-trigger="change" data-required="true" data-type="email">#}
+                                {#<input type="password" class="input-block-level" name="password" placeholder="Password" data-trigger="change" data-required="true">#}
+
+                            {#</div>#}
+                            {#<!-- Футер модального окна -->#}
+                            {#<div class="modal-footer">#}
+                                {#<button class="btn btn-large btn-primary" type="submit">Sign in</button>#}
+                                {#<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>#}
+                                {#<button type="button" class="btn btn-primary">Сохранить изменения</button>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+        {#</div>#}
+    {#</div>#}
+    {#</form>#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="col-md-4">
                 <div class="header-right">
@@ -51,7 +172,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="cart.html">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    <a href="{{ path('cart_index') }}">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                 </div>
             </div>
         </div>
@@ -71,6 +192,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <li class="active"><a href="{{ path('shop_homepage') }}">Home</a></li>
                     <li><a href="{{ path('categories_index') }}">Categories</a></li>
                     <li><a href="shop.html">Shop page</a></li>

@@ -1,3 +1,8 @@
+login_login:
+    resource: "@LoginLoginBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 shop:
     resource: "@ShopBundle/Resources/config/routing.yml"
     prefix:   /
