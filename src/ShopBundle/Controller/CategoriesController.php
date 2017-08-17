@@ -5,9 +5,9 @@ namespace ShopBundle\Controller;
 use ShopBundle\Entity\Categories;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
 class CategoriesController extends Controller
 {
-
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
@@ -18,5 +18,4 @@ class CategoriesController extends Controller
              'categories' => $categories,
         ));
     }
-
 }

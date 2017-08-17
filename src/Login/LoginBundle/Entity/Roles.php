@@ -1,37 +1,44 @@
 <?php
-namespace ShopBundle\Entity;
+
+namespace Login\LoginBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Roles
  *
- * @ORM\Table(name="Roles")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\RolesRepository")
+ * @ORM\Table(name="roles")
+ * @ORM\Entity(repositoryClass="Login\LoginBundle\Repository\RolesRepository")
  */
 class Roles
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
+
+
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
         return $this->id;
     }
+
     /**
      * Set type
      *
@@ -41,15 +48,22 @@ class Roles
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
+
     /**
      * Get type
      *
-     * @return string
+     * @return string 
      */
     public function getType()
     {
+        return $this->type;
+    }
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
         return $this->type;
     }
 }
