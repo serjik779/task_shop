@@ -48,12 +48,12 @@ class OrderItems
     /**
      * @var OrdersInfo
      *
-     * @ORM\ManyToOne(targetEntity="OrdersInfo", inversedBy="ordersItems", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="OrdersInfo", inversedBy="orderItems", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="order_info_id", referencedColumnName="id")
      * })
      */
-    private $orderInfo;
+    private $ordersInfo;
 
     /**
      * @var Products
@@ -147,26 +147,26 @@ class OrderItems
     }
 
     /**
-     * Set orderInfo
+     * Set ordersInfo
      *
-     * @param \ShopBundle\Entity\OrdersInfo $orderInfo
+     * @param \ShopBundle\Entity\OrdersInfo $ordersInfo
      * @return OrderItems
      */
-    public function setOrderInfo(\ShopBundle\Entity\OrdersInfo $orderInfo = null)
+    public function setOrdersInfo(\ShopBundle\Entity\OrdersInfo $ordersInfo = null)
     {
-        $this->orderInfo = $orderInfo;
+        $this->ordersInfo = $ordersInfo;
 
         return $this;
     }
 
     /**
-     * Get orderInfo
+     * Get ordersInfo
      *
      * @return \ShopBundle\Entity\OrdersInfo 
      */
-    public function getOrderInfo()
+    public function getOrdersInfo()
     {
-        return $this->orderInfo;
+        return $this->ordersInfo;
     }
 
     /**

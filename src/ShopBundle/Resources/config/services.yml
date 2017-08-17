@@ -57,3 +57,14 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
+    app.admin.order_items:
+        class: ShopBundle\Admin\OrderItemsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Order Items" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\OrderItems
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true

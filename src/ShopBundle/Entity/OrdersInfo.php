@@ -59,7 +59,7 @@ class OrdersInfo
     /**
      * @return ArrayCollection|OrderItems[]
      */
-    public function getOrdersItem()
+    public function getOrderItems()
     {
         return $this->orderItems;
     }
@@ -67,22 +67,22 @@ class OrdersInfo
     /**
      * @param ArrayCollection|OrderItems[] $ordersItem
      */
-    public function setOrdersItem($ordersItem)
+    public function setOrderItems($ordersItem)
     {
         if (count($ordersItem) > 0) {
             foreach ($ordersItem as $oi) {
-                $this->addOrdersItem($oi);
+                $this->addOrderItems($oi);
             }
         }
         return $this;
     }
 
-    public function addOrdersItem(OrderItems $orderItems) {
-        $orderItems->setOrderInfo($this);
+    public function addOrderItems(OrderItems $orderItems) {
+        $orderItems->setOrdersInfo($this);
         $this->orderItems->add($orderItems);
     }
 
-    public function removeOrdersItem(OrderItems $orderItems)
+    public function removeOrderItems(OrderItems $orderItems)
     {
         $this->orderItems->removeElement($orderItems);
     }

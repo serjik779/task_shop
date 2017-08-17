@@ -12,7 +12,9 @@ namespace ShopBundle\Admin;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\Entity;
 use ShopBundle\Entity\Categories;
+use ShopBundle\Entity\DeliveryType;
 use ShopBundle\Entity\Images;
+use ShopBundle\Entity\OrdersInfo;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -25,22 +27,25 @@ use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class OrderInfoAdmin extends AbstractAdmin
+class OrderItemsAdmin extends AbstractAdmin
 {
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('date', 'datetime')
-            ->add('address', 'text')
-            ->add('phone', 'text')
-            ->add('name', 'text')
-            ->add('orderItems', 'sonata_type_collection', array(
-            ), array(
+            ->add('orderInfo', 'entity', array(
+                'class' => OrdersInfo::class
+            ))
+            ->add('deliveryType', 'entity', array(
+                'class' => DeliveryType::class
+            ))
+            ->add('product', 'sonata_type_collection', array(), array(
                 'edit' => 'inline',
                 'inline' => 'table',
                 'sortable' => 'position',
             ))
+            ->add('discount', 'percent')
+            ->add('amount', 'number')
         ;
             #->add('image', 'sonata_type_admin', array( 'label' => false, 'delete' => false ));
     }

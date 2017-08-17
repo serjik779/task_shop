@@ -58,7 +58,11 @@ class ProductsAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title');
+            ->add('category')
+            ->add('title')
+            ->add('cost')
+            ->add('amount')
+            ->add('serviceId');
     }
 
     // Fields to be shown on lists
@@ -66,7 +70,11 @@ class ProductsAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->addIdentifier('title');
+            ->addIdentifier('category')
+            ->addIdentifier('title')
+            ->addIdentifier('cost')
+            ->addIdentifier('amount')
+            ->addIdentifier('serviceId');
     }
 
     // Fields to be shown on show action
@@ -74,7 +82,11 @@ class ProductsAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('title');
+            ->add('category')
+            ->add('title')
+            ->add('cost')
+            ->add('amount')
+            ->add('serviceId');
     }
 
 //    public function prePersist($page)
