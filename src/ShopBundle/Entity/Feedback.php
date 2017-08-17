@@ -1,14 +1,11 @@
 <?php
-
 namespace ShopBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Feedback
  *
  * @ORM\Table(name="Feedback")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\FeedbackRepository")
  */
 class Feedback
 {
@@ -20,40 +17,33 @@ class Feedback
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
-
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
-
     /**
      * @var string
      *
      * @ORM\Column(name="text", type="text", length=65535, nullable=false)
      */
     private $text;
-
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Set name
      *
@@ -63,20 +53,17 @@ class Feedback
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
-
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-
     /**
      * Set email
      *
@@ -86,20 +73,17 @@ class Feedback
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
-
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
         return $this->email;
     }
-
     /**
      * Set text
      *
@@ -109,14 +93,12 @@ class Feedback
     public function setText($text)
     {
         $this->text = $text;
-
         return $this;
     }
-
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {

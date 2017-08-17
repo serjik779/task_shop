@@ -1,0 +1,4 @@
+single-product_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:SingleProduct:index" }
+    methods:  GET

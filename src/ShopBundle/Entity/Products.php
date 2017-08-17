@@ -1,14 +1,13 @@
 <?php
-
 namespace ShopBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use ShopBundle\ShopBundle;
 /**
  * Products
  *
- * @ORM\Table(name="products", indexes={@ORM\Index(name="fk_category", columns={"id_category"})})
- * @ORM\Entity
+ * @ORM\Table(name="products", indexes={@ORM\Index(name="fk_category", columns={"category_id"})})
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\ProductsRepository")
  */
 class Products
 {
@@ -20,71 +19,94 @@ class Products
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
-
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
-
     /**
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
-
     /**
      * @var float
      *
-     * @ORM\Column(name="cost", type="float", precision=11, scale=0, nullable=false)
+     * @ORM\Column(name="cost", type="float", precision=10, scale=0, nullable=false)
      */
     private $cost;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="amount", type="integer", nullable=true)
      */
     private $amount;
-
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_service", type="integer", nullable=false)
+     * @ORM\Column(name="service_id", type="integer", nullable=false)
      */
-    private $idService;
-
+    private $serviceId;
     /**
      * @var Categories
      *
-     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="products", cascade={"persist"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_category", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * })
      */
-    private $idCategory;
-
-
-
+    private $category;
+    /**
+     * @var ArrayCollection|Images[]
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"})
+     */
+    protected $images;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="on_main", type="boolean", nullable=false)
+     */
+    private $onMain = false;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_visible", type="boolean", nullable=false)
+     */
+    private $isVisible = true;
+    /**
+     * @var ArrayCollection|Products[]
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="productId", cascade={"persist"})
+     */
+    protected $orderItems;
+    /**
+     * Products constructor.
+     */
+    public function __construct()
+    {
+        $this->orderItems = new ArrayCollection();
+    }
+    public function addImage(\ShopBundle\Entity\Images $image) {
+        $this->images[] = $image;
+        $image->addProduct($this);
+    }
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Set title
      *
@@ -94,20 +116,17 @@ class Products
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
-
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
         return $this->title;
     }
-
     /**
      * Set description
      *
@@ -117,20 +136,17 @@ class Products
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
-
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
         return $this->description;
     }
-
     /**
      * Set image
      *
@@ -140,20 +156,17 @@ class Products
     public function setImage($image)
     {
         $this->image = $image;
-
         return $this;
     }
-
     /**
      * Get image
      *
-     * @return string 
+     * @return string
      */
     public function getImage()
     {
         return $this->image;
     }
-
     /**
      * Set cost
      *
@@ -163,20 +176,17 @@ class Products
     public function setCost($cost)
     {
         $this->cost = $cost;
-
         return $this;
     }
-
     /**
      * Get cost
      *
-     * @return float 
+     * @return float
      */
     public function getCost()
     {
         return $this->cost;
     }
-
     /**
      * Set amount
      *
@@ -186,63 +196,105 @@ class Products
     public function setAmount($amount)
     {
         $this->amount = $amount;
-
         return $this;
     }
-
     /**
      * Get amount
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmount()
     {
         return $this->amount;
     }
-
     /**
-     * Set idService
+     * Set serviceId
      *
-     * @param integer $idService
+     * @param integer $serviceId
      * @return Products
      */
-    public function setIdService($idService)
+    public function setServiceId($serviceId)
     {
-        $this->idService = $idService;
-
+        $this->serviceId = $serviceId;
         return $this;
     }
-
     /**
-     * Get idService
+     * Get serviceId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getIdService()
+    public function getServiceId()
     {
-        return $this->idService;
+        return $this->serviceId;
     }
-
     /**
-     * Set idCategory
+     * Set category
      *
-     * @param \ShopBundle\Entity\Categories $idCategory
+     * @param \ShopBundle\Entity\Categories $category
      * @return Products
      */
-    public function setIdCategory(\ShopBundle\Entity\Categories $idCategory = null)
+    public function setCategory(\ShopBundle\Entity\Categories $category = null)
     {
-        $this->idCategory = $idCategory;
-
+        $this->category = $category;
         return $this;
     }
-
     /**
-     * Get idCategory
+     * Get category
      *
-     * @return \ShopBundle\Entity\Categories 
+     * @return \ShopBundle\Entity\Categories
      */
-    public function getIdCategory()
+    public function getCategory()
     {
-        return $this->idCategory;
+        return $this->category;
+    }
+    /**
+     * Remove images
+     *
+     * @param \ShopBundle\Entity\Images $images
+     */
+    public function removeImage(\ShopBundle\Entity\Images $images)
+    {
+        $this->images->removeElement($images);
+    }
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+    /**
+     * @return bool
+     */
+    public function getOnMain()
+    {
+        return $this->onMain;
+    }
+    /**
+     * @param bool $onMain
+     * @return Products
+     */
+    public function setOnMain($onMain)
+    {
+        $this->onMain = $onMain;
+        return $this;
+    }
+    /**
+     * @return bool
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
+    }
+    /**
+     * @param bool $isVisible
+     * @return Products
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->isVisible = $isVisible;
+        return $this;
     }
 }

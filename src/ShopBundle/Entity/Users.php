@@ -1,14 +1,11 @@
 <?php
-
 namespace ShopBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Users
  *
- * @ORM\Table(name="Users", indexes={@ORM\Index(name="fk_roles", columns={"id_role"})})
- * @ORM\Entity
+ * @ORM\Table(name="users", indexes={@ORM\Index(name="fk_roles", columns={"role_id"})})
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\UsersRepository")
  */
 class Users
 {
@@ -19,65 +16,52 @@ class Users
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
-
+    protected $id;
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
-
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
-    private $password;
-
+    protected $password;
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
-    private $email;
-
+    protected $email;
     /**
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
-
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=50, nullable=true)
      */
     private $phone;
-
     /**
-     * @var \Roles
+     * @var Roles
      *
-     * @ORM\ManyToOne(targetEntity="Roles")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_role", referencedColumnName="id")
-     * })
+     * @ORM\OneToOne(targetEntity="Roles")
      */
-    private $idRole;
-
-
-
+    private $role;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Set name
      *
@@ -87,20 +71,17 @@ class Users
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
-
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-
     /**
      * Set password
      *
@@ -110,20 +91,17 @@ class Users
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
-
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
         return $this->password;
     }
-
     /**
      * Set email
      *
@@ -133,20 +111,17 @@ class Users
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
-
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
         return $this->email;
     }
-
     /**
      * Set address
      *
@@ -156,20 +131,17 @@ class Users
     public function setAddress($address)
     {
         $this->address = $address;
-
         return $this;
     }
-
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
         return $this->address;
     }
-
     /**
      * Set phone
      *
@@ -179,40 +151,35 @@ class Users
     public function setPhone($phone)
     {
         $this->phone = $phone;
-
         return $this;
     }
-
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
         return $this->phone;
     }
-
     /**
-     * Set idRole
+     * Set role
      *
-     * @param \ShopBundle\Entity\Roles $idRole
+     * @param \ShopBundle\Entity\Roles $role
      * @return Users
      */
-    public function setIdRole(\ShopBundle\Entity\Roles $idRole = null)
+    public function setRole(\ShopBundle\Entity\Roles $role = null)
     {
-        $this->idRole = $idRole;
-
+        $this->role = $role;
         return $this;
     }
-
     /**
-     * Get idRole
+     * Get role
      *
-     * @return \ShopBundle\Entity\Roles 
+     * @return \ShopBundle\Entity\Roles
      */
-    public function getIdRole()
+    public function getRole()
     {
-        return $this->idRole;
+        return $this->role;
     }
 }
