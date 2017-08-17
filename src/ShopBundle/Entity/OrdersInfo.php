@@ -52,7 +52,7 @@ class OrdersInfo
 
     /**
      * @var ArrayCollection|OrderItems[]
-     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="orderInfoId", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="ordersInfo", cascade={"persist"}, orphanRemoval=true)
      */
     protected $orderItems;
 
@@ -87,14 +87,7 @@ class OrdersInfo
         $this->orderItems->removeElement($orderItems);
     }
 
-    /**
-     * OrdersInfo constructor.
-     * @param ArrayCollection|OrderItems[] $ordersItem
-     */
-    public function __construct()
-    {
-        $this->orderItems = new ArrayCollection();
-    }
+
 
 
     /**
@@ -197,5 +190,10 @@ class OrdersInfo
     public function getName()
     {
         return $this->name;
+    }
+
+    public function __toString()
+    {
+        return $this->getName().'-'.$this->getAddress().'-'.$this->getPhone();
     }
 }

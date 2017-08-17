@@ -33,16 +33,16 @@ class OrderItemsAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('orderInfo', 'entity', array(
+            ->add('ordersInfo', 'entity', array(
                 'class' => OrdersInfo::class
             ))
             ->add('deliveryType', 'entity', array(
                 'class' => DeliveryType::class
             ))
-            ->add('product', 'sonata_type_collection', array(), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
+            ->add('products', 'sonata_type_model_list', array(           'compound' => true,
+                'by_reference' => true), array(
+                'placeholder' => 'No product selected',
+                'multiple' => true
             ))
             ->add('discount', 'percent')
             ->add('amount', 'number')
@@ -54,7 +54,7 @@ class OrderItemsAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name');
+            ->add('discount');
     }
 
     // Fields to be shown on lists
@@ -62,7 +62,7 @@ class OrderItemsAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->addIdentifier('name');
+            ->addIdentifier('discount');
     }
 
     // Fields to be shown on show action
@@ -70,18 +70,18 @@ class OrderItemsAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('name');
+            ->add('discount');
     }
 
-    public function prePersist($orderInfo)
-    {
-        $this->preUpdate($orderInfo);
-    }
-
-    public function preUpdate($orderInfo)
-    {
-        $orderInfo->setOrdersItem($orderInfo->getOrdersItem());
-    }
+//    public function prePersist($orderInfo)
+//    {
+//        $this->preUpdate($orderInfo);
+//    }
+//
+//    public function preUpdate($orderInfo)
+//    {
+//        $orderInfo->setOrderItems($orderInfo->getOrderItems());
+//    }
 //    public function prePersist($page)
 //    {
 //        $this->manageEmbeddedImageAdmins($page);

@@ -96,6 +96,20 @@ class Products
      */
     private $isVisible = true;
 
+    /**
+     * @var ArrayCollection|Products[]
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="productId", cascade={"persist"})
+     */
+    protected $orderItems;
+
+    /**
+     * Products constructor.
+     */
+    public function __construct()
+    {
+        $this->orderItems = new ArrayCollection();
+    }
+
 
     public function addImage(\ShopBundle\Entity\Images $image) {
         $this->images[] = $image;

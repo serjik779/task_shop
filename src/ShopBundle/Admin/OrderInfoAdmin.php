@@ -36,6 +36,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('phone', 'text')
             ->add('name', 'text')
             ->add('orderItems', 'sonata_type_collection', array(
+                'required' => false
             ), array(
                 'edit' => 'inline',
                 'inline' => 'table',
@@ -68,15 +69,15 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('name');
     }
 
-    public function prePersist($orderInfo)
-    {
-        $this->preUpdate($orderInfo);
-    }
-
-    public function preUpdate($orderInfo)
-    {
-        $orderInfo->setOrdersItem($orderInfo->getOrdersItem());
-    }
+//    public function prePersist($ordersInfo)
+//    {
+//        $this->preUpdate($ordersInfo);
+//    }
+//
+//    public function preUpdate($ordersInfo)
+//    {
+//        $ordersInfo->setOrderItems($ordersInfo->getOrderItems());
+//    }
 //    public function prePersist($page)
 //    {
 //        $this->manageEmbeddedImageAdmins($page);

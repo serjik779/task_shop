@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,14 +59,18 @@ class OrderItems
     /**
      * @var Products
      *
-     * @ORM\ManyToOne(targetEntity="Products")
+     * @ORM\ManyToOne(targetEntity="Products", inversedBy="products", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      * })
      */
-    private $product;
+    private $products;
 
 
+    public function __construct()
+    {
+        $this->products = new Products();
+    }
 
     /**
      * Get id
@@ -170,25 +175,25 @@ class OrderItems
     }
 
     /**
-     * Set product
+     * Set products
      *
-     * @param \ShopBundle\Entity\Products $product
+     * @param \ShopBundle\Entity\Products $products
      * @return OrderItems
      */
-    public function setProduct(\ShopBundle\Entity\Products $product = null)
+    public function setProducts(\ShopBundle\Entity\Products $products = null)
     {
-        $this->product = $product;
+        $this->products = $products;
 
         return $this;
     }
 
     /**
-     * Get product
+     * Get products
      *
      * @return \ShopBundle\Entity\Products 
      */
-    public function getProduct()
+    public function getProducts()
     {
-        return $this->product;
+        return $this->products;
     }
 }

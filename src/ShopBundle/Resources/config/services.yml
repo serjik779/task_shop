@@ -68,3 +68,25 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
+    app.admin.delivery_type:
+        class: ShopBundle\Admin\DeliveryTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Delivery Type" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\DeliveryType
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.pages:
+        class: ShopBundle\Admin\PagesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Pages" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Pages
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true

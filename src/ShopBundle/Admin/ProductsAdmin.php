@@ -35,7 +35,10 @@ class ProductsAdmin extends AbstractAdmin
                 'class' => Categories::class
             ))
             ->add('title', 'text')
-            ->add('description', 'textarea')
+            ->add('description', 'sonata_simple_formatter_type', array(
+                'format' => 'richhtml', 'attr' => array(
+                    'class' => 'ckeditor')
+            ))
             ->add('cost', 'money')
             ->add('amount', 'number')
             ->add('serviceId', 'number')
