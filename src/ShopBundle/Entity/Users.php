@@ -50,7 +50,7 @@ class Users
     /**
      * @var Roles
      *
-     * @ORM\OneToOne(targetEntity="Roles")
+     * @ORM\ManyToOne(targetEntity="Roles")
      */
     private $role;
     /**
@@ -163,18 +163,18 @@ class Users
         return $this->phone;
     }
     /**
-     * Set role
+     * Set Roles
      *
      * @param \ShopBundle\Entity\Roles $role
      * @return Users
      */
-    public function setRole(\ShopBundle\Entity\Roles $role = null)
+    public function setRole(Roles $role = null)
     {
         $this->role = $role;
         return $this;
     }
     /**
-     * Get role
+     * Get Roles
      *
      * @return \ShopBundle\Entity\Roles
      */
