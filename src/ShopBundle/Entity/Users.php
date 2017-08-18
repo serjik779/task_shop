@@ -2,7 +2,9 @@
 
 namespace ShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Users
@@ -12,6 +14,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Users
 {
+    /**
+     *  @var ArrayCollection|Products[]
+     * Many Users have Many Products.
+     * @ORM\ManyToMany(targetEntity="Products")
+     * @ORM\JoinTable(name="wishlist",
+     *      joinColumns={@ORM\JoinColumn(name="users_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="products_id", referencedColumnName="id")}
+     * )
+     */
+    private $products;
     /**
      * @var integer
      *
@@ -211,5 +223,40 @@ class Users
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+    public function __construct() {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    /**
+     * Add products
+     *
+     * @param \ShopBundle\Entity\Products $products
+     *
+     * @return Users
+     */
+    public function addProducts(\ShopBundle\Entity\Products $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \ShopBundle\Entity\Products $products
+     */
+    public function removeProducts(\ShopBundle\Entity\Products $products)
+    {
+        $this->products->removeElement($products);
     }
 }

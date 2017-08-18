@@ -4,6 +4,9 @@ namespace ShopBundle\Controller;
 
 use ShopBundle\Entity\Feedback;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -38,7 +41,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('contact_vendor');
         }
 
-        return $this->render('ShopBundle:Default:contactVendor.html.twig', array(
+        return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
             'navigation_active' => 'others',
             'form' => $form->createView(),
         ));
@@ -47,7 +50,7 @@ class DefaultController extends Controller
     public function aboutAction()
     {
 
-        return $this->render('ShopBundle:Default:about.html.twig', array(
+        return $this->render('ShopBundle:Static:about.html.twig', array(
             'navigator_active' => 'others',
 
         ));

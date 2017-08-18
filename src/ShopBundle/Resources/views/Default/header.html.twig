@@ -5,7 +5,7 @@
                 <div class="user-menu">
                     <ul>
                         <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                        <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+                        <li><a href="{{ path('my-wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
                         <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                         <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                         <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
@@ -74,12 +74,12 @@
                     <li class="active"><a href="{{ path('shop_homepage') }}">Home</a></li>
                     <li><a href="{{ path('categories_index') }}">Categories</a></li>
                     <li><a href="shop.html">Shop page</a></li>
-                    <li><a href="#">Single product</a></li>
+                    <li><a href="{{ path('single-product_index') }}">Single product</a></li>
                     <li><a href="cart.html">Cart</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
                     <li><a href="#">Others</a></li>
-                    <li><a href="{{ path('contact_vendor') }}">Contact</a></li>
-                    <li><a href="{{ path('about_us') }}">About</a></li>
+                    <li><a href="{{ path('shop_contact') }}">Contact</a></li>
+                    <li><a href="{{ path('shop_about') }}">About</a></li>
                 </ul>
             </div>
         </div>
