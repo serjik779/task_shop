@@ -145,16 +145,19 @@ sonata_block:
         # enable the SonataAdminBundle block
 
 
-#sonata_admin:
-#    templates:
-#        layout:  SonataAdminBundle::layout.html.twig
-#    security:
-#
-#        # the default value
-#        handler: sonata.admin.security.handler.noop
-#
-#        # use this service if you want ACL
-#        handler: sonata.admin.security.handler.acl
+sonata_admin:
+    templates:
+        layout:  SonataAdminBundle::layout.html.twig
+    title:      "Ustora"
+    #title_logo: "/favicon-white.png"
+
+    security:
+
+        # the default value
+        handler: sonata.admin.security.handler.noop
+
+        # use this service if you want ACL
+        handler: sonata.admin.security.handler.acl
 
 sonata_user:
     security_acl: true

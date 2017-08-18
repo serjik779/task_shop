@@ -47,6 +47,7 @@ class ProductsAdmin extends AbstractAdmin
             ))
             ->add('isVisible', CheckboxType::class)
             ->add('images', 'sonata_type_collection', array(
+                'by_reference' => false,
                 'required' => false
             ), array(
                 'edit' => 'inline',
