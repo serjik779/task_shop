@@ -41,7 +41,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('contact_vendor');
         }
 
-        return $this->render('ShopBundle:Default:contactVendor.html.twig', array(
+        return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
             'navigation_active' => 'others',
             'form' => $form->createView(),
         ));
@@ -50,7 +50,7 @@ class DefaultController extends Controller
     public function aboutAction()
     {
 
-        return $this->render('ShopBundle:Default:about.html.twig', array(
+        return $this->render('ShopBundle:Static:about.html.twig', array(
             'navigator_active' => 'others',
 
         ));

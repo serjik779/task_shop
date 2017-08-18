@@ -1,0 +1,43 @@
+{% extends 'ShopBundle:Default:index.html.twig' %}
+
+{% block body %}
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <table border="1" cellspacing="0"
+                           cellpadding="8" style="background-color:aliceblue; color:black">
+                    <tr>
+                        <th>User</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Cost</th>
+                        <th>Amount</th>
+
+                    </tr>
+
+                        <tr>
+                        {% for user in users %}
+                            {% for prod in user.products %}
+                            <td>{{ user.id }}</td>
+                                <td>{{ prod.title }}</td>
+                                <td>{{ prod.description }}</td>
+                                <td>{{ prod.image }}</td>
+                                <td>{{ prod.cost }}</td>
+                                <td>{{ prod.amount }}</td>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </table>
+
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
