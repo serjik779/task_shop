@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@ShopBundle/Resources/config/services.yml" }
+    - { resource: "@LoginLoginBundle/Resources/config/services.yml" }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -36,10 +38,68 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    #Sonata with Symfony >= 2.6
+    form_themes:
+        - 'SonataFormatterBundle:Form:formatter.html.twig'
+
+    #Sonata with Symfony <=2.5
+    #form:
+    #    resources:
+    #        - 'SonataFormatterBundle:Form:formatter.html.twig'
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
+
+
+        text:
+            service: sonata.formatter.text.text
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        rawhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        richhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        twig:
+            service: sonata.formatter.text.twigengine
+            extensions: [] # Twig formatter cannot have extensions
+    ckeditor:
+        templates:
+            browser: 'SonataFormatterBundle:Ckeditor:browser.html.twig'
+            upload: 'SonataFormatterBundle:Ckeditor:upload.html.twig'
 
 # Doctrine Configuration
 doctrine:
     dbal:
+        types:
+            json: Sonata\Doctrine\Types\JsonType
         driver: pdo_mysql
         host: '%database_host%'
         port: '%database_port%'
@@ -56,8 +116,14 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        default_entity_manager: default
+        entity_managers:
+            default:
+                mappings:
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    ShopBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -70,16 +136,39 @@ swiftmailer:
 sonata_block:
     default_contexts: [cms]
     blocks:
-
-        # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
+        #...
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+        sonata.block.service.text: # used to if you plan to use Sonata user routes
+        # enable the SonataAdminBundle block
 
-sonata_admin:
-    security:
 
-        # the default value
-        handler: sonata.admin.security.handler.noop
+#sonata_admin:
+#    templates:
+#        layout:  SonataAdminBundle::layout.html.twig
+#    security:
+#
+#        # the default value
+#        handler: sonata.admin.security.handler.noop
+#
+#        # use this service if you want ACL
+#        handler: sonata.admin.security.handler.acl
 
-        # use this service if you want ACL
-        handler: sonata.admin.security.handler.acl
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+
+fos_user:
+    db_driver:      orm # can be orm or odm
+    firewall_name:  main
+    user_class:     Application\Sonata\UserBundle\Entity\User
+
+
+    group:
+        group_class:   Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+
+    service:
+        user_manager: sonata.user.orm.user_manager

@@ -1,11 +1,8 @@
 <?php
-
 namespace ShopBundle\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ShopBundle\ShopBundle;
-
 /**
  * Products
  *
@@ -22,49 +19,42 @@ class Products
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
-
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
-
     /**
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
-
     /**
      * @var float
      *
      * @ORM\Column(name="cost", type="float", precision=10, scale=0, nullable=false)
      */
     private $cost;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="amount", type="integer", nullable=true)
      */
     private $amount;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="service_id", type="integer", nullable=false)
      */
     private $serviceId;
-
     /**
      * @var Categories
      *
@@ -74,46 +64,49 @@ class Products
      * })
      */
     private $category;
-
     /**
      * @var ArrayCollection|Images[]
      * Many Users have Many Groups.
      * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"})
      */
     protected $images;
-
     /**
      * @var boolean
      *
      * @ORM\Column(name="on_main", type="boolean", nullable=false)
      */
     private $onMain = false;
-
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_visible", type="boolean", nullable=false)
      */
     private $isVisible = true;
-
-
+    /**
+     * @var ArrayCollection|Products[]
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="productId", cascade={"persist"})
+     */
+    protected $orderItems;
+    /**
+     * Products constructor.
+     */
+    public function __construct()
+    {
+        $this->orderItems = new ArrayCollection();
+    }
     public function addImage(\ShopBundle\Entity\Images $image) {
         $this->images[] = $image;
         $image->addProduct($this);
     }
-
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Set title
      *
@@ -123,20 +116,17 @@ class Products
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
-
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
         return $this->title;
     }
-
     /**
      * Set description
      *
@@ -146,20 +136,17 @@ class Products
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
-
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
         return $this->description;
     }
-
     /**
      * Set image
      *
@@ -169,20 +156,17 @@ class Products
     public function setImage($image)
     {
         $this->image = $image;
-
         return $this;
     }
-
     /**
      * Get image
      *
-     * @return string 
+     * @return string
      */
     public function getImage()
     {
         return $this->image;
     }
-
     /**
      * Set cost
      *
@@ -192,20 +176,17 @@ class Products
     public function setCost($cost)
     {
         $this->cost = $cost;
-
         return $this;
     }
-
     /**
      * Get cost
      *
-     * @return float 
+     * @return float
      */
     public function getCost()
     {
         return $this->cost;
     }
-
     /**
      * Set amount
      *
@@ -215,20 +196,17 @@ class Products
     public function setAmount($amount)
     {
         $this->amount = $amount;
-
         return $this;
     }
-
     /**
      * Get amount
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmount()
     {
         return $this->amount;
     }
-
     /**
      * Set serviceId
      *
@@ -238,20 +216,17 @@ class Products
     public function setServiceId($serviceId)
     {
         $this->serviceId = $serviceId;
-
         return $this;
     }
-
     /**
      * Get serviceId
      *
-     * @return integer 
+     * @return integer
      */
     public function getServiceId()
     {
         return $this->serviceId;
     }
-
     /**
      * Set category
      *
@@ -261,20 +236,17 @@ class Products
     public function setCategory(\ShopBundle\Entity\Categories $category = null)
     {
         $this->category = $category;
-
         return $this;
     }
-
     /**
      * Get category
      *
-     * @return \ShopBundle\Entity\Categories 
+     * @return \ShopBundle\Entity\Categories
      */
     public function getCategory()
     {
         return $this->category;
     }
-
     /**
      * Remove images
      *
@@ -284,17 +256,15 @@ class Products
     {
         $this->images->removeElement($images);
     }
-
     /**
      * Get images
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getImages()
     {
         return $this->images;
     }
-
     /**
      * @return bool
      */
@@ -302,7 +272,6 @@ class Products
     {
         return $this->onMain;
     }
-
     /**
      * @param bool $onMain
      * @return Products
@@ -312,7 +281,6 @@ class Products
         $this->onMain = $onMain;
         return $this;
     }
-
     /**
      * @return bool
      */
@@ -320,7 +288,6 @@ class Products
     {
         return $this->isVisible;
     }
-
     /**
      * @param bool $isVisible
      * @return Products

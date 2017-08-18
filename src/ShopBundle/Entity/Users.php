@@ -1,10 +1,8 @@
 <?php
-
 namespace ShopBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
 
 /**
  * Users
@@ -24,6 +22,8 @@ class Users
      * )
      */
     private $products;
+
+
     /**
      * @var integer
      *
@@ -32,61 +32,51 @@ class Users
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
-
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     protected $password;
-
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     protected $email;
-
     /**
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
-
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=50, nullable=true)
      */
     private $phone;
-
     /**
      * @var Roles
      *
-     * @ORM\OneToOne(targetEntity="Roles")
+     * @ORM\ManyToOne(targetEntity="Roles")
      */
     private $role;
-
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Set name
      *
@@ -96,20 +86,17 @@ class Users
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
-
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-
     /**
      * Set password
      *
@@ -119,20 +106,17 @@ class Users
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
-
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
         return $this->password;
     }
-
     /**
      * Set email
      *
@@ -142,20 +126,17 @@ class Users
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
-
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
         return $this->email;
     }
-
     /**
      * Set address
      *
@@ -165,20 +146,17 @@ class Users
     public function setAddress($address)
     {
         $this->address = $address;
-
         return $this;
     }
-
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
         return $this->address;
     }
-
     /**
      * Set phone
      *
@@ -188,37 +166,32 @@ class Users
     public function setPhone($phone)
     {
         $this->phone = $phone;
-
         return $this;
     }
-
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
         return $this->phone;
     }
-
     /**
-     * Set role
+     * Set Roles
      *
      * @param \ShopBundle\Entity\Roles $role
      * @return Users
      */
-    public function setRole(\ShopBundle\Entity\Roles $role = null)
+    public function setRole(Roles $role = null)
     {
         $this->role = $role;
-
         return $this;
     }
-
     /**
-     * Get role
+     * Get Roles
      *
-     * @return \ShopBundle\Entity\Roles 
+     * @return \ShopBundle\Entity\Roles
      */
     public function getRole()
     {
@@ -231,6 +204,14 @@ class Users
     public function setProducts($products)
     {
         $this->products = $products;
+    }
+
+    /**
+     * @return ArrayCollection|Products[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 
     public function __construct() {
@@ -260,3 +241,5 @@ class Users
         $this->products->removeElement($products);
     }
 }
+
+

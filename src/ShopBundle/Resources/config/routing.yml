@@ -21,3 +21,7 @@ shop_about:
 my-wishlist:
     path:     /wishlist
     defaults: { _controller: ShopBundle:Wishlist:wishlist }
+cart:
+    resource: "@ShopBundle/Resources/config/routing/cart.yml"
+    prefix:   /cart
+

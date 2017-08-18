@@ -1,9 +1,7 @@
 <?php
-
 namespace ShopBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * OrderItems
  *
@@ -20,21 +18,18 @@ class OrderItems
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="discount", type="integer", nullable=true)
      */
     private $discount;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="amount", type="integer", nullable=false)
      */
     private $amount;
-
     /**
      * @var DeliveryType
      *
@@ -44,39 +39,37 @@ class OrderItems
      * })
      */
     private $deliveryType;
-
     /**
      * @var OrdersInfo
      *
-     * @ORM\ManyToOne(targetEntity="OrdersInfo", inversedBy="ordersItems", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="OrdersInfo", inversedBy="orderItems", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="order_info_id", referencedColumnName="id")
      * })
      */
-    private $orderInfo;
-
+    private $ordersInfo;
     /**
      * @var Products
      *
-     * @ORM\ManyToOne(targetEntity="Products")
+     * @ORM\ManyToOne(targetEntity="Products", inversedBy="products", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      * })
      */
-    private $product;
-
-
-
+    private $products;
+    public function __construct()
+    {
+        $this->products = new Products();
+    }
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Set discount
      *
@@ -86,20 +79,17 @@ class OrderItems
     public function setDiscount($discount)
     {
         $this->discount = $discount;
-
         return $this;
     }
-
     /**
      * Get discount
      *
-     * @return integer 
+     * @return integer
      */
     public function getDiscount()
     {
         return $this->discount;
     }
-
     /**
      * Set amount
      *
@@ -109,20 +99,17 @@ class OrderItems
     public function setAmount($amount)
     {
         $this->amount = $amount;
-
         return $this;
     }
-
     /**
      * Get amount
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmount()
     {
         return $this->amount;
     }
-
     /**
      * Set deliveryType
      *
@@ -132,63 +119,55 @@ class OrderItems
     public function setDeliveryType(\ShopBundle\Entity\DeliveryType $deliveryType = null)
     {
         $this->deliveryType = $deliveryType;
-
         return $this;
     }
-
     /**
      * Get deliveryType
      *
-     * @return \ShopBundle\Entity\DeliveryType 
+     * @return \ShopBundle\Entity\DeliveryType
      */
     public function getDeliveryType()
     {
         return $this->deliveryType;
     }
-
     /**
-     * Set orderInfo
+     * Set ordersInfo
      *
-     * @param \ShopBundle\Entity\OrdersInfo $orderInfo
+     * @param \ShopBundle\Entity\OrdersInfo $ordersInfo
      * @return OrderItems
      */
-    public function setOrderInfo(\ShopBundle\Entity\OrdersInfo $orderInfo = null)
+    public function setOrdersInfo(\ShopBundle\Entity\OrdersInfo $ordersInfo = null)
     {
-        $this->orderInfo = $orderInfo;
-
+        $this->ordersInfo = $ordersInfo;
         return $this;
     }
-
     /**
-     * Get orderInfo
+     * Get ordersInfo
      *
-     * @return \ShopBundle\Entity\OrdersInfo 
+     * @return \ShopBundle\Entity\OrdersInfo
      */
-    public function getOrderInfo()
+    public function getOrdersInfo()
     {
-        return $this->orderInfo;
+        return $this->ordersInfo;
     }
-
     /**
-     * Set product
+     * Set products
      *
-     * @param \ShopBundle\Entity\Products $product
+     * @param \ShopBundle\Entity\Products $products
      * @return OrderItems
      */
-    public function setProduct(\ShopBundle\Entity\Products $product = null)
+    public function setProducts(\ShopBundle\Entity\Products $products = null)
     {
-        $this->product = $product;
-
+        $this->products = $products;
         return $this;
     }
-
     /**
-     * Get product
+     * Get products
      *
-     * @return \ShopBundle\Entity\Products 
+     * @return \ShopBundle\Entity\Products
      */
-    public function getProduct()
+    public function getProducts()
     {
-        return $this->product;
+        return $this->products;
     }
 }

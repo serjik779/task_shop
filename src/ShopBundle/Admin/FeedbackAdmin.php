@@ -34,7 +34,10 @@ class FeedbackAdmin extends AbstractAdmin
         $formMapper
             ->add('name', 'text')
             ->add('email', 'email')
-            ->add('text', 'textarea');
+            ->add('text', 'sonata_simple_formatter_type', array(
+                'format' => 'richhtml', 'attr' => array(
+                    'class' => 'ckeditor')
+            ));
     }
 
     // Fields to be shown on filter forms
