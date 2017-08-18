@@ -30,11 +30,6 @@ class CategoriesAdmin extends AbstractAdmin
             ->add('image', AdminType::class, array(
                 'label' => false,
                 'delete' => false
-            ))
-            ->add('products', CollectionType::class, array(), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
             ));
     }
 
