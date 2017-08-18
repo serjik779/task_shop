@@ -156,10 +156,14 @@ class OrderItems
      * @param \ShopBundle\Entity\Products $products
      * @return OrderItems
      */
-    public function setProducts(\ShopBundle\Entity\Products $products = null)
+    public function setProducts(Products $products = null)
     {
         $this->products = $products;
         return $this;
+    }
+
+    public function addProduct(Products $product) {
+        $this->setProducts($product);
     }
     /**
      * Get products

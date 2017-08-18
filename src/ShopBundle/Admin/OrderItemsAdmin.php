@@ -8,17 +8,15 @@
 
 namespace ShopBundle\Admin;
 
-use ShopBundle\Entity\DeliveryType;
 use ShopBundle\Entity\OrdersInfo;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\PercentType;
 
 class OrderItemsAdmin extends AbstractAdmin
 {
@@ -29,16 +27,9 @@ class OrderItemsAdmin extends AbstractAdmin
             ->add('ordersInfo', EntityType::class, array(
                 'class' => OrdersInfo::class
             ))
-            ->add('deliveryType', EntityType::class, array(
-                'class' => DeliveryType::class
-            ))
-            ->add('products', ModelListType::class, array(
-                'compound' => true,
-                'by_reference' => true), array(
-                'placeholder' => 'No product selected',
-                'multiple' => true
-            ))
-            ->add('discount', PercentType::class)
+            ->add('deliveryType', ModelType::class)
+            ->add('products', ModelType::class)
+            ->add('discount', NumberType::class)
             ->add('amount', NumberType::class);
     }
 
