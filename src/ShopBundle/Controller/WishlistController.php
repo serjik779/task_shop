@@ -10,7 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 
-class WishlistController extends Controller{
+class WishlistController extends Controller
+{
 
     public function wishlistAction()
     {

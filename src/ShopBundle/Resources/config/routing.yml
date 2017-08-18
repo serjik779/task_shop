@@ -18,10 +18,12 @@ shop_about:
     path:     /about
     defaults: { _controller: ShopBundle:Default:about }
 
-my-wishlist:
+shop_wishlist:
     path:     /wishlist
     defaults: { _controller: ShopBundle:Wishlist:wishlist }
-cart:
+
+
+shop_cart:
     resource: "@ShopBundle/Resources/config/routing/cart.yml"
     prefix:   /cart
 

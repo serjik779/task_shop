@@ -38,7 +38,7 @@ class DefaultController extends Controller
             $em->persist($feedback);
             $em->flush();
 
-            return $this->redirectToRoute('contact_vendor');
+            return $this->redirectToRoute('shop_contact');
         }
 
         return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
