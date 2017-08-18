@@ -51,7 +51,7 @@ class OrderItems
     /**
      * @var Products
      *
-     * @ORM\ManyToOne(targetEntity="Products", inversedBy="products", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Products", inversedBy="orderItems", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      * })

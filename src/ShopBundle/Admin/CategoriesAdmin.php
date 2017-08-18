@@ -8,13 +8,15 @@
 
 namespace ShopBundle\Admin;
 
-
 use ShopBundle\Entity\Images;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\CoreBundle\Form\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategoriesAdmin extends AbstractAdmin
 {
@@ -22,10 +24,18 @@ class CategoriesAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', 'text', array(
+            ->add('title', TextType::class, array(
                 'label' => 'Category Title'
             ))
-            ->add('image', 'sonata_type_admin', array( 'label' => false, 'delete' => false ));
+            ->add('image', AdminType::class, array(
+                'label' => false,
+                'delete' => false
+            ))
+            ->add('products', CollectionType::class, array(), array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+            ));
     }
 
     // Fields to be shown on filter forms

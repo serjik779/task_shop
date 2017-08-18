@@ -78,7 +78,7 @@ class Products
     private $isVisible = true;
     /**
      * @var ArrayCollection|Products[]
-     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="productId", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="products", cascade={"persist"})
      */
     protected $orderItems;
 
@@ -94,7 +94,7 @@ class Products
         $this->orderItems = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
-    public function addImage(\ShopBundle\Entity\Images $image) {
+    public function addImages(\ShopBundle\Entity\Images $image) {
         $this->images[] = $image;
         $image->addProduct($this);
     }

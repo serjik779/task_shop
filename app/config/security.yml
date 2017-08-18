@@ -46,14 +46,14 @@ security:
 
   access_control:
     # Products
-    - { path: ^/products/unreg, role: [ IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER ] }
-    - { path: ^/products/download, role: [ROLE_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
-    - { path: ^/products/, role: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+#    - { path: ^/products/unreg, role: [ IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER ] }
+#    - { path: ^/products/download, role: [ROLE_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+#    - { path: ^/products/, role: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
 
     # URL of FOSUserBundle which need to be available to anonymous users
-    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#    - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#    - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     # Admin login page needs to be access without credential
     - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
