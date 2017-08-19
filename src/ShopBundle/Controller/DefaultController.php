@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -18,10 +19,8 @@ class DefaultController extends Controller
 
     public function contactVendorAction(Request $request)
     {
-        $feedback = new Feedback();
-
-        $form = $this->createFormBuilder($feedback)
-            ->add('name', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array(
+        $form = $this->createFormBuilder(new Feedback())
+            ->add('name', TextType::class, array(
                 'label' => 'Name'))
             ->add('email', EmailType::class, array(
                 'label' => 'Email'))
@@ -38,7 +37,7 @@ class DefaultController extends Controller
             $em->persist($feedback);
             $em->flush();
 
-            return $this->redirectToRoute('contact_vendor');
+            return $this->redirectToRoute('shop_contact');
         }
 
         return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
@@ -52,7 +51,6 @@ class DefaultController extends Controller
 
         return $this->render('ShopBundle:Static:about.html.twig', array(
             'navigator_active' => 'others',
-
         ));
     }
 }
