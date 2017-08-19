@@ -78,7 +78,7 @@ class Products
     private $isVisible = true;
     /**
      * @var ArrayCollection|Products[]
-     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="P", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="products", cascade={"persist"})
      */
     protected $orderItems;
 
