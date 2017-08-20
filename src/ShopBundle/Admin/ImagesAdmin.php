@@ -8,12 +8,12 @@
 
 namespace ShopBundle\Admin;
 
-
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ImagesAdmin extends AbstractAdmin
 {
@@ -21,8 +21,6 @@ class ImagesAdmin extends AbstractAdmin
     {
         // get the current Image instance
         $image = $this->getSubject();
-
-        dump(get_class($image) );
 
         // use $fileFieldOptions so we can add other options to the field
         $fileFieldOptions = array('required' => false);
@@ -36,11 +34,20 @@ class ImagesAdmin extends AbstractAdmin
             $fileFieldOptions['help'] = '<img style="width:200px;border:1px solid;" src="'.$fullPath.'" class="admin-preview" />';
 
 
+        } elseif (is_array($image)) {
+            foreach ($image as $im) {
+                $webPath = $im->getWebPath();
+                $container = $this->getConfigurationPool()->getContainer();
+                $fullPath = $container->get('request_stack')->getCurrentRequest()->getBasePath().'/'.$webPath;
+
+                // add a 'help' option containing the preview's img tag
+                $fileFieldOptions['help'] = '<img style="width:200px;border:1px solid;" src="'.$fullPath.'" class="admin-preview" />';
+            }
         }
         $fileFieldOptions['required'] = true;
 
         $formMapper
-            ->add('file', 'file', $fileFieldOptions);
+            ->add('file', FileType::class, $fileFieldOptions);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

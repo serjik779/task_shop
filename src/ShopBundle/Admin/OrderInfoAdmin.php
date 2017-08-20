@@ -8,22 +8,14 @@
 
 namespace ShopBundle\Admin;
 
-
-use Doctrine\DBAL\Types\TextType;
-use Doctrine\Entity;
-use ShopBundle\Entity\Categories;
-use ShopBundle\Entity\Images;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Sonata\CoreBundle\Form\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OrderInfoAdmin extends AbstractAdmin
 {
@@ -31,11 +23,11 @@ class OrderInfoAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('date', 'datetime')
-            ->add('address', 'text')
-            ->add('phone', 'text')
-            ->add('name', 'text')
-            ->add('orderItems', 'sonata_type_collection', array(
+            ->add('date', DateTimeType::class)
+            ->add('address', TextType::class)
+            ->add('phone', TextType::class)
+            ->add('name', TextType::class)
+            ->add('orderItems', CollectionType::class, array(
                 'required' => false
             ), array(
                 'edit' => 'inline',

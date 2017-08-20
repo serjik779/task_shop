@@ -8,22 +8,19 @@
 
 namespace ShopBundle\Admin;
 
-
-use Doctrine\DBAL\Types\TextType;
-use Doctrine\Entity;
 use ShopBundle\Entity\Categories;
-use ShopBundle\Entity\Images;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\CoreBundle\Form\Type\CollectionType;
+use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProductsAdmin extends AbstractAdmin
 {
@@ -31,22 +28,23 @@ class ProductsAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('category', 'entity', array(
+            ->add('category', EntityType::class, array(
                 'class' => Categories::class
             ))
-            ->add('title', 'text')
-            ->add('description', 'sonata_simple_formatter_type', array(
+            ->add('title', TextType::class)
+            ->add('description', SimpleFormatterType::class, array(
                 'format' => 'richhtml', 'attr' => array(
                     'class' => 'ckeditor')
             ))
-            ->add('cost', 'money')
-            ->add('amount', 'number')
-            ->add('serviceId', 'number')
+            ->add('cost', MoneyType::class)
+            ->add('amount', NumberType::class)
+            ->add('serviceId', NumberType::class)
             ->add('onMain', CheckboxType::class, array(
                 'required' => false
             ))
             ->add('isVisible', CheckboxType::class)
-            ->add('images', 'sonata_type_collection', array(
+            ->add('images', CollectionType::class, array(
+                'by_reference' => false,
                 'required' => false
             ), array(
                 'edit' => 'inline',

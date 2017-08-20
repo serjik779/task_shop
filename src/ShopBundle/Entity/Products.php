@@ -32,12 +32,6 @@ class Products
      */
     private $description;
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     */
-    private $image;
-    /**
      * @var float
      *
      * @ORM\Column(name="cost", type="float", precision=10, scale=0, nullable=false)
@@ -84,19 +78,54 @@ class Products
     private $isVisible = true;
     /**
      * @var ArrayCollection|Products[]
-     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="productId", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="products", cascade={"persist"})
      */
     protected $orderItems;
+
+    /**
+     * @var Images
+     */
+    protected $image;
     /**
      * Products constructor.
      */
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
     public function addImage(\ShopBundle\Entity\Images $image) {
-        $this->images[] = $image;
+        $this->images->add($image);
         $image->addProduct($this);
+    }
+    /**
+     * Remove image
+     *
+     * @param \ShopBundle\Entity\Images $image
+     */
+    public function removeImage(Images $image)
+    {
+        $this->images->removeElement($image);
+    }
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Products
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
     /**
      * Get id
@@ -147,26 +176,7 @@ class Products
     {
         return $this->description;
     }
-    /**
-     * Set image
-     *
-     * @param string $image
-     * @return Products
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-        return $this;
-    }
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
+
     /**
      * Set cost
      *
@@ -247,15 +257,7 @@ class Products
     {
         return $this->category;
     }
-    /**
-     * Remove images
-     *
-     * @param \ShopBundle\Entity\Images $images
-     */
-    public function removeImage(\ShopBundle\Entity\Images $images)
-    {
-        $this->images->removeElement($images);
-    }
+
     /**
      * Get images
      *
@@ -296,5 +298,10 @@ class Products
     {
         $this->isVisible = $isVisible;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

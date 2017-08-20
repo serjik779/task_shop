@@ -8,24 +8,15 @@
 
 namespace ShopBundle\Admin;
 
-
-use Doctrine\DBAL\Types\TextType;
-use Doctrine\Entity;
-use ShopBundle\Entity\Categories;
-use ShopBundle\Entity\DeliveryType;
-use ShopBundle\Entity\Images;
 use ShopBundle\Entity\OrdersInfo;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\Filter\NumberType;
+use Sonata\AdminBundle\Form\Type\ModelType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class OrderItemsAdmin extends AbstractAdmin
 {
@@ -33,21 +24,13 @@ class OrderItemsAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('ordersInfo', 'entity', array(
+            ->add('ordersInfo', EntityType::class, array(
                 'class' => OrdersInfo::class
             ))
-            ->add('deliveryType', 'entity', array(
-                'class' => DeliveryType::class
-            ))
-            ->add('products', 'sonata_type_model_list', array(           'compound' => true,
-                'by_reference' => true), array(
-                'placeholder' => 'No product selected',
-                'multiple' => true
-            ))
-            ->add('discount', 'percent')
-            ->add('amount', 'number')
-        ;
-            #->add('image', 'sonata_type_admin', array( 'label' => false, 'delete' => false ));
+            ->add('deliveryType', ModelType::class)
+            ->add('products', ModelType::class)
+            ->add('discount', NumberType::class)
+            ->add('amount', NumberType::class);
     }
 
     // Fields to be shown on filter forms

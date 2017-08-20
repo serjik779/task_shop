@@ -35,7 +35,7 @@ class Categories
     private $image;
     /**
      * @var ArrayCollection|Products[]
-     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\Products", mappedBy="categoryId")
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\Products", mappedBy="category")
      */
     protected $products;
     public function __construct()
@@ -97,7 +97,7 @@ class Categories
      * @param \ShopBundle\Entity\Products $products
      * @return Categories
      */
-    public function addProduct(\ShopBundle\Entity\Products $products)
+    public function addProducts(\ShopBundle\Entity\Products $products)
     {
         $this->products[] = $products;
         return $this;
@@ -107,7 +107,7 @@ class Categories
      *
      * @param \ShopBundle\Entity\Products $products
      */
-    public function removeProduct(\ShopBundle\Entity\Products $products)
+    public function removeProducts(\ShopBundle\Entity\Products $products)
     {
         $this->products->removeElement($products);
     }

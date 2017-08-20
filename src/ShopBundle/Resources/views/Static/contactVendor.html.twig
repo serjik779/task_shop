@@ -1,0 +1,25 @@
+{% extends 'ShopBundle:Default:index.html.twig' %}
+
+{% block body %}
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+    {{ form_start(form) }}
+    <p>Feedback</p>
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+            </div>
+            <div class="col-md-6">
+                Content
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,7 +1,8 @@
 shop_homepage:
     path:     /
     defaults: { _controller: ShopBundle:Default:index }
-contact_vendor:
+
+shop_contact:
     path:     /vendor-contact
     defaults: { _controller: ShopBundle:Default:contactVendor }
 
@@ -9,17 +10,20 @@ shop_categories:
     resource: "@ShopBundle/Resources/config/routing/categories.yml"
     prefix:   /categories
 
-product-single:
-    resource: "@ShopBundle/Resources/config/routing/single-product.yml"
-    prefix:   /single-product
+shop_products:
+    resource: "@ShopBundle/Resources/config/routing/products.yml"
+    prefix:   /products
 
-cart:
-    resource: "@ShopBundle/Resources/config/routing/cart.yml"
-    prefix:   /cart
-
-
-about_us:
+shop_about:
     path:     /about
     defaults: { _controller: ShopBundle:Default:about }
 
+shop_wishlist:
+    path:     /wishlist
+    defaults: { _controller: ShopBundle:Wishlist:wishlist }
+
+
+shop_cart:
+    resource: "@ShopBundle/Resources/config/routing/cart.yml"
+    prefix:   /cart
 

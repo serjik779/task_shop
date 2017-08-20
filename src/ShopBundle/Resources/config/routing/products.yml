@@ -1,0 +1,8 @@
+products_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Product:index" }
+    methods:  GET
+products_show:
+    path:     /{id}
+    defaults: { _controller: "ShopBundle:Product:show" }
+    methods:  GET

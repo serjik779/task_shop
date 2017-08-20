@@ -51,7 +51,7 @@ class OrderItems
     /**
      * @var Products
      *
-     * @ORM\ManyToOne(targetEntity="Products", inversedBy="products", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Products", inversedBy="orderItems", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      * })
@@ -156,10 +156,14 @@ class OrderItems
      * @param \ShopBundle\Entity\Products $products
      * @return OrderItems
      */
-    public function setProducts(\ShopBundle\Entity\Products $products = null)
+    public function setProducts(Products $products = null)
     {
         $this->products = $products;
         return $this;
+    }
+
+    public function addProduct(Products $product) {
+        $this->setProducts($product);
     }
     /**
      * Get products

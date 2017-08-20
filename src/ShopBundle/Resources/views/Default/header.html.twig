@@ -6,12 +6,13 @@
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="#myModalshow"  data-toggle="modal"> My account</a></li>
-                        <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+                        <li><a href="#myModalshow"  data-toggle="modal"><i class="fa fa-user"></i> My account</a></li>
+                        <li><a href="{{ path('shop_wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
                         <li><a href="{{ path('cart_index') }}"><i class="fa fa-user"></i> My Cart</a></li>
                         <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                        <li><a href="#myModallog"  data-toggle="modal"> Login</a></li>
-                        <li><a href="#myModalReg"  data-toggle="modal"> Register</a></li>
+                        <li><a href="#myModallog" data-toggle="modal"><i class="fa fa-sign-in"></i> SignIn</a></li>
+                        <li><a href="#myModalReg" data-toggle="modal"><span class="glyphicon glyphicon-star"></span> SignUp</a></li>
+                        <li><a href="{{ path('login_login_default_logout') }}" data-toggle="modal"> <i class="fa fa-sign-out"></i>Logout</a></li>
                     </ul>
                     <!-- HTML-код модального окна LOG -->
                     <form action="{{ path('login_login_default_index') }}" method="POST">
@@ -20,44 +21,61 @@
                             <div class="modal-content">
                                 <!-- Заголовок модального окна -->
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h4 class="modal-title">Заголовок модального окна</h4>
+                                    <!-- Кнопка "закрыть"-->
+                                    <button type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-hidden="true">×
+                                    </button>
+                                    <h4 class="modal-title">Welcome to ElectroZone!</h4>
                                 </div>
                                 <!-- Основное содержимое модального окна -->
                                 <div class="modal-body">
-                                    Содержимое модального окна... <br>
-                                    <input type="text"  class="input-block-level"  name="email" placeholder="Email" data-trigger="change" data-required="true" data-type="email">
-                                    <input type="password" class="input-block-level" name="password" placeholder="Password" data-trigger="change" data-required="true">
+                                    <br>
+                                    <label>Email</label>
+                                    <input type="text"
+                                           class="input-block-level form-control"
+                                           name="email"
+                                           {#placeholder="Email"#}
+                                           data-trigger="change"
+                                           data-required="true"
+                                           data-type="email">
+                                    <label>Password</label>
+                                    <input type="password"
+                                           class="input-block-level form-control"
+                                           name="password"
+                                           {#placeholder="Password"#}
+                                           data-trigger="change"
+                                           data-required="true">
 
                                 </div>
                                 <!-- Футер модального окна -->
                                 <div class="modal-footer">
                                     <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
+
             </div>
-        </form>
+
+            <form>
 
             <!-- HTML-код модального окна SHOW -->
-            <form action="{{ path('login_login_default_show') }}" method="post">
+            <form action="{{ path('login_login_default_show') }}" method="get">
             <div id="myModalshow" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <!-- Заголовок модального окна -->
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">Заголовок модального окна</h4>
+                            <h4 class="modal-title">My Account</h4>
                         </div>
                         <!-- Основное содержимое модального окна -->
                         <div class="modal-body">
                             <div class="container">
-
-
                                 {% if user is defined%}
                                 <h2>ID: {{ user.id }}  </h2>
                                 <h2>NAME: {{ user.name}}  </h2>
@@ -72,8 +90,7 @@
                         </div>
                         <!-- Футер модального окна -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                            <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                            <button type="button" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -81,56 +98,44 @@
     </form>
 
 
+                <!-- HTML-код модального окна REG -->
+                <form action="{{ path('login_login_default_signup') }}" method="POST">
+                    <div id="myModalReg" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Заголовок модального окна -->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Register in ElectroZone!</h4>
+                                </div>
+                                <!-- Основное содержимое модального окна -->
+                               <div class="modal-body">
+                                <label>Email</label>
+                                <input type="text"  id="email"  class=" form-control" name="email" data-trigger="change" data-required="true" data-type="email">
 
-            {#<!-- HTML-код модального окна REG -->#}
-            {#<form action="{{ path('login_login_default_index') }}" method="POST">#}
-                {#<div id="myModallog" class="modal fade">#}
-                    {#<div class="modal-dialog">#}
-                        {#<div class="modal-content">#}
-                            {#<!-- Заголовок модального окна -->#}
-                            {#<div class="modal-header">#}
-                                {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
-                                {#<h4 class="modal-title">Заголовок модального окна</h4>#}
-                            {#</div>#}
-                            {#<!-- Основное содержимое модального окна -->#}
-                            {#<div class="modal-body">#}
-                                {#Содержимое модального окна... <br>#}
-                                {#<input type="text"  class="input-block-level"  name="email" placeholder="Email" data-trigger="change" data-required="true" data-type="email">#}
-                                {#<input type="password" class="input-block-level" name="password" placeholder="Password" data-trigger="change" data-required="true">#}
+                                <label>Password</label>
+                                <input type="password"   class="form-control" name="password" data-trigger="change" data-required="true">
 
-                            {#</div>#}
-                            {#<!-- Футер модального окна -->#}
-                            {#<div class="modal-footer">#}
-                                {#<button class="btn btn-large btn-primary" type="submit">Sign in</button>#}
-                                {#<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>#}
-                                {#<button type="button" class="btn btn-primary">Сохранить изменения</button>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-        {#</div>#}
-    {#</div>#}
-    {#</form>#}
+                                <label>Name</label>
+                                <input type="text"   class="form-control" name="name" data-trigger="change" data-required="true" >
 
+                                <label>Address</label>
+                                <input type="text"   class="form-control" name="address" data-trigger="change" data-required="true" >
 
+                                <label>Phone</label>
+                                <input type="text"   class="form-control" name="phone" data-trigger="change" data-required="true" >
 
+                               </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                <!-- Футер модального окна -->
+                                <div class="modal-footer">
+                                    <div>
+                                        <button class="btn btn-primary" type="submit" >Create Account</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -138,7 +143,19 @@
                 <div class="header-right">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
+                            <a data-toggle="dropdown"
+                               data-hover="dropdown"
+                               class="dropdown-toggle"
+                               href="#">
+                                <span class="key">
+                                    currency :
+                                </span>
+                                <span class="value">
+                                    USD
+                                </span>
+                                <b class="caret">
+                                </b>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">USD</a></li>
                                 <li><a href="#">INR</a></li>
@@ -147,7 +164,20 @@
                         </li>
 
                         <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                            <a data-toggle="dropdown"
+                               data-hover="dropdown"
+                               class="dropdown-toggle"
+                               href="#">
+                                <span class="key">
+                                    language :
+                                </span>
+                                <span class="value">
+                                    English
+                                </span>
+                                <b class="caret">
+
+                                </b>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">English</a></li>
                                 <li><a href="#">French</a></li>
@@ -157,9 +187,11 @@
                     </ul>
                 </div>
             </div>
+            </form>
         </div>
     </div>
-</div> <!-- End header area -->
+</div>
+<!-- End header area -->
 
 <div class="site-branding-area">
     <div class="container">
@@ -172,7 +204,17 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="{{ path('cart_index') }}">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    <a href="{{ path('cart_index') }}">
+                        Cart -
+                        <span
+                                class="cart-amunt">$100
+                        </span>
+                        <i class="fa fa-shopping-cart">
+                        </i>
+                        <span class="product-count">
+                            5
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -196,12 +238,12 @@
                     <li class="active"><a href="{{ path('shop_homepage') }}">Home</a></li>
                     <li><a href="{{ path('categories_index') }}">Categories</a></li>
                     <li><a href="shop.html">Shop page</a></li>
-                    <li><a href="#">Single product</a></li>
+                    <li><a href="{{ path('products_index') }}">Single product</a></li>
                     <li><a href="{{ path('cart_index') }}">Cart</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
                     <li><a href="#">Others</a></li>
-                    <li><a href="{{ path('contact_vendor') }}">Contact</a></li>
-                    <li><a href="{{ path('about_us') }}">About</a></li>
+                    <li><a href="{{ path('shop_contact') }}">Contact</a></li>
+                    <li><a href="{{ path('shop_about') }}">About</a></li>
                 </ul>
             </div>
         </div>
