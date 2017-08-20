@@ -10,11 +10,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ShopBundle:home:index.html.twig');
+         return $this->render('ShopBundle:home:index.html.twig');
     }
 
     public function contactVendorAction(Request $request)
