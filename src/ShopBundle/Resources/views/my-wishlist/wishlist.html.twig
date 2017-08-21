@@ -10,25 +10,19 @@
                     <table border="1" cellspacing="0"
                            cellpadding="8" style="background-color:aliceblue; color:black">
                     <tr>
-                        <th>User</th>
+                        <th>Image</th>
                         <th>Product</th>
                         <th>Description</th>
                         <th>Cost</th>
-                        <th>Amount</th>
-
                     </tr>
-
-                        <tr>
-                        {% for user in users %}
-                            {% for prod in user.products %}
-                            <td>{{ user.id }}</td>
+                        {% for prod in user.products %}
+                            <tr>
+                                <td>{{ prod.image }}</td>
                                 <td>{{ prod.title }}</td>
                                 <td>{{ prod.description }}</td>
                                 <td>{{ prod.cost }}</td>
-                                <td>{{ prod.amount }}</td>
+                            </tr>
                         {% endfor %}
-                        </tr>
-                    {% endfor %}
                     </table>
 
                 </div>
