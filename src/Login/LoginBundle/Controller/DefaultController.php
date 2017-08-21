@@ -49,9 +49,9 @@ class DefaultController extends Controller
 //                    dump($login);
 
 //                return $this->render('LoginLoginBundle:Default:welcome.html.twig', array('user' => $user));
-                return $this->render('ShopBundle:home:index.html.twig', array('user' => $user));
+                return $this->render('ShopBundle:Default:index.html.twig', array('user' => $user));
             }else{
-                return $this->render('ShopBundle:home:index.html.twig', array('name' => 'Login Failed'));
+                return $this->render('LoginLoginBundle:Default:login.html.twig', array('name' => 'Login Failed'));
             }
         }else{
             if ($session->has('login')){
@@ -60,15 +60,15 @@ class DefaultController extends Controller
                 $password = $login->getPassword();
                 $user = $repository->findOneBy(array('email'=>$email, 'password'=>$password));
                 if ($user) {
-                    return $this->render('ShopBundle:home:index.html.twig', array('user' => $user));
+                    return $this->render('LoginLoginBundle:Default:welcome.html.twig', array('user' => $user));
                 }
 
             }
 //            return $this->render('LoginLoginBundle:Default:login.html.twig');
-            return $this->render('ShopBundle:home:index.html.twig');
+            return $this->render('ShopBundle:Default:index.html.twig');
         }
 
-//        return $this->render('ShopBundle:home:index.html.twig');
+
     }
 
     /**
@@ -104,10 +104,8 @@ dump($role);
 
         }
 //        return $this->render('LoginLoginBundle:Default:signup.html.twig');
-//        return $this->render('ShopBundle:Default:index.html.twig');
-        return $this->render('ShopBundle:home:index.html.twig');
+        return $this->render('ShopBundle:Default:index.html.twig');
     }
-
 
 
 
@@ -117,7 +115,7 @@ dump($role);
     public  function logoutAction(Request $request){
         $session=$this->getRequest()->getSession();
         $session->clear();
-        return $this->render('ShopBundle:home:index.html.twig');
+        return $this->render('LoginLoginBundle:Default:login.html.twig');
     }
 
 
@@ -125,16 +123,9 @@ dump($role);
      * @Route("/show")
      */
     public  function showAction(Request $request){
-
-
-        $session=$this->getRequest()->getSession();
-        $login = $session->get('login');
-        dump($login);
-
-
         $session=$this->getRequest()->getSession();
         $em = $this->getDoctrine()->getEntityManager();
-        $repository = $em->getRepository('ShopBundle:Users');
+        $repository = $em->getRepository('LoginLoginBundle:Users');
 
         $login = $session->get('login');
         $email = $login->getEmail();
@@ -145,7 +136,7 @@ dump($role);
 dump($login);
 //        dump($user);
 //print_r($user);
-        return $this->render('ShopBundle:home:index.html.twig', array('user' => $user));
+        return $this->render('LoginLoginBundle:Default:show.html.twig', array('user' => $user));
     }
 
 }
