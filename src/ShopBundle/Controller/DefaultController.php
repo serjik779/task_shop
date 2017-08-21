@@ -20,14 +20,9 @@ class DefaultController extends Controller
 
     public function contactVendorAction(Request $request)
     {
-<<<<<<< HEAD
         $feedback = new Feedback();
         $form = $this->createFormBuilder($feedback)
-            ->add('name', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array(
-=======
-        $form = $this->createFormBuilder(new Feedback())
             ->add('name', TextType::class, array(
->>>>>>> 5ba4648d8104aa301587132bc03e93d4b11e6125
                 'label' => 'Name'))
             ->add('email', EmailType::class, array(
                 'label' => 'Email'))
