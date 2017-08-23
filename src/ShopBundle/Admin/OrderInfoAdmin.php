@@ -42,7 +42,10 @@ class OrderInfoAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name');
+            ->add('date')
+            ->add('name')
+            ->add('address')
+            ->add('phone');
     }
 
     // Fields to be shown on lists
@@ -50,7 +53,10 @@ class OrderInfoAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->addIdentifier('name');
+            ->addIdentifier('name')
+            ->addIdentifier('date')
+            ->addIdentifier('address')
+            ->addIdentifier('phone');
     }
 
     // Fields to be shown on show action
@@ -58,53 +64,10 @@ class OrderInfoAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('name');
+            ->add('date')
+            ->add('name')
+            ->add('address')
+            ->add('phone');
     }
 
-//    public function prePersist($ordersInfo)
-//    {
-//        $this->preUpdate($ordersInfo);
-//    }
-//
-//    public function preUpdate($ordersInfo)
-//    {
-//        $ordersInfo->setOrderItems($ordersInfo->getOrderItems());
-//    }
-//    public function prePersist($page)
-//    {
-//        $this->manageEmbeddedImageAdmins($page);
-//    }
-//
-//    public function preUpdate($page)
-//    {
-//        $this->manageEmbeddedImageAdmins($page);
-//    }
-//
-//    private function manageEmbeddedImageAdmins($page)
-//    {
-//        // Cycle through each field
-//        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
-//            // detect embedded Admins that manage Images
-//            if ($fieldDescription->getType() === 'sonata_type_admin' &&
-//                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
-//                $associationMapping['targetEntity'] === 'ShopBundle\Entity\Images'
-//            ) {
-//                $getter = 'get'.$fieldName;
-//                $setter = 'set'.$fieldName;
-//
-//                /** @var Images $image */
-//                $image = $page->$getter();
-//
-//                if ($image) {
-//                    if ($image->getFile()) {
-//                        // update the Image to trigger file management
-//                        $image->refreshUpdated();
-//                    } elseif (!$image->getFile() && !$image->getFilename()) {
-//                        // prevent Sf/Sonata trying to create and persist an empty Image
-//                        $page->$setter(null);
-//                    }
-//                }
-//            }
-//        }
-//    }
 }

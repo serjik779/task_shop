@@ -101,3 +101,6 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
+    data_center:
+         class: ShopBundle\Services\DataCenter
+         arguments: ['@doctrine.orm.default_entity_manager']
