@@ -90,3 +90,14 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
+    app.admin.service_link:
+        class: ShopBundle\Admin\ServiceLinkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Service link" }
+        arguments:
+            - ~
+            - null
+            - ShopBundle:ServiceLink
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true

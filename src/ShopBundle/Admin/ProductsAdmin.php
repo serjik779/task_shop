@@ -90,41 +90,35 @@ class ProductsAdmin extends AbstractAdmin
             ->add('serviceId');
     }
 
-//    public function prePersist($page)
-//    {
-//        $this->manageEmbeddedImageAdmins($page);
-//    }
-//
-//    public function preUpdate($page)
-//    {
-//        $this->manageEmbeddedImageAdmins($page);
-//    }
-//
-//    private function manageEmbeddedImageAdmins($page)
-//    {
-//        // Cycle through each field
-//        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
-//            // detect embedded Admins that manage Images
-//            if ($fieldDescription->getType() === 'sonata_type_admin' &&
-//                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
-//                $associationMapping['targetEntity'] === 'ShopBundle\Entity\Images'
-//            ) {
-//                $getter = 'get'.$fieldName;
-//                $setter = 'set'.$fieldName;
-//
-//                /** @var Images $image */
-//                $image = $page->$getter();
-//
-//                if ($image) {
-//                    if ($image->getFile()) {
-//                        // update the Image to trigger file management
-//                        $image->refreshUpdated();
-//                    } elseif (!$image->getFile() && !$image->getFilename()) {
-//                        // prevent Sf/Sonata trying to create and persist an empty Image
-//                        $page->$setter(null);
-//                    }
-//                }
-//            }
-//        }
-//    }
+    public function prePersist($product)
+    {
+        $this->manageEmbeddedImageAdmins($product);
+    }
+
+    public function preUpdate($product)
+    {
+        $this->manageEmbeddedImageAdmins($product);
+    }
+
+    private function manageEmbeddedImageAdmins($product)
+    {
+        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
+            if ($fieldDescription->getType() === 'Sonata\CoreBundle\Form\Type\CollectionType' &&
+                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
+                $associationMapping['targetEntity'] === 'ShopBundle\Entity\Images'
+            ) {
+                $getter = 'get' . $fieldName;
+                $setter = 'set' . $fieldName;
+                if ($product->getImages()) {
+                    foreach ($product->getImages() as $image) {
+                        if ($image->getFile()) {
+                            $image->refreshUpdated();
+                        } elseif ((!$image->getFile()) && (!$image->getFilename())) {
+                            $product->$setter(null);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

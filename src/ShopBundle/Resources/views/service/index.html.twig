@@ -1,0 +1,8 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+{% block content %}
+    <form method="post">
+        <button type="submit" name="getProducts" value="1">Get products</button>
+        <button type="submit" name="getCategories" value="1">Get categories</button>
+    </form>
+    {{ data }}
+{% endblock %}

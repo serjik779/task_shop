@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class Images
 {
 
-    const SERVER_PATH_TO_IMAGE_FOLDER = '%kernel.root_dir%/../web/uploads/categories/';
+    const SERVER_PATH_TO_IMAGE_FOLDER = '%kernel.root_dir%/../uploads/';
     /**
      * @var integer
      *
@@ -114,7 +114,7 @@ class Images
 
         // move takes the target directory and target filename as params
         $this->getFile()->move(
-            self::SERVER_PATH_TO_IMAGE_FOLDER,
+            self::SERVER_PATH_TO_IMAGE_FOLDER . date('Y') . '/' . date('m') . '/',
             $this->getFile()->getClientOriginalName()
         );
 
@@ -213,7 +213,11 @@ class Images
     }
 
     public function getWebPath() {
-        return Images::SERVER_PATH_TO_IMAGE_FOLDER.$this->getFilename();
+        return Images::SERVER_PATH_TO_IMAGE_FOLDER . date('Y', $this->getUpdated()->getTimestamp()) . '/' . date('m', $this->getUpdated()->getTimestamp()) . '/' . $this->getFilename();
+    }
+
+    public function getPath() {
+        return '/uploads/' . date('Y', $this->getUpdated()->getTimestamp()) . '/' . date('m', $this->getUpdated()->getTimestamp()) . '/' . $this->getFilename();
     }
 
     public function __toString()

@@ -1,43 +1,50 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
 {% block body %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Categories</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="latest-product">
-                        <h2 class="section-title">Categories</h2>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="img/product-1.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> Learn more</a>
-                                    </div>
+                {% if categories %}
+                    {% for category in categories %}
+                        <div class="col-md-3 col-sm-6">
+                            <div class="single-shop-product">
+                                <div class="product-upper">
+                                    <a href="{{ path('categories_products', { 'id': category.id }) }}">
+                                        {% if category.image %}
+                                            <img src="{{ category.image.path }}" alt="">
+                                        {% else %}
+                                            <img src="/img/no-image.png" alt="">
+                                        {% endif %}
+                                    </a>
                                 </div>
-                                <h2><a href="single-product.html">Samsung Galaxy s5- 2015</a></h2>
+                                <h2><a href="{{ path('categories_products', { 'id': category.id }) }}">{{ category.title }}</a></h2>
+                                <div class="product-carousel-price"></div>
 
-                                <div class="product-carousel-price">
-                                    <ins>$700.00</ins> <del>$100.00</del>
-                                </div>
+                                <div class="product-option-shop"></div>
                             </div>
-                        <div class="single-product">
-                            <div class="product-f-image">
-                                <img src="img/product-2.jpg" alt="">
-                                <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                </div>
-                            </div>
-        test
-        {% if categories %}
-            {% for category in categories %}
-                {{ category.title }}
-            {% endfor %}
-        {% endif %}
-                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navigation">
+                        {{ knp_pagination_render(categories) }}
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 {% endblock %}
