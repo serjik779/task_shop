@@ -37,15 +37,22 @@ class OrderItemsAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('discount');
+            ->add('ordersInfo')
+            ->add('deliveryType')
+            ->add('products')
+            ->add('discount')
+            ->add('amount');
     }
 
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
-            ->addIdentifier('discount');
+            ->addIdentifier('ordersInfo')
+            ->addIdentifier('deliveryType')
+            ->addIdentifier('products')
+            ->addIdentifier('discount')
+            ->addIdentifier('amount');
     }
 
     // Fields to be shown on show action
@@ -53,53 +60,10 @@ class OrderItemsAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('discount');
+            ->add('ordersInfo')
+            ->add('deliveryType')
+            ->add('products')
+            ->add('discount')
+            ->add('amount');
     }
-
-//    public function prePersist($orderInfo)
-//    {
-//        $this->preUpdate($orderInfo);
-//    }
-//
-//    public function preUpdate($orderInfo)
-//    {
-//        $orderInfo->setOrderItems($orderInfo->getOrderItems());
-//    }
-//    public function prePersist($page)
-//    {
-//        $this->manageEmbeddedImageAdmins($page);
-//    }
-//
-//    public function preUpdate($page)
-//    {
-//        $this->manageEmbeddedImageAdmins($page);
-//    }
-//
-//    private function manageEmbeddedImageAdmins($page)
-//    {
-//        // Cycle through each field
-//        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
-//            // detect embedded Admins that manage Images
-//            if ($fieldDescription->getType() === 'sonata_type_admin' &&
-//                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
-//                $associationMapping['targetEntity'] === 'ShopBundle\Entity\Images'
-//            ) {
-//                $getter = 'get'.$fieldName;
-//                $setter = 'set'.$fieldName;
-//
-//                /** @var Images $image */
-//                $image = $page->$getter();
-//
-//                if ($image) {
-//                    if ($image->getFile()) {
-//                        // update the Image to trigger file management
-//                        $image->refreshUpdated();
-//                    } elseif (!$image->getFile() && !$image->getFilename()) {
-//                        // prevent Sf/Sonata trying to create and persist an empty Image
-//                        $page->$setter(null);
-//                    }
-//                }
-//            }
-//        }
-//    }
 }

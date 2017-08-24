@@ -21,17 +21,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class FeedbackAdmin extends AbstractAdmin
 {
 
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('name', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('text', FormatterType::class, array(
-                'format' => 'richhtml', 'attr' => array(
-                    'class' => 'ckeditor')
-            ));
-    }
-
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -47,7 +36,8 @@ class FeedbackAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('id')
             ->addIdentifier('name')
-            ->addIdentifier('email');
+            ->addIdentifier('email')
+            ->addIdentifier('text');
     }
 
     // Fields to be shown on show action
@@ -56,7 +46,8 @@ class FeedbackAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('name')
-            ->add('email');
+            ->add('email')
+            ->add('text');
     }
 
     protected function configureRoutes(RouteCollection $collection)
