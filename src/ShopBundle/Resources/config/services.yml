@@ -90,3 +90,7 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
+
+    shop.allcategories_view_model_assembler:
+                class: ShopBundle\ViewModels\Categories\AllCategoriesViewModelAssembler
+                parent: gotakk.view_model.view_model_assembler

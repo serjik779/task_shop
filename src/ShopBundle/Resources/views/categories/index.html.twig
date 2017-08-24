@@ -15,8 +15,8 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                {% if categories %}
-                    {% for category in categories %}
+                {% if vm.category %}
+                    {% for category in vm.category %}
                         <div class="col-md-3 col-sm-6">
                             <div class="single-shop-product">
                                 <div class="product-upper">
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="navigation">
-                        {{ knp_pagination_render(categories) }}
+                        {#{{ knp_pagination_render(vm.category) }}#}
                     </div>
                 </div>
             </div>
