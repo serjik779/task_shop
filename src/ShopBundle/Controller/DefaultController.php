@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 
+
 class DefaultController extends Controller
 {
     public function indexAction()
@@ -22,6 +23,7 @@ class DefaultController extends Controller
     public function contactVendorAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
         $form = $this->createFormBuilder(new Feedback())
             ->add('name', TextType::class, array(
                 'label' => 'Name'))
@@ -35,9 +37,19 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /* @var $feedback Feedback */
             $feedback = $form->getData();
+
             $em->persist($feedback);
             $em->flush();
+
+
+            $message = (new \Swift_Message('Feedback message.'))
+                    ->setFrom('alona.ant@bk.ru')
+                    ->setTo('alona.ant@bk.ru')
+                    ->setBody("User: ".$feedback->getName().". "." User Email: ".$feedback->getEmail().". "." Message: ".$feedback->getText(),'text/plain');
+
+            $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('shop_contact');
         }
@@ -45,7 +57,7 @@ class DefaultController extends Controller
         $page = $em->getRepository(Pages::class)->findOneBy(['title' => 'contact']);
 
         return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
-            'navigation_active' => 'others',
+            'page' => $page,
             'form' => $form->createView(),
             'page' => $page
         ));
