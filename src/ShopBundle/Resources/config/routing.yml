@@ -3,7 +3,7 @@ shop_homepage:
     defaults: { _controller: ShopBundle:Default:index }
 
 shop_contact:
-    path:     /vendor-contact
+    path:     /shop_contact
     defaults: { _controller: ShopBundle:Default:contactVendor }
 
 shop_categories:
@@ -15,7 +15,7 @@ shop_products:
     prefix:   /products
 
 shop_about:
-    path:     /about
+    path:     /about_us
     defaults: { _controller: ShopBundle:Default:about }
 
 shop_wishlist:

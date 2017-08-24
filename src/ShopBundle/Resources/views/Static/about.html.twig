@@ -9,7 +9,11 @@
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
-                    Content
+                    <div>
+                        {% if page %}
+                            {{ page.content | raw }}
+                        {% endif %}
+                </div>
                 </div>
             </div>
         </div>
