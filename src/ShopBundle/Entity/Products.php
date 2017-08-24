@@ -302,6 +302,6 @@ class Products
 
     public function __toString()
     {
-        return $this->getTitle();
+        return $this->getTitle() ?: '';
     }
 }

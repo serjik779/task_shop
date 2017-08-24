@@ -73,7 +73,7 @@ class CategoriesAdmin extends AbstractAdmin
         // Cycle through each field
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
             // detect embedded Admins that manage Images
-            if ($fieldDescription->getType() === 'sonata_type_admin' &&
+            if ($fieldDescription->getType() === 'Sonata\AdminBundle\Form\Type\AdminType' &&
                 ($associationMapping = $fieldDescription->getAssociationMapping()) &&
                 $associationMapping['targetEntity'] === 'ShopBundle\Entity\Images'
             ) {

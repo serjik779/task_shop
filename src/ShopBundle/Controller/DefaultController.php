@@ -22,8 +22,8 @@ class DefaultController extends Controller
 
     public function contactVendorAction(Request $request)
     {
-        $em = $this->get('doctrine.orm.default_entity_manager');
-        $page = $em->getRepository(Pages::class)->findOneBy(['title' => 'contact']);
+        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createFormBuilder(new Feedback())
             ->add('name', TextType::class, array(
                 'label' => 'Name'))
@@ -40,7 +40,6 @@ class DefaultController extends Controller
             /* @var $feedback Feedback */
             $feedback = $form->getData();
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($feedback);
             $em->flush();
 
@@ -55,22 +54,22 @@ class DefaultController extends Controller
             return $this->redirectToRoute('shop_contact');
         }
 
-
-
+        $page = $em->getRepository(Pages::class)->findOneBy(['title' => 'contact']);
 
         return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
             'page' => $page,
             'form' => $form->createView(),
+            'page' => $page
         ));
     }
 
     public function aboutAction()
     {
-        $em = $this->get('doctrine.orm.default_entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository(Pages::class)->findOneBy(['title' => 'about']);
-
         return $this->render('ShopBundle:Static:about.html.twig', array(
-            'page' => $page,
+            'navigator_active' => 'others',
+            'page' => $page
         ));
     }
 

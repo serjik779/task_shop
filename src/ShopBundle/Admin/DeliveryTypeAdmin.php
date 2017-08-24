@@ -30,7 +30,8 @@ class DeliveryTypeAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title');
+            ->add('title')
+            ->add('cost');
     }
 
     // Fields to be shown on lists
@@ -38,7 +39,8 @@ class DeliveryTypeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->addIdentifier('title');
+            ->addIdentifier('title')
+            ->addIdentifier('cost');
     }
 
     // Fields to be shown on show action
@@ -46,6 +48,7 @@ class DeliveryTypeAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('title');
+            ->add('title')
+            ->add('cost');
     }
 }

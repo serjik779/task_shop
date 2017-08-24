@@ -9,11 +9,9 @@
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
-                    <div>
-                        {% if page %}
-                            {{ page.content | raw }}
-                        {% endif %}
-                </div>
+                    {% if page %}
+                        {{ page.content | raw }}
+                    {% endif %}
                 </div>
             </div>
         </div>
