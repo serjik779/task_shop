@@ -20,7 +20,7 @@ class AllCategoriesViewModelAssembler extends ViewModelAssembler
     {
         $vm = $this->vmService->createViewModel();
 
-        $vm->setPageTitle('Contact Us');
+        $vm->setTitle('Contact Us');
         $vm->addMail('abc@gmail.com');
         $vm->addMail('def@gmail.com');
 
