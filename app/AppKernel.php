@@ -36,8 +36,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
-
-            new Aequasi\Bundle\ViewModelBundle\AequasiViewModelBundle(),
+            new gotakk\ViewModelBundle\gotakkViewModelBundle(),
 
         );
 

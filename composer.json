@@ -14,7 +14,7 @@
     },
     "require": {
         "php": ">=5.3.9",
-        "aequasi/view-model-bundle": "~4.0.0",
+        "gotakk/view-model-bundle":"dev-master",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
         "friendsofsymfony/rest-bundle": "^1.8",
