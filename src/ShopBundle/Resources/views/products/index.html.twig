@@ -6,8 +6,8 @@
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
                         <h2>
-                            {% if category %}
-                                {{ category.title }}
+                            {% if vm.category %}
+                                {{category.title}}
                             {% else %}
                                  Products
                             {% endif %}
@@ -21,8 +21,8 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                {% if products %}
-                    {% for product in products %}
+                {% if vm.product %}
+                    {% for product in vm.product %}
                         <div class="col-md-3 col-sm-6">
                             <div class="single-shop-product">
                                 <div class="product-upper">
@@ -48,13 +48,24 @@
                 {% endif %}
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="navigation">
-                        {{ knp_pagination_render(products) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            {#<div class="row">#}
+                {#<div class="col-md-12">#}
+                    {#<div class="navigation">#}
+                       {#{{ knp_pagination_render(products) }}#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+      {#<div class="col-md-3 col-sm-6">#}
+         {#<div class="single-shop-product">#}
+                 {#{% for categories in vm.categories %}#}
+                 {#{{ categories.title }}#}
+                 {#{% endfor %}#}
+             {#{% for item in vm.categories %}#}
+                 {#{{dump(item.title)}}#}
+             {#{% endfor %}#}
+         {#</div>#}
+     {#</div>#}
+{% dump vm %}
 {% endblock %}

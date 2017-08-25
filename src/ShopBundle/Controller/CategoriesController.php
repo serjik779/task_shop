@@ -38,12 +38,13 @@ class CategoriesController extends Controller
 //        ));
 //    }
 //
-//    public function showProductsAction(Request $request, Categories $category) {
+//    public function showProductsAction(Request $request, Categories $category)
+//    {
 //        $em = $this->getDoctrine()->getManager();
 //
 //        $products = $em->getRepository(Products::class)->findBy(['category' => $request->get('id')]);
 //
-//        $paginator  = $this->get('knp_paginator');
+//        $paginator = $this->get('knp_paginator');
 //        $productsPagination = $paginator->paginate(
 //            $products, /* query NOT result */
 //            $request->query->getInt('page', 1)/*page number*/,
@@ -53,6 +54,7 @@ class CategoriesController extends Controller
 //            'products' => $productsPagination,
 //            'category' => $category
 //        ));
+//    }
     /**
      * @Template()
      */
