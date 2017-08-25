@@ -27,3 +27,7 @@ shop_cart:
     resource: "@ShopBundle/Resources/config/routing/cart.yml"
     prefix:   /cart
 
+shop_checkout:
+    resource: "@ShopBundle/Resources/config/routing/checkout.yml"
+    prefix:   /checkout
+
