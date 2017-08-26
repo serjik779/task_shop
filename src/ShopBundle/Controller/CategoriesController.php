@@ -18,10 +18,12 @@ class CategoriesController extends Controller
 
         $paginator  = $this->get('knp_paginator');
         $categoriesPagination = $paginator->paginate(
-            $categories, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
+            $categories,
+            $request->query->getInt('page', 1),
             $this->container->getParameter('page_limit')
         );
+
+
 
         return $this->render('ShopBundle:categories:index.html.twig', array(
              'categories' => $categoriesPagination,
