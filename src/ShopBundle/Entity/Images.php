@@ -37,7 +37,7 @@ class Images
     /**
      * @var ArrayCollection|Products[]
      *
-     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Products", inversedBy="images")
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Products", inversedBy="images", cascade={"persist"})
      * @ORM\JoinTable(name="images_products",
      *     joinColumns={
      *       @ORM\JoinColumn(name="images_id", referencedColumnName="id")
