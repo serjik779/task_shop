@@ -1,16 +1,16 @@
 <?php
-//src/ViewModels/Categories/CategoryProductViewModelAssembler.php
-namespace ShopBundle\ViewModels\Categories;
+//src/ShopBundle/ViewModels/Categories/CategoriesViewModelAssembler.php
 
+namespace ShopBundle\ViewModels\Product;
 
 use gotakk\ViewModelBundle\ViewModel\ViewModelAssembler;
 
-class CategoryProductViewModelAssembler extends ViewModelAssembler
+class CategoriesViewModelAssembler extends ViewModelAssembler
 {
     public function __construct()
     {
         $this->skel = array(
-            'Product'=> array(),
+            'Category'
 
         );
     }
@@ -18,7 +18,7 @@ class CategoryProductViewModelAssembler extends ViewModelAssembler
     {
         $vm = $this->vmService->createViewModel();
 
-        $vm->setProduct($model);
+        $vm->setCategory($model);
 
 
         return $vm->toArray();

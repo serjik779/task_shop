@@ -14,10 +14,10 @@
     },
     "require": {
         "php": ">=5.3.9",
-        "gotakk/view-model-bundle":"dev-master",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
         "friendsofsymfony/rest-bundle": "^1.8",
+      "gotakk/view-model-bundle": "dev-master",
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/knp-paginator-bundle": "^2.6",
         "nelmio/api-doc-bundle": "^2.13",
@@ -27,6 +27,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "^3.1",
         "sonata-project/formatter-bundle": "^3.2",
         "sonata-project/user-bundle": "^3.2",
+      "stof/doctrine-extensions-bundle": "^1.2",
         "swiftmailer/swiftmailer": "^5.4",
         "symfony/assetic-bundle": "^2.8",
         "symfony/monolog-bundle": "^3.0.2",
@@ -36,7 +37,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
-        "symfony/phpunit-bridge": "~2.7"
+      "symfony/phpunit-bridge": "~2.7",
+      "phpunit/phpunit": "^6.2.1"
     },
     "scripts": {
         "symfony-scripts": [
@@ -57,7 +59,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "5.3.9"
+          "php": "7.1"
         },
         "sort-packages": true
     },

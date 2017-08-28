@@ -2,7 +2,8 @@
 namespace ShopBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use ShopBundle\ShopBundle;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * Products
  *
@@ -86,6 +87,14 @@ class Products
      * @var Images
      */
     protected $image;
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=128, nullable=false, unique=true )
+     */
+    private $slug;
+
     /**
      * Products constructor.
      */
@@ -304,4 +313,21 @@ class Products
     {
         return $this->getTitle() ?: '';
     }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
+    }
+
 }

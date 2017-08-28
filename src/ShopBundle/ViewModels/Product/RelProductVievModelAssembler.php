@@ -1,24 +1,26 @@
 <?php
-//src/ShopBundle/ViewModels/Categories/AllCategoriesViewModelAssembler.php
+//src/ViewModels/Product/RelProductVievModelAssembler.php
 
-namespace ShopBundle\ViewModels\Categories;
+namespace ShopBundle\ViewModels\Product;
+
 
 use gotakk\ViewModelBundle\ViewModel\ViewModelAssembler;
-use ShopBundle\Entity\Categories;
-class AllCategoriesViewModelAssembler extends ViewModelAssembler
+
+class RelProductVievModelAssembler extends ViewModelAssembler
 {
     public function __construct()
     {
         $this->skel = array(
-            'Category'
-
+            'Product',
         );
     }
+
     public function generateViewModel($model)
     {
         $vm = $this->vmService->createViewModel();
 
-        $vm->setCategory($model);
+        $vm->setRelated($model);
+
 
 
         return $vm->toArray();

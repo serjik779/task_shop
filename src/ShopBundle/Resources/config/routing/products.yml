@@ -2,7 +2,13 @@ products_index:
     path:     /
     defaults: { _controller: "ShopBundle:Products:index" }
     methods:  GET
-products_show:
+
+products_category:
     path:     /{id}
-    defaults: { _controller: "ShopBundle:Products:show" }
+    defaults: { _controller: "ShopBundle:Products:showCategory" }
+    methods:  GET
+
+products_show:
+    path:     /{id}/{id2}
+    defaults: { _controller: "ShopBundle:Products:showSingle" }
     methods:  GET
