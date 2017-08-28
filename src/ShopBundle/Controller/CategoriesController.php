@@ -37,24 +37,26 @@ class CategoriesController extends Controller
 //             'categories' => $categoriesPagination,
 //        ));
 //    }
-//
-//    public function showProductsAction(Request $request, Categories $category)
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $products = $em->getRepository(Products::class)->findBy(['category' => $request->get('id')]);
-//
+
+    public function showProductsAction(Request $request, Categories $category)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $products = $em->getRepository(Products::class)->findBy(['category' => $request->get('id')]);
+
 //        $paginator = $this->get('knp_paginator');
 //        $productsPagination = $paginator->paginate(
 //            $products, /* query NOT result */
 //            $request->query->getInt('page', 1)/*page number*/,
 //            $this->container->getParameter('page_limit')
 //        );
-//        return $this->render('ShopBundle:products:index.html.twig', array(
+        return $this->render('ShopBundle:products:index.html.twig'
+//            , array(
 //            'products' => $productsPagination,
 //            'category' => $category
-//        ));
-//    }
+//        )
+        );
+    }
     /**
      * @Template()
      */

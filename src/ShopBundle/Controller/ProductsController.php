@@ -46,9 +46,9 @@ class ProductsController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $model1 = $this->get('doctrine')->getManager()->getRepository(Products::class)->findAll();
+//        $model1 = $this->get('doctrine')->getManager()->getRepository(Products::class)->findAll();
         $model2 = $this->get('doctrine')->getManager()->getRepository(Categories::class)->findAll();
-        $vm = $this->get('shop.product_view_model_assembler')->generateViewModel($model1, $model2);
+        $vm = $this->get('shop.product_view_model_assembler')->generateViewModel($model2);
 //        return $this->render('ShopBundle:products:index.html.twig' , array(
 //            'vm' => $vm
         return array(

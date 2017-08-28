@@ -14,11 +14,11 @@ class ProductViewModelAssembler extends ViewModelAssembler
             'Categories' => array(),
         );
     }
-    public function generateViewModel($model1, $model2)
+    public function generateViewModel($model2)
     {
         $vm = $this->vmService->createViewModel();
 
-        $vm->setProduct($model1);
+//        $vm->setProduct($model1);
         $vm->setCategory($model2);
 
 
