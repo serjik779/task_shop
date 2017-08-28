@@ -10,16 +10,15 @@ class ProductViewModelAssembler extends ViewModelAssembler
     public function __construct()
     {
         $this->skel = array(
-            'Products'=> array(),
-            'Categories' => array(),
+            'Product',
         );
     }
-    public function generateViewModel($model2)
+    public function generateViewModel($model)
     {
         $vm = $this->vmService->createViewModel();
 
-//        $vm->setProduct($model1);
-        $vm->setCategory($model2);
+        $vm->setProduct($model);
+
 
 
         return $vm->toArray();

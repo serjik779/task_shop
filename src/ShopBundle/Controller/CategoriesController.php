@@ -28,29 +28,29 @@ class CategoriesController extends Controller
         );
         return $this->render('ShopBundle:categories:index.html.twig' , array(
             'vm' => $vm,
-            'cat' => $categoriesPagination
+            'category' => $categoriesPagination
         ));
     }
 
     /**
      * @Template()
      */
-    public function showProductsAction(Request $request)
+    public function showProductsAction(Request $request, Categories $categories)
     {
-        $model1 = $this->get('doctrine')->getManager()->getRepository(Categories::class)->findAll();
-        $model2 = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $request->get('id')]);
-        $vm = $this->get('shop.categoryproduct_view_model_assembler')->generateViewModel($model1, $model2);
+        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $request->get('id')]);
+        $vm = $this->get('shop.categoryproduct_view_model_assembler')->generateViewModel($model);
 
         $paginator = $this->get('knp_paginator');
         $productsPagination = $paginator->paginate(
-            $model2, /* query NOT result */
+            $model, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             $this->container->getParameter('page_limit')
         );
         return $this->render('ShopBundle:products:index.html.twig'
            , array(
                 'vm' => $vm,
-                'prod' => $productsPagination,
+                'product' => $productsPagination,
+                'category'=>$categories,
                 )
         );
     }

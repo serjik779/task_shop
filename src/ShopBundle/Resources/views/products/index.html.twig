@@ -6,8 +6,8 @@
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
                         <h2>
-                            {% if vm.category %}
-                                {{Category.title}}
+                            {% if category %}
+                                {{category.title}}
                             {% else %}
                                  Products
                             {% endif %}
@@ -17,55 +17,45 @@
             </div>
         </div>
     </div>
-    {#<div class="single-product-area">#}
-        {#<div class="zigzag-bottom"></div>#}
-        {#<div class="container">#}
-            {#<div class="row">#}
-                {#{% if vm.product %}#}
-                    {#{% for product in vm.product %}#}
-                        {#<div class="col-md-3 col-sm-6">#}
-                            {#<div class="single-shop-product">#}
-                                {#<div class="product-upper">#}
-                                    {#<a href="{{ path('products_show', { 'id': product.id }) }}">#}
-                                        {#{% if product.images|length != 0 %}#}
-                                            {#<img src="{{ product.images[0].path }}" alt="">#}
-                                        {#{% else %}#}
-                                            {#<img src="/img/no-image.png" alt="">#}
-                                        {#{% endif %}#}
-                                    {#</a>#}
-                                {#</div>#}
-                                {#<h2><a href="{{ path('products_show', { 'id': product.id }) }}">{{ product.title }}</a></h2>#}
-                                {#<div class="product-carousel-price">#}
-                                    {#<ins>${{ product.cost }}</ins> <del>${{ product.cost * 1.25 }}</del>#}
-                                {#</div>#}
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                {% if vm.product %}
+                    {% for product in vm.product %}
+                        <div class="col-md-3 col-sm-6">
+                            <div class="single-shop-product">
+                                <div class="product-upper">
+                                    <a href="{{ path('products_show', { 'id': product.id }) }}">
+                                        {% if product.images|length != 0 %}
+                                            <img src="{{ product.images[0].path }}" alt="">
+                                        {% else %}
+                                            <img src="/img/no-image.png" alt="">
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <h2><a href="{{ path('products_show', { 'id': product.id }) }}">{{ product.title }}</a></h2>
+                                <div class="product-carousel-price">
+                                    <ins>${{ product.cost }}</ins> <del>${{ product.cost * 1.25 }}</del>
+                                </div>
 
-                                {#<div class="product-option-shop">#}
-                                    {#<a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#{% endfor %}#}
-                {#{% endif %}#}
-            {#</div>#}
+                                <div class="product-option-shop">
+                                    <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
 
-            {#<div class="row">#}
-                {#<div class="col-md-12">#}
-                    {#<div class="navigation">#}
-                       {#{{ knp_pagination_render(prod) }}#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
-      {#<div class="col-md-3 col-sm-6">#}
-         {#<div class="single-shop-product">#}
-                 {#{% for categories in vm.categories %}#}
-                 {#{{ categories.title }}#}
-                 {#{% endfor %}#}
-             {#{% for item in vm.categories %}#}
-                 {#{{dump(item.title)}}#}
-             {#{% endfor %}#}
-         {#</div>#}
-     {#</div>#}
-{% dump vm %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navigation">
+                       {{ knp_pagination_render(product) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     {% dump vm %}
 {% endblock %}

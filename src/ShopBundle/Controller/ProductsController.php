@@ -17,12 +17,7 @@ class ProductsController extends Controller
 //        #$productsSin = $this->getDoctrine()->getRepository(Products::class);
 //        $products = $em->getRepository('ShopBundle:Products')->findAll();
 //
-//        $paginator  = $this->get('knp_paginator');
-//        $productsPagination = $paginator->paginate(
-//            $products, /* query NOT result */
-//            $request->query->getInt('page', 1)/*page number*/,
-//            $this->container->getParameter('page_limit')
-//        );
+
 //
 //        return $this->render('ShopBundle:products:index.html.twig', array(
 //            'products' => $productsPagination,
@@ -46,13 +41,20 @@ class ProductsController extends Controller
      */
     public function indexAction(Request $request)
     {
-//        $model1 = $this->get('doctrine')->getManager()->getRepository(Products::class)->findAll();
-        $model2 = $this->get('doctrine')->getManager()->getRepository(Categories::class)->findAll();
-        $vm = $this->get('shop.product_view_model_assembler')->generateViewModel($model2);
-//        return $this->render('ShopBundle:products:index.html.twig' , array(
-//            'vm' => $vm
-        return array(
+        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findAll();
+        $vm = $this->get('shop.product_view_model_assembler')->generateViewModel($model);
+
+        $paginator  = $this->get('knp_paginator');
+        $productsPagination = $paginator->paginate(
+            $model, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $this->container->getParameter('page_limit')
+        );
+        return $this->render('ShopBundle:products:index.html.twig' , array(
             'vm' => $vm,
+            'product' => $productsPagination,
+//            'category'=>$categories
+            )
         );
     }
 }
