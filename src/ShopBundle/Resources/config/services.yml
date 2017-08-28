@@ -97,3 +97,6 @@ services:
     shop.product_view_model_assembler:
                     class: ShopBundle\ViewModels\Product\ProductViewModelAssembler
                     parent: gotakk.view_model.view_model_assembler
+    shop.categoryproduct_view_model_assembler:
+                        class: ShopBundle\ViewModels\Categories\CategoryProductViewModelAssembler
+                        parent: gotakk.view_model.view_model_assembler

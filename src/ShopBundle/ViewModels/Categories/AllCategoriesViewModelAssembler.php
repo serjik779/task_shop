@@ -7,6 +7,13 @@ use gotakk\ViewModelBundle\ViewModel\ViewModelAssembler;
 use ShopBundle\Entity\Categories;
 class AllCategoriesViewModelAssembler extends ViewModelAssembler
 {
+    public function __construct()
+    {
+        $this->skel = array(
+            'Category'
+
+        );
+    }
     public function generateViewModel($model)
     {
         $vm = $this->vmService->createViewModel();

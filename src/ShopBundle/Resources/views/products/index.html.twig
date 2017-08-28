@@ -7,7 +7,7 @@
                     <div class="product-bit-title text-center">
                         <h2>
                             {% if vm.category %}
-                                {{category.title}}
+                                {{Category.title}}
                             {% else %}
                                  Products
                             {% endif %}
@@ -51,7 +51,7 @@
             {#<div class="row">#}
                 {#<div class="col-md-12">#}
                     {#<div class="navigation">#}
-                       {#{{ knp_pagination_render(products) }}#}
+                       {#{{ knp_pagination_render(prod) }}#}
                     {#</div>#}
                 {#</div>#}
             {#</div>#}

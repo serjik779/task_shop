@@ -12,51 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CategoriesController extends Controller
 {
-//    public function indexAction(Request $request) {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        #$categoriesRep = $this->getDoctrine()->getRepository(Categories::class);
-//        $categories = $em->getRepository(Categories::class)->findAll();
-//
-//        return $this->render('ShopBundle:categories:index.html.twig', array(
-//             'categories' => $categories,
-//        ));
-//    }
-
-//        #$categoriesRep = $this->getDoctrine()->getRepository(Categories::class);
-//        $categories = $em->getRepository(Categories::class)->findAll();
-//
-//        $paginator  = $this->get('knp_paginator');
-//        $categoriesPagination = $paginator->paginate(
-//            $categories, /* query NOT result */
-//            $request->query->getInt('page', 1)/*page number*/,
-//            $this->container->getParameter('page_limit')
-//        );
-//
-//        return $this->render('ShopBundle:categories:index.html.twig', array(
-//             'categories' => $categoriesPagination,
-//        ));
-//    }
-
-    public function showProductsAction(Request $request, Categories $category)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $products = $em->getRepository(Products::class)->findBy(['category' => $request->get('id')]);
-
-//        $paginator = $this->get('knp_paginator');
-//        $productsPagination = $paginator->paginate(
-//            $products, /* query NOT result */
-//            $request->query->getInt('page', 1)/*page number*/,
-//            $this->container->getParameter('page_limit')
-//        );
-        return $this->render('ShopBundle:products:index.html.twig'
-//            , array(
-//            'products' => $productsPagination,
-//            'category' => $category
-//        )
-        );
-    }
     /**
      * @Template()
      */
@@ -64,9 +19,41 @@ class CategoriesController extends Controller
     {
         $model = $this->get('doctrine')->getManager()->getRepository(Categories::class)->findAll();
         $vm = $this->get('shop.allcategories_view_model_assembler')->generateViewModel($model);
+
+        $paginator  = $this->get('knp_paginator');
+        $categoriesPagination = $paginator->paginate(
+            $model, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $this->container->getParameter('page_limit')
+        );
         return $this->render('ShopBundle:categories:index.html.twig' , array(
-            'vm' => $vm
+            'vm' => $vm,
+            'cat' => $categoriesPagination
         ));
     }
+
+    /**
+     * @Template()
+     */
+    public function showProductsAction(Request $request)
+    {
+        $model1 = $this->get('doctrine')->getManager()->getRepository(Categories::class)->findAll();
+        $model2 = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $request->get('id')]);
+        $vm = $this->get('shop.categoryproduct_view_model_assembler')->generateViewModel($model1, $model2);
+
+        $paginator = $this->get('knp_paginator');
+        $productsPagination = $paginator->paginate(
+            $model2, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $this->container->getParameter('page_limit')
+        );
+        return $this->render('ShopBundle:products:index.html.twig'
+           , array(
+                'vm' => $vm,
+                'prod' => $productsPagination,
+                )
+        );
+    }
+
 }
 
