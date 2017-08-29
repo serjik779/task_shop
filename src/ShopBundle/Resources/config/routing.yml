@@ -27,8 +27,14 @@ shop_cart:
     resource: "@ShopBundle/Resources/config/routing/cart.yml"
     prefix:   /cart
 
+
 api:
     path:     /api/orders
     defaults: { _controller: ShopBundle:apiOrders:get }
+
+
+shop_checkout:
+    resource: "@ShopBundle/Resources/config/routing/checkout.yml"
+    prefix:   /checkout
 
 
