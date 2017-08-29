@@ -1,0 +1,5 @@
+ShopBundle\Entity\Products:
+    exclusion_policy: ALL
+    properties:
+        serviceId:
+            expose: true

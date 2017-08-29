@@ -213,3 +213,19 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
+
+jms_serializer:
+    property_naming:
+        separator:  _
+        lower_case: true
+
+    metadata:
+        cache: file
+        debug: "%kernel.debug%"
+        file_cache:
+            dir: "%kernel.cache_dir%/serializer"
+        directories:
+            ShopBundle:
+                namespace_prefix: ShopBundle
+                path: %kernel.root_dir%/config/serializer/ShopBundle
+        auto_detection: true
