@@ -1,0 +1,69 @@
+{% extends 'ShopBundle:Default:index.html.twig' %}
+{% block head %}
+    <head><title>{% block title %}ElectroZone | {{ category.title }}{% endblock %}</title></head>
+{% endblock %}
+{% block body %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>
+                            {% if category %}
+                                {{ category.title }}
+                            {% else %}
+                                Products
+                            {% endif %}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                {% if vm.product %}
+                    {% for product in vm.product %}
+                        <div class="col-md-3 col-sm-6">
+                            <div class="single-shop-product">
+                                <div class="product-upper">
+                                    <a href="{{ path('products_show', { 'slug2': category.slug, 'slug': product.slug }) }}">
+                                        {% if product.images|length != 0 %}
+                                            <img src="{{ product.images[0].path }}" alt="">
+                                        {% else %}
+                                            <img src="/img/no-image.png" alt="">
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <h2>
+                                    <a href="{{ path('products_show', { 'slug2': category.slug, 'slug': product.slug}) }}">{{ product.title }}</a>
+                                </h2>
+                                <div class="product-carousel-price">
+                                    <ins>${{ product.cost }}</ins>
+                                    <del>${{ product.cost * 1.25 }}</del>
+                                </div>
+
+                                <div class="product-option-shop">
+                                    <a class="add_to_cart_button" data-quantity="1" data-product_sku=""
+                                       data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to
+                                        cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navigation">
+                        {{ knp_pagination_render(product) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% dump vm %}
+{% endblock %}

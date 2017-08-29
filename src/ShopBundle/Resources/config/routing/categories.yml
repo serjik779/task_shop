@@ -1,8 +1,0 @@
-categories_index:
-    path:     /
-    defaults: { _controller: "ShopBundle:Categories:index" }
-
-categories_products:
-    path:     /{id}/products
-    defaults: { _controller: "ShopBundle:Categories:showProducts" }
-    methods:  GET

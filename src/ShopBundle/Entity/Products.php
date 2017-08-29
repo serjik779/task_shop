@@ -2,7 +2,8 @@
 namespace ShopBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use ShopBundle\ShopBundle;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * Products
  *
@@ -21,7 +22,7 @@ class Products
     private $id;
     /**
      * @var string
-     *
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
@@ -86,6 +87,7 @@ class Products
      * @var Images
      */
     protected $image;
+
     /**
      * Products constructor.
      */
@@ -304,4 +306,5 @@ class Products
     {
         return $this->getTitle() ?: '';
     }
+
 }

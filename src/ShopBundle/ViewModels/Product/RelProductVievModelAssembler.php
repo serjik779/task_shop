@@ -1,11 +1,12 @@
 <?php
-
+//src/ViewModels/Product/RelProductVievModelAssembler.php
 
 namespace ShopBundle\ViewModels\Product;
 
+
 use gotakk\ViewModelBundle\ViewModel\ViewModelAssembler;
 
-class ProductViewModelAssembler extends ViewModelAssembler
+class RelProductVievModelAssembler extends ViewModelAssembler
 {
     public function __construct()
     {
@@ -13,11 +14,12 @@ class ProductViewModelAssembler extends ViewModelAssembler
             'Product',
         );
     }
+
     public function generateViewModel($model)
     {
         $vm = $this->vmService->createViewModel();
 
-        $vm->setProduct($model);
+        $vm->setRelated($model);
 
 
 

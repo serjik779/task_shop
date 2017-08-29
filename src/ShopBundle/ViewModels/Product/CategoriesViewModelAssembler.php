@@ -1,20 +1,18 @@
 <?php
-//src/ShopBundle/ViewModels/Categories/AllCategoriesViewModelAssembler.php
+//src/ShopBundle/ViewModels/Categories/CategoriesViewModelAssembler.php
 
-namespace ShopBundle\ViewModels\Categories;
+namespace ShopBundle\ViewModels\Product;
 
 use gotakk\ViewModelBundle\ViewModel\ViewModelAssembler;
-use ShopBundle\Entity\Categories;
-class AllCategoriesViewModelAssembler extends ViewModelAssembler
+
+class CategoriesViewModelAssembler extends ViewModelAssembler
 {
     public function __construct()
     {
         $this->skel = array(
-            'pageTitle' => array(),
-            'mails',
+            'Category'
         );
     }
-
     public function generateViewModel($model)
     {
         $vm = $this->vmService->createViewModel();

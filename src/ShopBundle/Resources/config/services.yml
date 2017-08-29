@@ -91,6 +91,12 @@ services:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
 
-    shop.allcategories_view_model_assembler:
-                class: ShopBundle\ViewModels\Categories\AllCategoriesViewModelAssembler
+    shop.categories_view_model_assembler:
+                class: ShopBundle\ViewModels\Product\CategoriesViewModelAssembler
                 parent: gotakk.view_model.view_model_assembler
+    shop.product_view_model_assembler:
+                    class: ShopBundle\ViewModels\Product\ProductViewModelAssembler
+                    parent: gotakk.view_model.view_model_assembler
+    shop.relprod_view_model_assembler:
+                        class: ShopBundle\ViewModels\Product\RelProductVievModelAssembler
+                        parent: gotakk.view_model.view_model_assembler

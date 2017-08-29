@@ -221,11 +221,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li {% if app.request.attributes.get('_route') == 'shop_homepage' %}class="active"{% endif %}><a href="{{ path('shop_homepage') }}">Home</a></li>
-                    <li {% if app.request.attributes.get('_route') == 'shop_about' %}class="active"{% endif %}><a href="{{ path('shop_about') }}">About</a></li>
-                    <li {% if app.request.attributes.get('_route') == 'categories_index' %}class="active"{% endif %}><a href="{{ path('categories_index') }}">Categories</a></li>
-                    <li {% if app.request.attributes.get('_route') == 'products_index' or app.request.attributes.get('_route') == 'products_show' %}class="active"{% endif %}><a href="{{ path('products_index') }}">Products</a></li>
-                    <li {% if app.request.attributes.get('_route') == 'shop_contact' %}class="active"{% endif %}><a href="{{ path('shop_contact') }}">Contact</a></li>
+                    <li {% if app.request.attributes.get('_route') == 'shop_homepage' %}class="active"{% endif %}>
+                        <a href="{{ path('shop_homepage') }}">Home</a></li>
+                    <li {% if app.request.attributes.get('_route') == 'products_index'
+                        or app.request.attributes.get('_route') == 'products_category'
+                        or app.request.attributes.get('_route') == 'products_show' %}class="active"{% endif %}>
+                        <a href="{{ path('products_index') }}">Products</a></li>
+                    <li {% if app.request.attributes.get('_route') == 'shop_about' %}class="active"{% endif %}>
+                        <a href="{{ path('shop_about') }}">About</a></li>
+                    <li {% if app.request.attributes.get('_route') == 'shop_contact' %}class="active"{% endif %}>
+                        <a href="{{ path('shop_contact') }}">Contact</a></li>
                 </ul>
             </div>
         </div>
