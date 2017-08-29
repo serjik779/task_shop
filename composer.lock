@@ -1699,7 +1699,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2433,7 +2433,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2017-08-25 16:49:47"
+            "time": "2017-08-25T16:49:47+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -4305,7 +4305,11 @@
             "keywords": [
                 "framework"
             ],
+<<<<<<< HEAD
             "time": "2017-08-28 19:21:56"
+=======
+            "time": "2017-08-28T19:21:56+00:00"
+>>>>>>> 5ff7183c487af748a330643dbfb62f9473bd979b
         },
         {
             "name": "twig/extensions",
