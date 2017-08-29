@@ -29,7 +29,7 @@
                         <div class="col-md-3 col-sm-6">
                             <div class="single-shop-product">
                                 <div class="product-upper">
-                                    <a href="{{ path('products_show', { 'id': category.id, 'id2': product.id }) }}">
+                                    <a href="{{ path('products_show', { 'slug': category.slug, 'slug2': product.slug }) }}">
                                         {% if product.images|length != 0 %}
                                             <img src="{{ product.images[0].path }}" alt="">
                                         {% else %}
@@ -38,7 +38,7 @@
                                     </a>
                                 </div>
                                 <h2>
-                                    <a href="{{ path('products_show', { 'id': category.id, 'id2': product.id}) }}">{{ product.title }}</a>
+                                    <a href="{{ path('products_show', { 'slug': category.slug, 'slug2': product.slug}) }}">{{ product.title }}</a>
                                 </h2>
                                 <div class="product-carousel-price">
                                     <ins>${{ product.cost }}</ins>

@@ -4,11 +4,11 @@ products_index:
     methods:  GET
 
 products_category:
-    path:     /{id}
+    path:     /{slug}
     defaults: { _controller: "ShopBundle:Products:showCategory" }
     methods:  GET
 
 products_show:
-    path:     /{id}/{id2}
+    path:     /{slug2}/{slug}
     defaults: { _controller: "ShopBundle:Products:showSingle" }
     methods:  GET
