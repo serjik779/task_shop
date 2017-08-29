@@ -61,7 +61,7 @@ class Products
     /**
      * @var ArrayCollection|Images[]
      * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"remove"})
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"})
      */
     protected $images;
     /**
