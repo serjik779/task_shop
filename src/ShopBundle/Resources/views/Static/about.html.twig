@@ -1,0 +1,19 @@
+{% extends 'ShopBundle:Default:index.html.twig' %}
+
+{% block body %}
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    {% if page %}
+                        {{ page.content | raw }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

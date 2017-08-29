@@ -1121,3 +1121,13 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .pagination > li > a, .pagination > li > span {
   color: #5a88ca;
 }
+
+.form-group{
+    max-width: 500px;
+}
+.form-horizontal p{
+    margin-left:230px;
+    color: #4169E0;
+    font-weight:bold;
+    font-size: 16px;
+}

@@ -1,0 +1,42 @@
+{% extends 'ShopBundle:Default:index.html.twig' %}
+
+{% block body %}
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-responsive table-hover">
+                        <thead>
+                    <tr class="bg-success">
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Cost</th>
+                    </tr>
+                        </thead>
+                        <tbody>
+                        {% for prod in user.products %}
+                            <tr>
+                                <td>
+                            {% for image in prod.images %}
+                                {{ image.filename }}
+                            {% endfor %}
+                                </td>
+                                <td>{{ prod.title }}</td>
+                                <td>{{ prod.description }}</td>
+                                <td>{{ prod.cost }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

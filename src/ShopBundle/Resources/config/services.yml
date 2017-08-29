@@ -2,3 +2,105 @@ services:
 #    shop.example:
 #        class: ShopBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    app.admin.categories:
+        class: ShopBundle\Admin\CategoriesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Categories" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Categories
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.images:
+        class: ShopBundle\Admin\ImagesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Images", show_in_dashboard: false }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Images
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.products:
+        class: ShopBundle\Admin\ProductsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Products" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Products
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.feedback:
+        class: ShopBundle\Admin\FeedbackAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Feedback" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Feedback
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.orders_info:
+        class: ShopBundle\Admin\OrderInfoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Orders Info" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\OrdersInfo
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.order_items:
+        class: ShopBundle\Admin\OrderItemsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Order Items" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\OrderItems
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.delivery_type:
+        class: ShopBundle\Admin\DeliveryTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Delivery Type" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\DeliveryType
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.pages:
+        class: ShopBundle\Admin\PagesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Pages" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Pages
+            - ~
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.service_link:
+        class: ShopBundle\Admin\ServiceLinkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Service link" }
+        arguments:
+            - ~
+            - null
+            - ShopBundle:ServiceLink
+#        calls:
+#            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    data_center:
+         class: ShopBundle\Services\DataCenter
+         arguments: ['@doctrine.orm.default_entity_manager']

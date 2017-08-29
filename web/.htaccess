@@ -30,7 +30,7 @@ DirectoryIndex app.php
     RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
     RewriteRule ^(.*) - [E=BASE:%1]
 
-    # Sets the HTTP_AUTHORIZATION header removed by apache
+    # Sets the HTTP_AUTHORIZATION header.html.twig removed by apache
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 

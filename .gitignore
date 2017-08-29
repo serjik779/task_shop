@@ -41,4 +41,5 @@
 **/Entity/*~
 
 .idea/*
-/vendor/
+/composer.phar
+vendor/

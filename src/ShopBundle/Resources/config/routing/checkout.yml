@@ -1,0 +1,4 @@
+Checkout_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Checkout:index" }
+    methods:  GET
