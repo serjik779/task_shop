@@ -18,8 +18,10 @@ class WishlistController extends Controller
     }
 
     /* @var $user Users
-     *  @var $product Products */
-    public function addWishlistProductAction($user,$product){
+     * @var $product Products
+     */
+    public function addWishlistProductAction($user, $product)
+    {
         $em = $this->get('doctrine.orm.default_entity_manager');
         $user->addProducts($product);
         $em->persist($product);

@@ -4,7 +4,6 @@ namespace ShopBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CartController extends Controller
 {
@@ -12,7 +11,7 @@ class CartController extends Controller
 
 //        dump($this->getRequest());
         dump($this->getRequest()->get('id'));
-die;
+        die;
 //        new JsonResponse()
 
 
