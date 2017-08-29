@@ -58,7 +58,7 @@ class ProductsController extends Controller
      */
     public function showSingleAction(Request $request, Products $products)
     {
-        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $products->getCategory(), [], 10]);
+        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $products->getCategory()->getId()], [], 10);
         $vm = $this->get('shop.relprod_view_model_assembler')->generateViewModel($model);
 
         return $this->render('ShopBundle:products:single.html.twig', array

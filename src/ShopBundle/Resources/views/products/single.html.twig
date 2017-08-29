@@ -33,8 +33,8 @@
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
                             <a href="{{ path('shop_homepage') }}">Home</a>
-                            <a href="">Category Name</a>
-                            <a href="">Sony Smart TV - 2015</a>
+                            <a href="">{{ product.category.title }}</a>
+                            <a class="disabled">{{ product.title }}</a>
                         </div>
 
                         <div class="row">
@@ -153,4 +153,3 @@
         </div>
     </div>
 {% endblock %}
-{% dump vm %}
