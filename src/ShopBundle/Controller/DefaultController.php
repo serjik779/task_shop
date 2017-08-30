@@ -4,6 +4,7 @@ namespace ShopBundle\Controller;
 
 use ShopBundle\Entity\Feedback;
 use ShopBundle\Entity\Pages;
+use ShopBundle\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -12,11 +13,18 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 
+
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ShopBundle:home:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $products = $em->getRepository(Products::class)->findBy(array('onMain' => 1, 'isVisible' => 1));
+
+        return $this->render('ShopBundle:home:index.html.twig', array(
+            'products' => $products
+        ));
     }
 
     public function contactVendorAction(Request $request)
@@ -44,9 +52,9 @@ class DefaultController extends Controller
 
 
             $message = (new \Swift_Message('Feedback message.'))
-                ->setFrom('alona.ant@bk.ru')
-                ->setTo('alona.ant@bk.ru')
-                ->setBody("User: " . $feedback->getName() . ". " . " User Email: " . $feedback->getEmail() . ". " . " Message: " . $feedback->getText(), 'text/plain');
+                    ->setFrom('alona.ant@bk.ru')
+                    ->setTo('alona.ant@bk.ru')
+                    ->setBody("User: ".$feedback->getName().". "." User Email: ".$feedback->getEmail().". "." Message: ".$feedback->getText(),'text/plain');
 
             $this->get('mailer')->send($message);
 
