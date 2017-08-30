@@ -1,15 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: GeoRider
- * Date: 30.08.2017
- * Time: 13:19
- */
 
 namespace ShopBundle\ViewModels\Index;
 
+use gotakk\ViewModelBundle\ViewModel\ViewModelAssembler;
 
-class IndexViewModelAssembler
+class IndexViewModelAssembler extends ViewModelAssembler
 {
+    public function __construct()
+    {
+        $this->skel = array(
+            'Product',
+        );
+    }
 
+    public function generateViewModel($model)
+    {
+        $vm = $this->vmService->createViewModel();
+
+        $vm->setProduct($model);
+
+
+        return $vm->toArray();
+    }
 }

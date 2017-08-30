@@ -4,27 +4,27 @@
         <!-- Slider -->
         <div class="block-slider block-slider4">
             <ul class="" id="bxslider-home4">
-            {% if products %}
-                {% for product in products %}
-                <li>
-                    {% if product.images|length != 0 %}
-                        <img src="{{ product.images[0].path }}" alt="">
-                    {% else %}
-                        <img src="/img/no-image.png" alt="">
-                    {% endif %}
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            {{ product.title }}
-                        </h2>
-                        <a href="{{ path('products_show', { 'id': product.id }) }}">Go</a>
-                    </div>
-                </li>
-                {% endfor %}
-            {% endif %}
+                {% if vm.product %}
+                    {% for product in vm.product %}
+                        <li>
+                            {% if product.images|length != 0 %}
+                                <img src="{{ product.images[0].path }}" alt="">
+                            {% else %}
+                                <img src="/img/no-image.png" alt="">
+                            {% endif %}
+                            <div class="caption-group">
+                                <h2 class="caption title">
+                                    {{ product.title }}
+                                </h2>
+                                <a href="{{ path('products_show', { 'slug2': product.category.slug, 'slug': product.slug }) }}">Go</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endif %}
             </ul>
         </div>
-        <!-- ./Slider -->
-    </div> <!-- End slider area -->
+    </div>
+    <!-- End slider area -->
 
     <div class="promo-area">
         <div class="zigzag-bottom"></div>

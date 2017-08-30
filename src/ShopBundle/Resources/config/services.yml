@@ -100,3 +100,6 @@ services:
     shop.relprod_view_model_assembler:
                         class: ShopBundle\ViewModels\Product\RelProductVievModelAssembler
                         parent: gotakk.view_model.view_model_assembler
+    shop.index_view_model_assembler:
+                            class: ShopBundle\ViewModels\Index\IndexViewModelAssembler
+                            parent: gotakk.view_model.view_model_assembler

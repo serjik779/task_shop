@@ -61,7 +61,7 @@ class Products
     private $category;
     /**
      * @var ArrayCollection|Images[]
-     * Many Users have Many Groups.
+     * Many Products have Many Images.
      * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"})
      */
     protected $images;
@@ -87,6 +87,12 @@ class Products
      * @var Images
      */
     protected $image;
+    /**
+     * @var = \DateTime
+     * @Gedmo\Timestampable(field="created")
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
     /**
      * @var string
      *
@@ -330,4 +336,21 @@ class Products
         $this->slug = $slug;
     }
 
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
 }
