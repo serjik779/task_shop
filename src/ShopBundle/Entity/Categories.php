@@ -15,9 +15,10 @@ class Categories
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
+
     /**
      * @var string
      *
@@ -50,6 +51,16 @@ class Categories
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Categories
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
     /**
      * Set title

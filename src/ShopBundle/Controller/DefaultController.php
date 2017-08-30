@@ -2,14 +2,19 @@
 
 namespace ShopBundle\Controller;
 
+use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Feedback;
+use ShopBundle\Entity\Images;
 use ShopBundle\Entity\Pages;
+use ShopBundle\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Test\Fixture\Document\Image;
 
 
 
@@ -59,7 +64,6 @@ class DefaultController extends Controller
         return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
             'page' => $page,
             'form' => $form->createView(),
-            'page' => $page
         ));
     }
 
@@ -74,3 +78,5 @@ class DefaultController extends Controller
     }
 
 }
+
+
