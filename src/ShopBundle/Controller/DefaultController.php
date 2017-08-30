@@ -22,7 +22,13 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-         return $this->render('ShopBundle:home:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $products = $em->getRepository(Products::class)->findBy(array('onMain' => 1, 'isVisible' => 1));
+
+        return $this->render('ShopBundle:home:index.html.twig', array(
+            'products' => $products
+        ));
     }
 
     public function contactVendorAction(Request $request)
