@@ -32,13 +32,13 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">Categories</h2>
-                    <ul>
-                        <li><a href="#">Mobile Phone</a></li>
-                        <li><a href="#">Home accesseries</a></li>
-                        <li><a href="#">LED TV</a></li>
-                        <li><a href="#">Computer</a></li>
-                        <li><a href="#">Gadets</a></li>
-                    </ul>
+                    {% for category in vm.category %}
+                        <ul>
+                            <li>
+                                <a href="{{ path('products_category', { 'slug': category.slug }) }}">{{ category.title }}</a>
+                            </li>
+                        </ul>
+                    {% endfor %}
                 </div>
             </div>
 

@@ -78,6 +78,12 @@ class Products
      */
     private $isVisible = true;
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="top", type="boolean", nullable=false)
+     */
+    private $top = false;
+    /**
      * @var ArrayCollection|Products[]
      * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="products", cascade={"persist"})
      */
@@ -313,6 +319,22 @@ class Products
     {
         $this->isVisible = $isVisible;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTop(): bool
+    {
+        return $this->top;
+    }
+
+    /**
+     * @param bool $top
+     */
+    public function setTop(bool $top)
+    {
+        $this->top = $top;
     }
 
     public function __toString()
