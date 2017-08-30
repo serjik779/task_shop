@@ -61,7 +61,7 @@ class Products
     private $category;
     /**
      * @var ArrayCollection|Images[]
-     * Many Users have Many Groups.
+     * Many Products have Many Images.
      * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"})
      */
     protected $images;
@@ -78,6 +78,12 @@ class Products
      */
     private $isVisible = true;
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="top", type="boolean", nullable=false)
+     */
+    private $top = false;
+    /**
      * @var ArrayCollection|Products[]
      * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="products", cascade={"persist"})
      */
@@ -87,6 +93,20 @@ class Products
      * @var Images
      */
     protected $image;
+
+    /**
+     * @var = \DateTime
+     * @Gedmo\Timestampable(field="created")
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=128, nullable=false, unique=true )
+     */
+    private $slug;
 
     /**
      * Products constructor.
@@ -302,9 +322,58 @@ class Products
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function getTop(): bool
+    {
+        return $this->top;
+    }
+
+    /**
+     * @param bool $top
+     */
+    public function setTop(bool $top)
+    {
+        $this->top = $top;
+    }
+
     public function __toString()
     {
         return $this->getTitle() ?: '';
     }
 
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
 }

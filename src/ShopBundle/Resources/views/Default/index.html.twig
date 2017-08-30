@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}ElectoZone{% endblock %}</title>
+    <title>{% block title %}ElectroZone{% endblock %}</title>
     {% block stylesheets %}
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
@@ -32,10 +32,10 @@
 {% include 'ShopBundle:Default:footer.html.twig' %}
 {% block javascripts %}
     <!-- Latest jQuery form server -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap JS form CDN -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- jQuery sticky menu -->
     <script src="/js/owl.carousel.min.js"></script>
@@ -46,6 +46,9 @@
 
     <!-- Main Script -->
     <script src="/js/main.js"></script>
+
+    <!-- add to cart -->
+    <script src="/js/addtocart.js"></script>
 
     <!-- Slider -->
     <script type="text/javascript" src="/js/bxslider.min.js"></script>

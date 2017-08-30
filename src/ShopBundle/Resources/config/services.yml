@@ -16,7 +16,7 @@ services:
     app.admin.images:
         class: ShopBundle\Admin\ImagesAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Images" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Images", show_in_dashboard: false }
         arguments:
             - ~
             - ShopBundle\Entity\Images
@@ -100,3 +100,6 @@ services:
     shop.relprod_view_model_assembler:
                         class: ShopBundle\ViewModels\Product\RelProductVievModelAssembler
                         parent: gotakk.view_model.view_model_assembler
+    shop.index_view_model_assembler:
+                            class: ShopBundle\ViewModels\Index\IndexViewModelAssembler
+                            parent: gotakk.view_model.view_model_assembler

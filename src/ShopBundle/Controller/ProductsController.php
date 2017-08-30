@@ -2,7 +2,6 @@
 
 namespace ShopBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,9 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductsController extends Controller
 {
-    /**
-     * @Template()
-     */
     public function indexAction(Request $request)
     {
         $model = $this->get('doctrine')->getManager()->getRepository(Categories::class)->findAll();
@@ -30,9 +26,6 @@ class ProductsController extends Controller
         ));
     }
 
-    /**
-     * @Template()
-     */
     public function showCategoryAction(Request $request, Categories $categories)
     {
         $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $categories->getId()]);
@@ -53,9 +46,6 @@ class ProductsController extends Controller
         );
     }
 
-    /**
-     * @Template()
-     */
     public function showSingleAction(Request $request, Products $products)
     {
         $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $products->getCategory()->getId()], [], 10);
