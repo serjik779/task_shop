@@ -1,0 +1,11 @@
+ShopBundle\Entity\OrderItems:
+    exclusion_policy: ALL
+    properties:
+        discount:
+            expose: true
+        amount:
+            expose: true
+        products:
+            expose: true
+        deliveryType:
+            expose: true

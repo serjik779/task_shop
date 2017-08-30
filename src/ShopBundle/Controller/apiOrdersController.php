@@ -3,6 +3,7 @@
 namespace ShopBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use ShopBundle\Entity\OrdersInfo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -23,7 +24,7 @@ class apiOrdersController extends FOSRestController{
 //        $request = $this->getRequest();
 //        $token = $request->get('token');
 
-        $restresult = $this->getDoctrine()->getRepository('ShopBundle:OrderItems')->findAll();
+        $restresult = $this->getDoctrine()->getRepository(OrdersInfo::class)->findAll();
         if ($restresult === null) {
             return new View("there are no orders exist", Response::HTTP_NOT_FOUND);
         }
