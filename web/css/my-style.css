@@ -1,0 +1,7 @@
+body {
+    padding-top: 50px;
+}
+.starter-template { /* rename this bit to whatever your content div is using */
+    padding: 40px 15px;
+    text-align: center;
+}
