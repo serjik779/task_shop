@@ -12,10 +12,10 @@
                         <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                         <li><a href="#myModallog" data-toggle="modal"><i class="fa fa-sign-in"></i> SignIn</a></li>
                         <li><a href="#myModalReg" data-toggle="modal"><span class="glyphicon glyphicon-star"></span> SignUp</a></li>
-                        <li><a href="{{ path('login_login_default_logout') }}" data-toggle="modal"> <i class="fa fa-sign-out"></i>Logout</a></li>
+                        <li><a href="#" data-toggle="modal"> <i class="fa fa-sign-out"></i>Logout</a></li>
                     </ul>
                     <!-- HTML-код модального окна LOG -->
-                    <form action="{{ path('login_login_default_index') }}" method="POST">
+                    <form action="#" method="POST">
                     <div id="myModallog" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -64,7 +64,7 @@
             <form>
 
             <!-- HTML-код модального окна SHOW -->
-            <form action="{{ path('login_login_default_show') }}" method="get">
+            <form action="#" method="get">
             <div id="myModalshow" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -99,7 +99,7 @@
 
 
                 <!-- HTML-код модального окна REG -->
-                <form action="{{ path('login_login_default_signup') }}" method="POST">
+                <form action="#" method="POST">
                     <div id="myModalReg" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
