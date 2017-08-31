@@ -32,7 +32,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">Categories</h2>
-                    {% for category in vm.category %}
+                    {% for category in getFooterCategories() %}
                         <ul>
                             <li>
                                 <a href="{{ path('products_category', { 'slug': category.slug }) }}">{{ category.title }}</a>

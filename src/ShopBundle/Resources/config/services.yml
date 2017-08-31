@@ -103,3 +103,9 @@ services:
     shop.index_view_model_assembler:
                             class: ShopBundle\ViewModels\Index\IndexViewModelAssembler
                             parent: gotakk.view_model.view_model_assembler
+
+    twig.extension.getFooterCategories:
+        class: ShopBundle\Services\Twig\GetCategories
+        arguments: ['@doctrine.orm.default_entity_manager']
+        tags:
+            - { name: twig.extension }
