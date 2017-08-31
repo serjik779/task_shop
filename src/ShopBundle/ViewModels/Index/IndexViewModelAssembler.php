@@ -11,10 +11,13 @@ class IndexViewModelAssembler extends ViewModelAssembler
         $this->skel = array(
             'Product',
             'Latest',
+            'Top',
+            'New',
+            'Category'
         );
     }
 
-    public function generateViewModel($model1, $model2, $model3, $model4, $model5)
+    public function generateViewModel($model1, $model2, $model3, $model4)
     {
         $vm = $this->vmService->createViewModel();
 
@@ -22,7 +25,6 @@ class IndexViewModelAssembler extends ViewModelAssembler
         $vm->setLatest($model2);
         $vm->setTop($model3);
         $vm->setNew($model4);
-        $vm->setCategory($model5);
 
 
         return $vm->toArray();

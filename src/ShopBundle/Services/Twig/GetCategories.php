@@ -24,13 +24,14 @@ class GetCategories extends \Twig_Extension
         $o = $this;
 
         return array(
-            'categories' => new \Twig_SimpleFunction('getFooterCategories', function () use ($o) {
-                return $o->getCategoriesForFooter();
+            'categories' => new \Twig_SimpleFunction('getCategories', function () use ($o) {
+                return $o->getCategories();
             })
         );
     }
 
-    public function getCategoriesForFooter() {
+    public function getCategories()
+    {
 
         $categories = $this->em->getRepository(Categories::class)->findAll();
 
