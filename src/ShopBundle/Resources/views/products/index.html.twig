@@ -18,6 +18,10 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
+                <div class="product-breadcroumb">
+                    <a href="{{ path('shop_homepage') }}">Home</a>
+                    <a class="disabled">Products</a>
+                </div>
                 {% if vm.category %}
                     {% for category in vm.category %}
                         <div class="col-md-3 col-sm-6">

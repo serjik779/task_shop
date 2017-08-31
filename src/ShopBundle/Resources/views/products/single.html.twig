@@ -19,21 +19,23 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Search Products</h2>
-                        <form action="">
-                            <input type="text" placeholder="Search products...">
-                            <input type="submit" value="Search">
-                        </form>
-                    </div>
-                </div>
+                {#<div class="col-md-4">#}
+                {#<div class="single-sidebar">#}
+                {#<h2 class="sidebar-title">Search Products</h2>#}
+                {#<form action="">#}
+                {#<input type="text" placeholder="Search products...">#}
+                {#<input type="submit" value="Search">#}
+                {#</form>#}
+                {#</div>#}
+                {#</div>#}
 
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
                             <a href="{{ path('shop_homepage') }}">Home</a>
-                            <a href="">{{ product.category.title }}</a>
+                            <a href="{{ path('products_index') }}">Products</a>
+                            <a href="{{ path('products_category', { 'slug': product.category.slug }) }}
+                                ">{{ product.category.title }}</a>
                             <a class="disabled">{{ product.title }}</a>
                         </div>
 
@@ -70,41 +72,25 @@
                                         </div>
                                         <button class="add_to_cart_button" type="submit">Add to cart</button>
                                     </form>
-
-                                    <div class="product-inner-category">
-                                        <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
-                                    </div>
-
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
                                             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+                                            {#<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>#}
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                                 <h2>Product Description</h2>
                                                 {{ product.description | raw }}
                                             </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
-                                                <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                    <div class="rating-chooser">
-                                                        <p>Your rating</p>
-
-                                                        <div class="rating-wrap-post">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
-                                                </div>
-                                            </div>
+                                            {#<div role="tabpanel" class="tab-pane fade" id="profile">#}
+                                            {#<h2>Reviews</h2>#}
+                                            {#<div class="submit-review">#}
+                                            {#<p><label for="name">Name</label> <input name="name" type="text"></p>#}
+                                            {#<p><label for="email">Email</label> <input name="email" type="email"></p>#}
+                                            {#<p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>#}
+                                            {#<p><input type="submit" value="Submit"></p>#}
+                                            {#</div>#}
+                                            {#</div>#}
                                         </div>
                                     </div>
 
@@ -129,7 +115,7 @@
                                                 </a>
                                                 <div class="product-hover">
                                                     <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                    <a href="{{ path('products_show', { 'slug': product.category.slug, 'slug2': product.slug }) }}"
+                                                    <a href="{{ path('products_show', { 'slug2': product.category.slug, 'slug': product.slug }) }}"
                                                        class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                                 </div>
                                             </div>
