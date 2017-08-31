@@ -4,7 +4,6 @@ namespace ShopBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use ShopBundle\Repository\ImagesRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\DateTime;
 

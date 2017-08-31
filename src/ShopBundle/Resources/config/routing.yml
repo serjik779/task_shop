@@ -3,12 +3,8 @@ shop_homepage:
     defaults: { _controller: ShopBundle:Default:index }
 
 shop_contact:
-    path:     /shop_contact
-    defaults: { _controller: ShopBundle:Default:contactVendor }
-
-shop_categories:
-    resource: "@ShopBundle/Resources/config/routing/categories.yml"
-    prefix:   /categories
+    path:     /contact
+    defaults: { _controller: ShopBundle:Contact:contactVendor }
 
 shop_products:
     resource: "@ShopBundle/Resources/config/routing/products.yml"
@@ -16,7 +12,7 @@ shop_products:
 
 shop_about:
     path:     /about_us
-    defaults: { _controller: ShopBundle:Default:about }
+    defaults: { _controller: ShopBundle:About:about }
 
 shop_wishlist:
     path:     /wishlist

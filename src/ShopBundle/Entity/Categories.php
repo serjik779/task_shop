@@ -2,6 +2,7 @@
 namespace ShopBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Categories
  *
@@ -15,9 +16,10 @@ class Categories
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
+
     /**
      * @var string
      *
@@ -38,6 +40,13 @@ class Categories
      * @ORM\OneToMany(targetEntity="ShopBundle\Entity\Products", mappedBy="category")
      */
     protected $products;
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=128, nullable=false, unique=true )
+     */
+    private $slug;
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -50,6 +59,16 @@ class Categories
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Categories
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
     /**
      * Set title
@@ -123,5 +142,19 @@ class Categories
     public function __toString()
     {
         return $this->getTitle() ?: '';
+    }
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
     }
 }

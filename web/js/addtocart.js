@@ -1,13 +1,14 @@
-$ ('.add_to_cart_button').click(function () {
+$('.add_to_cart_button').click(function () {
     var addid = $(this).attr('data-product_id');
     $.ajax({
         type: "POST",
         url: "/cart/add",
-        data: {id:addid},
+        data: {id: addid},
         dataType: "json",
-        cache: false ,
-        success: function(data){
-            loadcart()}
+        cache: false,
+        success: function (data) {
+            loadcart()
+        }
     });
     return false;
 });

@@ -1,5 +1,7 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
-
+{% block head %}
+    <head><title>{% block title %}ElectroZone | MyWishlist{% endblock %}</title></head>
+{% endblock %}
 {% block body %}
 
     <div class="single-product-area">
@@ -9,7 +11,7 @@
                 <div class="col-md-12">
                     <table class="table table-responsive table-hover">
                         <thead>
-                    <tr class="bg-success">
+                        <tr class="bg-success">
                         <th>Image</th>
                         <th>Product</th>
                         <th>Description</th>
@@ -20,9 +22,9 @@
                         {% for prod in user.products %}
                             <tr>
                                 <td>
-                            {% for image in prod.images %}
-                                {{ image.filename }}
-                            {% endfor %}
+                                    {% for image in prod.images %}
+                                        {{ image.filename }}
+                                    {% endfor %}
                                 </td>
                                 <td>{{ prod.title }}</td>
                                 <td>{{ prod.description }}</td>

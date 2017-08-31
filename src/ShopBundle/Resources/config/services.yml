@@ -90,17 +90,22 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
-    app.admin.service_link:
-        class: ShopBundle\Admin\ServiceLinkAdmin
+
+    shop.categories_view_model_assembler:
+                class: ShopBundle\ViewModels\Product\CategoriesViewModelAssembler
+                parent: gotakk.view_model.view_model_assembler
+    shop.product_view_model_assembler:
+                    class: ShopBundle\ViewModels\Product\ProductViewModelAssembler
+                    parent: gotakk.view_model.view_model_assembler
+    shop.relprod_view_model_assembler:
+                        class: ShopBundle\ViewModels\Product\RelProductVievModelAssembler
+                        parent: gotakk.view_model.view_model_assembler
+    shop.index_view_model_assembler:
+                            class: ShopBundle\ViewModels\Index\IndexViewModelAssembler
+                            parent: gotakk.view_model.view_model_assembler
+
+    twig.extension.getFooterCategories:
+        class: ShopBundle\Services\Twig\GetCategories
+        arguments: ['@doctrine.orm.default_entity_manager']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Service link" }
-        arguments:
-            - ~
-            - null
-            - ShopBundle:ServiceLink
-#        calls:
-#            - [ setTranslationDomain, [ShopBundle]]
-        public: true
-    data_center:
-         class: ShopBundle\Services\DataCenter
-         arguments: ['@doctrine.orm.default_entity_manager']
+            - { name: twig.extension }

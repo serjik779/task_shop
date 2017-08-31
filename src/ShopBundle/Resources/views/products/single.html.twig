@@ -1,0 +1,141 @@
+{% extends 'ShopBundle:Default:index.html.twig' %}
+{% block head %}
+    <head><title>{% block title %}ElectroZone | {{ product.title }}{% endblock %}</title></head>
+{% endblock %}
+{% block body %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>{{ product.title }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                {#<div class="col-md-4">#}
+                {#<div class="single-sidebar">#}
+                {#<h2 class="sidebar-title">Search Products</h2>#}
+                {#<form action="">#}
+                {#<input type="text" placeholder="Search products...">#}
+                {#<input type="submit" value="Search">#}
+                {#</form>#}
+                {#</div>#}
+                {#</div>#}
+
+                <div class="col-md-8">
+                    <div class="product-content-right">
+                        <div class="product-breadcroumb">
+                            <a href="{{ path('shop_homepage') }}">Home</a>
+                            <a href="{{ path('products_index') }}">Products</a>
+                            <a href="{{ path('products_category', { 'slug': product.category.slug }) }}
+                                ">{{ product.category.title }}</a>
+                            <a class="disabled">{{ product.title }}</a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="product-images">
+                                    {% if product.images|length != 0 %}
+                                        <div class="product-main-img">
+                                            <img src="{{ product.images[0].path }}" alt="">
+                                        </div>
+                                        <div class="product-gallery">
+                                            {% for image in product.images %}
+                                                <img src="{{ image.path }}" alt="">
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <div class="product-main-img">
+                                            <img src="/img/no-image.png" alt="">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="product-inner">
+                                    <h2 class="product-name">{{ product.title }}</h2>
+                                    <div class="product-inner-price">
+                                        <ins>${{ product.cost }}</ins> <del>${{ product.cost * 1.25 }}</del>
+                                    </div>
+
+                                    <form action="" class="cart">
+                                        <div class="quantity">
+                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                        </div>
+                                        <button class="add_to_cart_button" type="submit">Add to cart</button>
+                                    </form>
+                                    <div role="tabpanel">
+                                        <ul class="product-tab" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                            {#<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>#}
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                <h2>Product Description</h2>
+                                                {{ product.description | raw }}
+                                            </div>
+                                            {#<div role="tabpanel" class="tab-pane fade" id="profile">#}
+                                            {#<h2>Reviews</h2>#}
+                                            {#<div class="submit-review">#}
+                                            {#<p><label for="name">Name</label> <input name="name" type="text"></p>#}
+                                            {#<p><label for="email">Email</label> <input name="email" type="email"></p>#}
+                                            {#<p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>#}
+                                            {#<p><input type="submit" value="Submit"></p>#}
+                                            {#</div>#}
+                                            {#</div>#}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="related-products-wrapper">
+                            <h2 class="related-products-title">Related Products</h2>
+                            <div class="related-products-carousel">
+                                {% if vm.related %}
+                                    {% for product in vm.related %}
+                                        <div class="single-product">
+                                            <div class="product-f-image">
+                                                <a href="{{ path('products_show', { 'slug2': product.category.slug, 'slug': product.slug}) }}">
+                                                    {% if product.images|length != 0 %}
+                                                        <img src="{{ product.images[0].path }}" alt="">
+                                                    {% else %}
+                                                        <img src="/img/no-image.png" alt="">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="product-hover">
+                                                    <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                    <a href="{{ path('products_show', { 'slug2': product.category.slug, 'slug': product.slug }) }}"
+                                                       class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                                </div>
+                                            </div>
+
+                                            <h2>
+                                                <a href="{{ path('products_show', { 'slug2': product.category.slug, 'slug': product.slug}) }}">{{ product.title }}</a>
+                                            </h2>
+
+                                            <div class="product-carousel-price">
+                                                <ins>${{ product.cost }}</ins>
+                                                <del>${{ product.cost * 1.25 }}</del>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
