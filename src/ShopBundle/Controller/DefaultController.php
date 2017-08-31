@@ -56,8 +56,8 @@ class DefaultController extends Controller
 
 
             $message = (new \Swift_Message('Feedback message.'))
-                    ->setFrom('alona.ant@bk.ru')
-                    ->setTo('alona.ant@bk.ru')
+                    ->setFrom($this->getParameter('mailer_user'))
+                    ->setTo($this->getParameter('mailer_user'))
                     ->setBody("User: ".$feedback->getName().". "." User Email: ".$feedback->getEmail().". "." Message: ".$feedback->getText(),'text/plain');
 
             $this->get('mailer')->send($message);
