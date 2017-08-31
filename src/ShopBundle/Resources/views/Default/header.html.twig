@@ -6,125 +6,34 @@
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="#myModalshow"  data-toggle="modal"> My account</a></li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                        <li>
+
+                          <a href="/profile">Welcome  {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a>
+                        </li>
                         <li><a href="{{ path('shop_wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
                         <li><a href="{{ path('cart_index') }}"><i class="fa fa-user"></i> My Cart</a></li>
                         <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                        <li><a href="#myModallog" data-toggle="modal"> SignIn</a></li>
-                        <li><a href="#myModalReg" data-toggle="modal"> SignUp</a></li>
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} <i class="fa fa-sign-out"></i>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li>
+                        <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i>{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fos_user_registration_register') }}">
+                                <span class="glyphicon glyphicon-star"></span>
+                                {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+
+                        </li>
+                        {% endif %}
                     </ul>
-                    <!-- HTML-код модального окна LOG -->
-                    <form action="{{ path('login_login_default_index') }}" method="POST">
-                    <div id="myModallog" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <!-- Заголовок модального окна -->
-                                <div class="modal-header">
-                                    <!-- Кнопка "закрыть"-->
-                                    <button type="button"
-                                            class="close"
-                                            data-dismiss="modal"
-                                            aria-hidden="true">×
-                                    </button>
-                                    <h4 class="modal-title">Welcome to ElectroZone!</h4>
-                                </div>
-                                <!-- Основное содержимое модального окна -->
-                                <div class="modal-body">
-                                    <br>
-                                    <input type="text"
-                                           class="input-block-level"
-                                           name="email"
-                                           placeholder="Email"
-                                           data-trigger="change"
-                                           data-required="true"
-                                           data-type="email">
-                                    <input type="password"
-                                           class="input-block-level"
-                                           name="password"
-                                           placeholder="Password"
-                                           data-trigger="change"
-                                           data-required="true">
-
-                                </div>
-                                <!-- Футер модального окна -->
-                                <div class="modal-footer">
-                                    <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-
-            </div>
-
-            <form>
-
-            <!-- HTML-код модального окна SHOW -->
-            <form action="{{ path('login_login_default_show') }}" method="post">
-            <div id="myModalshow" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- Заголовок модального окна -->
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">My Account</h4>
-                        </div>
-                        <!-- Основное содержимое модального окна -->
-                        <div class="modal-body">
-                            <div class="container">
-                                {% if user is defined%}
-                                <h2>ID: {{ user.id }}  </h2>
-                                <h2>NAME: {{ user.name}}  </h2>
-                                <h2>PASSWORD: {{ user.password }}  </h2>
-                                <h2>EMAIL: {{ user.email }}  </h2>
-                                <h2>ADDRESS: {{ user.address }}  </h2>
-                                <h2>PHONE: {{ user.phone }}  </h2>
-                                {%endif%}
-                                {#{% include "LoginLoginBundle:Default:table.html.twig"%}#}
-                            </div>
-                            Содержимое модального окна...
-                        </div>
-                        <!-- Футер модального окна -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </div>
                 </div>
             </div>
-    </form>
-
-
-                {#<!-- HTML-код модального окна REG -->#
-                <form>}
-                {#<form action="{{ path('login_login_default_index') }}" method="POST">#}
-                {#<div id="myModallog" class="modal fade">#}
-                    {#<div class="modal-dialog">#}
-                        {#<div class="modal-content">#}
-                            {#<!-- Заголовок модального окна -->#}
-                            {#<div class="modal-header">#}
-                                {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
-                                {#<h4 class="modal-title">Заголовок модального окна</h4>#}
-                            {#</div>#}
-                            {#<!-- Основное содержимое модального окна -->#}
-                            {#<div class="modal-body">#}
-                                {#Содержимое модального окна... <br>#}
-                                {#<input type="text"  class="input-block-level"  name="email" placeholder="Email" data-trigger="change" data-required="true" data-type="email">#}
-                                {#<input type="password" class="input-block-level" name="password" placeholder="Password" data-trigger="change" data-required="true">#}
-
-                            {#</div>#}
-                            {#<!-- Футер модального окна -->#}
-                            {#<div class="modal-footer">#}
-                                {#<button class="btn btn-large btn-primary" type="submit">Sign in</button>#}
-                                {#<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>#}
-                                {#<button type="button" class="btn btn-primary">Сохранить изменения</button>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-        {#</div>#}
-    {#</div>#}
-    {#</form>#}
 
             <div class="col-md-4">
                 <div class="header-right">

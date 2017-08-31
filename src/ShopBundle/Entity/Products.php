@@ -17,9 +17,11 @@ class Products
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
+
+
     /**
      * @var string
      * @Gedmo\Slug(fields={"title"})
@@ -157,6 +159,15 @@ class Products
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * @param int $id
+     *  @return Products
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
     /**
      * Set title
