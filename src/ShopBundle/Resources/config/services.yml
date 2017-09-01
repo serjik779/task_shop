@@ -106,6 +106,7 @@ services:
 
     twig.extension.getFooterCategories:
         class: ShopBundle\Services\Twig\GetCategories
-        arguments: ['@doctrine.orm.default_entity_manager']
+        arguments: ['@doctrine.orm.default_entity_manager', '@security.context']
         tags:
             - { name: twig.extension }
+            - { name: security.context }

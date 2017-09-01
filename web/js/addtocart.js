@@ -1,34 +1,18 @@
 $('.add_to_cart_button').click(function () {
     var addid = $(this).attr('data-product_id');
+    var prodAmount = $('.qty').val();
     $.ajax({
         type: "POST",
         url: "/cart/add",
-        data: {id: addid},
+        data: {
+            product: addid,
+            amount: prodAmount
+        },
         dataType: "json",
-        cache: false,
         success: function (data) {
-            loadcart()
+            if (data['status'] === 'error') {
+                window.location.href = "/login";
+            }
         }
     });
-    return false;
 });
-
-
-function loadcart() {
-    $.ajax({
-        type: "POST",
-        url: "ShopBundle\Controller\CartloadController",
-        datatype: "json",
-        cache: false,
-        success: function (data) {
-            if (data = "0") {
-                $(".cart-amunt > a ").html("Cart is empty");
-            }
-            else {
-                $(".cart-amunt > a").html(data);
-            }
-        }
-
-    });
-    return false;
-}

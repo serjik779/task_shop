@@ -52,13 +52,13 @@
                 <div class="shopping-item">
                     <a href="{{ path('cart_index') }}">
                         Cart -
-                        <span
-                                class="cart-amunt">$100
+                        <span class="cart-amunt">
+                            {{ getCountCartItems().cash }}
                         </span>
                         <i class="fa fa-shopping-cart">
                         </i>
                         <span class="product-count">
-                            5
+                            {{ getCountCartItems().count }}
                         </span>
                     </a>
                 </div>

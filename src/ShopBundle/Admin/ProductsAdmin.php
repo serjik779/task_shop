@@ -39,6 +39,9 @@ class ProductsAdmin extends AbstractAdmin
             ->add('cost', MoneyType::class)
             ->add('amount', NumberType::class)
             ->add('serviceId', NumberType::class)
+            ->add('top', CheckboxType::class, array(
+                'required' => false
+            ))
             ->add('onMain', CheckboxType::class, array(
                 'required' => false
             ))
