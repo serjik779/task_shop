@@ -63,7 +63,7 @@ class CartController extends Controller
         $em->persist($cartItem);
         $em->flush();
 
-        $response = array('status' => 'success', 'data' => array('product' => $product, 'amount' => $amount));
+        $response = array('status' => 'success', 'data' => array('product' => $product, 'amount' => $amount, 'cost' => $product->getCost()));
         $response = $serializer->serialize($response, 'json');
         return $this->render('ShopBundle::output.json.twig', array('data' => $response));
     }

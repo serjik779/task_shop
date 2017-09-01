@@ -12,6 +12,12 @@ $('.add_to_cart_button').click(function () {
         success: function (data) {
             if (data['status'] === 'error') {
                 window.location.href = "/login";
+            } else {
+
+                var oldCost = $('.cart-amunt').text();
+                $('.cart-amunt').text( Number(oldCost) + Number(data['data']['cost']));
+                var oldCount = $('.product-count').text();
+                $('.product-count').text( Number(oldCount) + Number(data['data']['amount']));
             }
         }
     });
