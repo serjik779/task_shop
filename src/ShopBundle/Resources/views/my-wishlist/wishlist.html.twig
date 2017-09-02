@@ -22,11 +22,13 @@
                         {% for wl in wishlist %}
                             <tr>
                                 <td>
-                                    {% if wl.product.images|length != 0 %}
-                                        <img src="{{ wl.product.images[0].path }}" alt="">
-                                    {% else %}
-                                        <img src="/img/no-image.png" alt="">
-                                    {% endif %}
+                                    <a href="{{ path('products_show', { 'slug2': wl.product.category.slug, 'slug': wl.product.slug }) }}">
+                                        {% if wl.product.images|length != 0 %}
+                                            <img src="{{ wl.product.images[0].path }}" alt="">
+                                        {% else %}
+                                            <img src="/img/no-image.png" alt="">
+                                        {% endif %}
+                                    </a>
                                 </td>
                                 <td>{{ wl.product.title }}</td>
                                 <td>{{ wl.product.description|raw }}</td>
