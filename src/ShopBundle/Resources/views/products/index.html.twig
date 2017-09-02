@@ -1,17 +1,14 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
+{% block head %}
+    <head><title>{% block title %}ElectroZone | Products{% endblock %}</title></head>
+{% endblock %}
 {% block body %}
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>
-                            {% if category %}
-                                {{ category.title }}
-                            {% else %}
-                                 Products
-                            {% endif %}
-                        </h2>
+                        <h2>Products</h2>
                     </div>
                 </div>
             </div>
@@ -21,27 +18,29 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                {% if products %}
-                    {% for product in products %}
+                <div class="product-breadcroumb">
+                    <a href="{{ path('shop_homepage') }}">Home</a>
+                    <a class="disabled">Products</a>
+                </div>
+                {% if vm.category %}
+                    {% for category in vm.category %}
                         <div class="col-md-3 col-sm-6">
                             <div class="single-shop-product">
                                 <div class="product-upper">
-                                    <a href="{{ path('products_show', { 'id': product.id }) }}">
-                                        {% if product.images|length != 0 %}
-                                            <img src="{{ product.images[0].path }}" alt="">
+                                    <a href="{{ path('products_category', { 'slug': category.slug }) }}">
+                                        {% if category.image %}
+                                            <img src="{{ category.image.path }}" alt="">
                                         {% else %}
                                             <img src="/img/no-image.png" alt="">
                                         {% endif %}
                                     </a>
                                 </div>
-                                <h2><a href="{{ path('products_show', { 'id': product.id }) }}">{{ product.title }}</a></h2>
-                                <div class="product-carousel-price">
-                                    <ins>${{ product.cost }}</ins> <del>${{ product.cost * 1.25 }}</del>
-                                </div>
+                                <h2>
+                                    <a href="{{ path('products_category', { 'slug': category.slug }) }}">{{ category.title }}</a>
+                                </h2>
+                                <div class="product-carousel-price"></div>
 
-                                <div class="product-option-shop">
-                                    <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="{{ product.id }}" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                                </div>
+                                <div class="product-option-shop"></div>
                             </div>
                         </div>
                     {% endfor %}
@@ -51,7 +50,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="navigation">
-                        {{ knp_pagination_render(products) }}
+                        {{ knp_pagination_render(category) }}
                     </div>
                 </div>
             </div>

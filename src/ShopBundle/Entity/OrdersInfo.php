@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OrdersInfo
  *
- * @ORM\Table(name="orders_info")
+ * @ORM\Table(name="orders_info", indexes={@ORM\Index(name="fk_delivery_type", columns={"delivery_type_id"})})
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrdersInfoRepository")
  */
 class OrdersInfo
@@ -47,6 +47,15 @@ class OrdersInfo
      * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="ordersInfo", cascade={"persist"}, orphanRemoval=true)
      */
     protected $orderItems;
+    /**
+     * @var DeliveryType
+     *
+     * @ORM\ManyToOne(targetEntity="DeliveryType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="delivery_type_id", referencedColumnName="id")
+     * })
+     */
+    private $deliveryType;
     /**
      * @return ArrayCollection|OrderItems[]
      */
@@ -165,6 +174,26 @@ class OrdersInfo
     }
     public function __toString()
     {
-        return $this->getName().'-'.$this->getAddress().'-'.$this->getPhone();
+        return $this->getName() ?: '';
+    }
+    /**
+     * Set deliveryType
+     *
+     * @param \ShopBundle\Entity\DeliveryType $deliveryType
+     * @return OrdersInfo
+     */
+    public function setDeliveryType(\ShopBundle\Entity\DeliveryType $deliveryType = null)
+    {
+        $this->deliveryType = $deliveryType;
+        return $this;
+    }
+    /**
+     * Get deliveryType
+     *
+     * @return \ShopBundle\Entity\DeliveryType
+     */
+    public function getDeliveryType()
+    {
+        return $this->deliveryType;
     }
 }

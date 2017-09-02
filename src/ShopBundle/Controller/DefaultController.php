@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Controller;
 
+use ShopBundle\Entity\Brands;
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Feedback;
 use ShopBundle\Entity\Images;
@@ -16,25 +17,35 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Test\Fixture\Document\Image;
 
-
-
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $products = $em->getRepository(Products::class)->findBy(array('onMain' => 1, 'isVisible' => 1));
+        $model1 = $this->get('doctrine')->getManager()->
+        getRepository(Products::class)->findBy(array('onMain' => 1, 'isVisible' => 1));
+        $model2 = $this->get('doctrine')->getManager()->
+        getRepository(Products::class)->findBy([], ['created' => 'DESC'], 10);
+        $model3 = $this->get('doctrine')->getManager()->
+        getRepository(Products::class)->findBy(array('top' => 1), [], 4);
+        $model4 = $this->get('doctrine')->getManager()->
+        getRepository(Products::class)->findBy(array('top' => 1), ['created' => 'DESC'], 4);
+        $model5 = $this->get('doctrine')
+            ->getManager()
+            ->getRepository(Brands::class)
+            ->findAll();
 
-        return $this->render('ShopBundle:home:index.html.twig', array(
-            'products' => $products
+        $vm = $this->get('shop.index_view_model_assembler')->generateViewModel($model1, $model2, $model3, $model4, $model5);
+
+        return $this->render('ShopBundle:home:index.html.twig', array
+        (
+            'vm' => $vm,
         ));
     }
 
     public function contactVendorAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $form = $this->createFormBuilder(new Feedback())
             ->add('name', TextType::class, array(
                 'label' => 'Name'))
@@ -45,28 +56,20 @@ class DefaultController extends Controller
             ->add('save', SubmitType::class, array(
                 'label' => 'Send'))
             ->getForm();
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $feedback Feedback */
             $feedback = $form->getData();
-
             $em->persist($feedback);
             $em->flush();
-
-
             $message = (new \Swift_Message('Feedback message.'))
-                    ->setFrom('alona.ant@bk.ru')
-                    ->setTo('alona.ant@bk.ru')
-                    ->setBody("User: ".$feedback->getName().". "." User Email: ".$feedback->getEmail().". "." Message: ".$feedback->getText(),'text/plain');
-
+                ->setFrom($feedback->getEmail())
+                ->setTo($this->getParameter('mailer_user'))
+                ->setBody("User: ".$feedback->getName().". "." User Email: ".$feedback->getEmail().". "." Message: ".$feedback->getText(),'text/plain');
             $this->get('mailer')->send($message);
-
             return $this->redirectToRoute('shop_contact');
         }
-
         $page = $em->getRepository(Pages::class)->findOneBy(['title' => 'contact']);
-
         return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
             'page' => $page,
             'form' => $form->createView(),
@@ -82,7 +85,6 @@ class DefaultController extends Controller
             'page' => $page
         ));
     }
-
 }
 
 

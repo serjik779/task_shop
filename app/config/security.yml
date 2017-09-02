@@ -45,7 +45,7 @@ security:
       anonymous:  true
       remember_me:
          key: "%secret%"
-         lifetime: 200
+         lifetime: 8000
 
   access_control:
     # Products

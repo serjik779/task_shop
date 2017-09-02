@@ -3,12 +3,8 @@ shop_homepage:
     defaults: { _controller: ShopBundle:Default:index }
 
 shop_contact:
-    path:     /shop_contact
-    defaults: { _controller: ShopBundle:Default:contactVendor }
-
-shop_categories:
-    resource: "@ShopBundle/Resources/config/routing/categories.yml"
-    prefix:   /categories
+    path:     /contact
+    defaults: { _controller: ShopBundle:Contact:contactVendor }
 
 shop_products:
     resource: "@ShopBundle/Resources/config/routing/products.yml"
@@ -16,25 +12,27 @@ shop_products:
 
 shop_about:
     path:     /about_us
-    defaults: { _controller: ShopBundle:Default:about }
+    defaults: { _controller: ShopBundle:About:about }
 
 shop_wishlist:
     path:     /wishlist
     defaults: { _controller: ShopBundle:Wishlist:wishlist }
 
+shop_wishlist_add:
+    path:     /wishlist/add-to-wishlist
+    defaults: { _controller: ShopBundle:Wishlist:addWishlistProduct }
 
 shop_cart:
     resource: "@ShopBundle/Resources/config/routing/cart.yml"
     prefix:   /cart
 
-
 api:
     path:     /api/orders
     defaults: { _controller: ShopBundle:apiOrders:get }
 
-
 shop_checkout:
     resource: "@ShopBundle/Resources/config/routing/checkout.yml"
     prefix:   /checkout
-
-
+shop_login:
+    path:     /login
+    defaults: { _controller: SonataUserBundle:SecurityFOSUser1:login }
