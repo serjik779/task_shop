@@ -19,12 +19,13 @@
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">User Navigation </h2>
                     <ul>
-                        <li><a href="#">My account</a></li>
-                        <li><a href="#">Order history</a></li>
-                        <li><a href="{{ path('shop_wishlist') }}">Wishlist</a></li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a href="/profile">My account</a></li>
+                            <li><a href="{{ path('shop_wishlist') }}">Wishlist</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('products_category') }}">Products</a></li>
                         <li><a href="{{ path('shop_contact') }}">Contact us</a></li>
                         <li><a href="{{ path('shop_about') }}">About shop</a></li>
-                        <li><a href="#">Front page</a></li>
                     </ul>
                 </div>
             </div>
