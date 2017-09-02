@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Controller;
 
+use ShopBundle\Entity\Brands;
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Feedback;
 use ShopBundle\Entity\Images;
@@ -29,8 +30,12 @@ class DefaultController extends Controller
         getRepository(Products::class)->findBy(array('top' => 1), [], 4);
         $model4 = $this->get('doctrine')->getManager()->
         getRepository(Products::class)->findBy(array('top' => 1), ['created' => 'DESC'], 4);
+        $model5 = $this->get('doctrine')
+            ->getManager()
+            ->getRepository(Brands::class)
+            ->findAll();
 
-        $vm = $this->get('shop.index_view_model_assembler')->generateViewModel($model1, $model2, $model3, $model4);
+        $vm = $this->get('shop.index_view_model_assembler')->generateViewModel($model1, $model2, $model3, $model4, $model5);
 
         return $this->render('ShopBundle:home:index.html.twig', array
         (

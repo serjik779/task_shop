@@ -17,7 +17,7 @@ class IndexViewModelAssembler extends ViewModelAssembler
         );
     }
 
-    public function generateViewModel($model1, $model2, $model3, $model4)
+    public function generateViewModel($model1, $model2, $model3, $model4, $model5)
     {
         $vm = $this->vmService->createViewModel();
 
@@ -25,6 +25,7 @@ class IndexViewModelAssembler extends ViewModelAssembler
         $vm->setLatest($model2);
         $vm->setTop($model3);
         $vm->setNew($model4);
+        $vm->setBrands($model5);
 
 
         return $vm->toArray();
