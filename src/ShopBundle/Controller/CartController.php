@@ -3,16 +3,25 @@
 namespace ShopBundle\Controller;
 
 
+
+use JMS\Serializer\Tests\Fixtures\Order;
 use PHPUnit\Runner\Exception;
 use ShopBundle\Entity\Cart;
 use ShopBundle\Entity\CartItems;
+use ShopBundle\Entity\DeliveryType;
+use ShopBundle\Entity\OrderItems;
+use ShopBundle\Entity\OrdersInfo;
 use ShopBundle\Entity\Products;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $user = $this->getUser();
         if (!$user) {
             return $this->redirect($this->generateUrl('shop_login'));
@@ -20,8 +29,42 @@ class CartController extends Controller
         $em = $this->getDoctrine()->getManager();
         $cart = $em->getRepository(Cart::class)->findOneBy(array('user' => $this->getUser()));
         $cartItems = $em->getRepository(CartItems::class)->findBy(array('cart' => $cart));
+        $form = $this->createFormBuilder(new OrdersInfo())
+            ->add('date', DateTimeType::class, array(
+                'label' => 'date'))
+            ->add('name', TextType::class, array(
+                'label' => 'Name'))
+            ->add('address', TextType::class, array(
+                'label' => 'Address'))
+            ->add('phone', TextType::class, array(
+                'label' => 'Phone'))
+            ->add('deliveryType', EntityType::class, array(
+                'label' => 'Delivery', 'class' => DeliveryType::class))
+            ->add('Checkout', SubmitType::class, array(
+                'label' => 'Send'))
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid() && !empty($cartItems)) {
+            /* @var $feedback OrdersInfo */
+            $ordersInfo = $form->getData();
+            $em->persist($ordersInfo);
+
+            foreach ($cartItems as $cartItem) {
+                $orderItems = new OrderItems();
+                $orderItems->setAmount($request->get('amount'.$cartItem->getProduct()->getId()))
+                    ->setDiscount(0)
+                    ->setProducts($cartItem->getProduct())
+                    ->setOrdersInfo($ordersInfo);
+                $em->persist($orderItems);
+                $em->remove($cartItem);
+            }
+            $em->flush();
+            return $this->redirect($this->generateUrl('shop_homepage'));
+        }
+
         return $this->render('ShopBundle:cart:index.html.twig', array(
-            'cartItems' => $cartItems
+            'cartItems' => $cartItems,
+            'form' => $form->createView()
         ));
     }
 
