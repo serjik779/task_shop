@@ -33,5 +33,6 @@ api:
 shop_checkout:
     resource: "@ShopBundle/Resources/config/routing/checkout.yml"
     prefix:   /checkout
-
-
+shop_login:
+    path:     /login
+    defaults: { _controller: SonataUserBundle:SecurityFOSUser1:login }

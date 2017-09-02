@@ -15,7 +15,7 @@ class CartController extends Controller
     public function indexAction() {
         $user = $this->getUser();
         if (!$user) {
-            return $this->redirect($this->generateUrl('auth_login'));
+            return $this->redirect($this->generateUrl('shop_login'));
         }
         $em = $this->getDoctrine()->getManager();
         $cart = $em->getRepository(Cart::class)->findOneBy(array('user' => $this->getUser()));
@@ -72,5 +72,25 @@ class CartController extends Controller
             $em->getConnection()->rollback();
             throw $e;
         }
+    }
+
+    public function deleteAction(Request $request) {
+        $cartItemId = $request->get('id');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $cartItem = $em->getRepository(CartItems::class)->find($cartItemId);
+
+        $em->remove($cartItem);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('cart_index'));
+    }
+
+    public function checkoutAction(Request $request) {
+
+        return $this->render('ShopBundle:cart:index.html.twig', array(
+
+        ));
     }
 }

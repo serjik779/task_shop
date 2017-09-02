@@ -1136,3 +1136,6 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     min-height: 243px;
     border: 1px solid #ccc;
 }
+table.shop_table .td-right {
+    text-align: right;
+}

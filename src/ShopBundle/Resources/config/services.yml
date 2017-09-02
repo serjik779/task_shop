@@ -98,6 +98,14 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
+    app.admin.wishlist:
+        class: ShopBundle\Admin\WishlistAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Wishlist" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Wishlist
+            - ~
 
     shop.categories_view_model_assembler:
                 class: ShopBundle\ViewModels\Product\CategoriesViewModelAssembler

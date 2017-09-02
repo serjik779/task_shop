@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OrderItems
  *
- * @ORM\Table(name="order_items", indexes={@ORM\Index(name="fk_order_info", columns={"order_info_id"}), @ORM\Index(name="fk_delivery_type", columns={"delivery_type_id"}), @ORM\Index(name="fk_product", columns={"product_id"})})
+ * @ORM\Table(name="order_items", indexes={@ORM\Index(name="fk_order_info", columns={"order_info_id"}), @ORM\Index(name="fk_product", columns={"product_id"})})
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrderItemsRepository")
  */
 class OrderItems
@@ -30,15 +30,6 @@ class OrderItems
      * @ORM\Column(name="amount", type="integer", nullable=false)
      */
     private $amount;
-    /**
-     * @var DeliveryType
-     *
-     * @ORM\ManyToOne(targetEntity="DeliveryType")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="delivery_type_id", referencedColumnName="id")
-     * })
-     */
-    private $deliveryType;
     /**
      * @var OrdersInfo
      *
@@ -109,26 +100,6 @@ class OrderItems
     public function getAmount()
     {
         return $this->amount;
-    }
-    /**
-     * Set deliveryType
-     *
-     * @param \ShopBundle\Entity\DeliveryType $deliveryType
-     * @return OrderItems
-     */
-    public function setDeliveryType(\ShopBundle\Entity\DeliveryType $deliveryType = null)
-    {
-        $this->deliveryType = $deliveryType;
-        return $this;
-    }
-    /**
-     * Get deliveryType
-     *
-     * @return \ShopBundle\Entity\DeliveryType
-     */
-    public function getDeliveryType()
-    {
-        return $this->deliveryType;
     }
     /**
      * Set ordersInfo

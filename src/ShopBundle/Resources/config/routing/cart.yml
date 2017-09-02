@@ -4,3 +4,6 @@ cart_add:
 cart_index:
     path:     /index
     defaults: { _controller: "ShopBundle:Cart:index" }
+cart_delete:
+    path:     /delete/{id}
+    defaults: { _controller: "ShopBundle:Cart:delete" }
