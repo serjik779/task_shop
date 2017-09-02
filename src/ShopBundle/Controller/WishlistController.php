@@ -15,8 +15,6 @@ class WishlistController extends Controller
         $em = $this->getDoctrine()->getManager();
         $wishlist = $em->getRepository(Wishlist::class)->findBy(array('user' => $user));
 
-        dump($wishlist);
-
         return $this->render('ShopBundle:my-wishlist:wishlist.html.twig', array(
             'wishlist' => $wishlist
         ));
