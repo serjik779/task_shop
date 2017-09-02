@@ -165,6 +165,6 @@ class OrdersInfo
     }
     public function __toString()
     {
-        return $this->getName().'-'.$this->getAddress().'-'.$this->getPhone();
+        return $this->getName() ?: '';
     }
 }

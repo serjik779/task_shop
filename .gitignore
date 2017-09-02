@@ -44,4 +44,3 @@
 /composer.phar
 vendor/
 /web/.htaccess
-composer.lock

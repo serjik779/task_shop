@@ -3,6 +3,7 @@
 namespace ShopBundle\Controller;
 
 
+use PHPUnit\Runner\Exception;
 use ShopBundle\Entity\Cart;
 use ShopBundle\Entity\CartItems;
 use ShopBundle\Entity\Products;
@@ -36,35 +37,40 @@ class CartController extends Controller
         $amount = $request->get('amount', 1);
 
         $em = $this->getDoctrine()->getManager();
+        $em->getConnection()->beginTransaction();
+        try {
+            $product = $em->getRepository(Products::class)->find($productId);
+            $cart = $em->getRepository(Cart::class)->findOneBy(array('user' => $user));
+            if (!$cart) {
+                $cart = new Cart();
+                $cart->setCreated(new \DateTime())
+                    ->setUser($user);
+            }
+            $em->persist($cart);
+            $cartItem = $em->getRepository(CartItems::class)->findOneBy(array('cart' => $cart, 'product' => $product));
 
-        $product = $em->getRepository(Products::class)->find($productId);
+            if (!$cartItem) {
+                $cartItem = new CartItems();
+                $cartItem->setAmount($amount)
+                    ->setCart($cart)
+                    ->setProduct($product)
+                    ->setDiscount(0);
+            } else {
+                $cartAmount = $cartItem->getAmount();
+                $cartItem->setAmount($amount + $cartAmount);
+                $amount = 0;
+            }
+            $em->persist($cartItem);
+            $em->flush();
+            $em->getConnection()->commit();
 
-        $cart = $em->getRepository(Cart::class)->findOneBy(array('user' => $user));
+            $response = array('status' => 'success', 'data' => array('product' => $product, 'amount' => $amount, 'cost' => $product->getCost()));
+            $response = $serializer->serialize($response, 'json');
 
-        if (!$cart) {
-            $cart = new Cart();
-            $cart->setCreated(new \DateTime())
-                ->setUser($user);
+            return $this->render('ShopBundle::output.json.twig', array('data' => $response));
+        } catch (Exception $e) {
+            $em->getConnection()->rollback();
+            throw $e;
         }
-        $em->persist($cart);
-
-        $cartItem = $em->getRepository(CartItems::class)->findOneBy(array('cart' => $cart, 'product' => $product));
-
-        if (!$cartItem) {
-            $cartItem = new CartItems();
-            $cartItem->setAmount($amount)
-                ->setCart($cart)
-                ->setProduct($product)
-                ->setDiscount(0);
-        } else {
-            $cartAmount = $cartItem->getAmount();
-            $cartItem->setAmount($amount + $cartAmount);
-        }
-        $em->persist($cartItem);
-        $em->flush();
-
-        $response = array('status' => 'success', 'data' => array('product' => $product, 'amount' => $amount, 'cost' => $product->getCost()));
-        $response = $serializer->serialize($response, 'json');
-        return $this->render('ShopBundle::output.json.twig', array('data' => $response));
     }
 }

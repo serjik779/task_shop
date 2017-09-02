@@ -10,6 +10,8 @@
  */
 
 namespace Application\Sonata\UserBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use ShopBundle\Entity\Products;
 use Sonata\UserBundle\Entity\BaseUser;
 
 
@@ -39,4 +41,5 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
 }

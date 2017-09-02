@@ -19,16 +19,18 @@
                     </tr>
                         </thead>
                         <tbody>
-                        {% for prod in user.products %}
+                        {% for wl in wishlist %}
                             <tr>
                                 <td>
-                                    {% for image in prod.images %}
-                                        {{ image.filename }}
-                                    {% endfor %}
+                                    {% if wl.product.images|length != 0 %}
+                                        <img src="{{ wl.product.images[0].path }}" alt="">
+                                    {% else %}
+                                        <img src="/img/no-image.png" alt="">
+                                    {% endif %}
                                 </td>
-                                <td>{{ prod.title }}</td>
-                                <td>{{ prod.description }}</td>
-                                <td>{{ prod.cost }}</td>
+                                <td>{{ wl.product.title }}</td>
+                                <td>{{ wl.product.description|raw }}</td>
+                                <td>{{ wl.product.cost }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

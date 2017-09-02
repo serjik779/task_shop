@@ -1,5 +1,6 @@
 <?php
 namespace ShopBundle\Entity;
+use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -117,6 +118,7 @@ class Products
     {
         $this->orderItems = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
     public function addImage(\ShopBundle\Entity\Images $image) {
         $this->images->add($image);
