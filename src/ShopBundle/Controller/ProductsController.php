@@ -29,7 +29,8 @@ class ProductsController extends Controller
 
     public function showCategoryAction(Request $request, Categories $categories)
     {
-        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $categories->getId()]);
+        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)
+            ->findBy(['category' => $categories->getId()]);
         $vm = $this->get('shop.product_view_model_assembler')->generateViewModel($model);
 
         $paginator = $this->get('knp_paginator');
@@ -49,7 +50,8 @@ class ProductsController extends Controller
 
     public function showSingleAction(Request $request, Products $products)
     {
-        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)->findBy(['category' => $products->getCategory()->getId()], [], 10);
+        $model = $this->get('doctrine')->getManager()->getRepository(Products::class)
+            ->findBy(['category' => $products->getCategory()->getId()], [], 10);
         $vm = $this->get('shop.relprod_view_model_assembler')->generateViewModel($model);
 
         return $this->render('ShopBundle:products:single.html.twig', array
