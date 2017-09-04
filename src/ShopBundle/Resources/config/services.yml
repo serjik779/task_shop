@@ -126,3 +126,7 @@ services:
         tags:
             - { name: twig.extension }
             - { name: security.context }
+
+    adding.product:
+         class: ShopBundle\Services\AddingProductsCenter
+         arguments: ['@doctrine.orm.default_entity_manager']
