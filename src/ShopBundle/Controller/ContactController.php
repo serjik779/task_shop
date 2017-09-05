@@ -39,7 +39,7 @@ class ContactController extends Controller
 
             $message = (new \Swift_Message('Feedback message.'))
                 ->setFrom('alona.ant@bk.ru')
-                ->setTo('alona.ant@bk.ru')
+                ->setTo($this->getParameter('mailer_user'))
                 ->setBody("User: " . $feedback->getName() . ". " . " User Email: " . $feedback->getEmail() . ". " . " Message: " . $feedback->getText(), 'text/plain');
 
             $this->get('mailer')->send($message);
@@ -51,8 +51,7 @@ class ContactController extends Controller
 
         return $this->render('ShopBundle:Static:contactVendor.html.twig', array(
             'page' => $page,
-            'form' => $form->createView(),
-            'page' => $page
+            'form' => $form->createView()
         ));
     }
 }

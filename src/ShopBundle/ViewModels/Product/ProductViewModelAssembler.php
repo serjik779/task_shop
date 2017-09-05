@@ -16,10 +16,7 @@ class ProductViewModelAssembler extends ViewModelAssembler
     public function generateViewModel($model)
     {
         $vm = $this->vmService->createViewModel();
-
         $vm->setProduct($model);
-
-
 
         return $vm->toArray();
     }

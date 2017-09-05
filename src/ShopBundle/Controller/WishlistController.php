@@ -6,6 +6,7 @@ use Application\Sonata\UserBundle\Entity\User;
 use ShopBundle\Entity\Wishlist;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class WishlistController extends Controller
 {
@@ -20,15 +21,27 @@ class WishlistController extends Controller
         ));
     }
 
-    /* @var $request Request
+    /**
+     * @param Request $request
+     *
+     * @return Response
      */
     public function addWishlistProductAction(Request $request)
     {
+        $response = [
+            'status' => 'ok',
+            'data' => [],
+        ];
+
         $user = $this->getUser();
+
         if (!$user) {
-            $response = array('status' => 'error', 'data' => array('message' => 'Invalid user'));
-            return $this->render('ShopBundle::output.json.twig', array('data' => json_encode($response)));
+            $response['status'] = 'error';
+            $response['message'] = 'Invalid user.';
+
+            return new Response(json_encode($response));
         }
+
         $em = $this->get('doctrine.orm.default_entity_manager');
         $productId = $request->get('product', null);
         $product = $em->getRepository(Products::class)->find($productId);
@@ -36,6 +49,7 @@ class WishlistController extends Controller
             'user' => $user,
             'product' => $product
         ));
+
         if (!$wishlist) {
             $wishlist = new Wishlist();
             $wishlist->setProduct($product)->setUser($this->getUser());
@@ -43,7 +57,8 @@ class WishlistController extends Controller
             $em->persist($wishlist);
             $em->flush();
         }
-        return $this->render('ShopBundle::output.json.twig', array('data' => 1));
+
+        return new Response(json_encode($response));
     }
 }
 

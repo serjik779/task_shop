@@ -8,6 +8,7 @@ parameters:
     database_user: root
     database_password: ~
     page_limit: 5
+    service_url: http://siteformyhard.com
     # You should uncomment this if you want to use pdo_sqlite
     #database_path: "%kernel.root_dir%/data.db3"
 
