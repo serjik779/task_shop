@@ -43,3 +43,5 @@
 .idea/*
 /composer.phar
 vendor/
+/web/.htaccess
+!/src/ShopBundle/Controller/ProductsController.php

@@ -2,6 +2,14 @@ services:
 #    shop.example:
 #        class: ShopBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    app.admin.brands:
+        class: ShopBundle\Admin\BrandsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Brands" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Brands
+            - ~
     app.admin.categories:
         class: ShopBundle\Admin\CategoriesAdmin
         tags:
@@ -12,6 +20,17 @@ services:
             - ~
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
+        public: true
+    app.admin.slider:
+        class: ShopBundle\Admin\SliderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Slider" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Slider
+            - ~
+        #        calls:
+        #            - [ setTranslationDomain, [ShopBundle]]
         public: true
     app.admin.images:
         class: ShopBundle\Admin\ImagesAdmin
@@ -90,17 +109,35 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
-    app.admin.service_link:
-        class: ShopBundle\Admin\ServiceLinkAdmin
+    app.admin.wishlist:
+        class: ShopBundle\Admin\WishlistAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Service link" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Wishlist" }
         arguments:
             - ~
-            - null
-            - ShopBundle:ServiceLink
-#        calls:
-#            - [ setTranslationDomain, [ShopBundle]]
-        public: true
-    data_center:
-         class: ShopBundle\Services\DataCenter
+            - ShopBundle\Entity\Wishlist
+            - ~
+
+    shop.categories_view_model_assembler:
+                class: ShopBundle\ViewModels\Product\CategoriesViewModelAssembler
+                parent: gotakk.view_model.view_model_assembler
+    shop.product_view_model_assembler:
+                    class: ShopBundle\ViewModels\Product\ProductViewModelAssembler
+                    parent: gotakk.view_model.view_model_assembler
+    shop.relprod_view_model_assembler:
+                        class: ShopBundle\ViewModels\Product\RelProductVievModelAssembler
+                        parent: gotakk.view_model.view_model_assembler
+    shop.index_view_model_assembler:
+                            class: ShopBundle\ViewModels\Index\IndexViewModelAssembler
+                            parent: gotakk.view_model.view_model_assembler
+
+    twig.extension.getFooterCategories:
+        class: ShopBundle\Services\Twig\GetCategories
+        arguments: ['@doctrine.orm.default_entity_manager', '@security.context']
+        tags:
+            - { name: twig.extension }
+            - { name: security.context }
+
+    adding.product:
+         class: ShopBundle\Services\AddingProductsCenter
          arguments: ['@doctrine.orm.default_entity_manager']

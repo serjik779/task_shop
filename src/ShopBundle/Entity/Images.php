@@ -4,7 +4,6 @@ namespace ShopBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use ShopBundle\Repository\ImagesRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -25,6 +24,9 @@ class Images
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\Slider", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="image", referencedColumnName="id",nullable=true)
+
      */
     private $id;
 
@@ -62,8 +64,13 @@ class Images
      */
     public function getUpdated()
     {
-        return $this->updated;
+        if ($this->updated) {
+            return $this->updated;
+        } else {
+            return new \DateTime();
+        }
     }
+
 
     /**
      * @param DateTime $updated

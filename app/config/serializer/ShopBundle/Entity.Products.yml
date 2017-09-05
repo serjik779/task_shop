@@ -3,3 +3,5 @@ ShopBundle\Entity\Products:
     properties:
         serviceId:
             expose: true
+        cost:
+            expose: true

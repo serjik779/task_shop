@@ -63,7 +63,6 @@ class User extends BaseUser
         $this->setToken($token);
     }
 
-
     /**
      * @var \DateTime
      */
@@ -118,9 +117,4 @@ class User extends BaseUser
     {
         $this->salt = $salt;
     }
-
-
-
-
-
 }

@@ -11,13 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use ShopBundle\Entity\OrderItems;
-
 use Application\Sonata\UserBundle\Entity\User;
-
-
-
-
-
 
 class apiOrdersController extends FOSRestController
 {

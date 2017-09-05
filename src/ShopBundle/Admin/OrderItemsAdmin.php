@@ -27,7 +27,6 @@ class OrderItemsAdmin extends AbstractAdmin
             ->add('ordersInfo', EntityType::class, array(
                 'class' => OrdersInfo::class
             ))
-            ->add('deliveryType', ModelType::class)
             ->add('products', ModelType::class)
             ->add('discount', NumberType::class)
             ->add('amount', NumberType::class);
@@ -38,7 +37,6 @@ class OrderItemsAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('ordersInfo')
-            ->add('deliveryType')
             ->add('products')
             ->add('discount')
             ->add('amount');
@@ -49,7 +47,6 @@ class OrderItemsAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('ordersInfo')
-            ->addIdentifier('deliveryType')
             ->addIdentifier('products')
             ->addIdentifier('discount')
             ->addIdentifier('amount');
@@ -61,7 +58,6 @@ class OrderItemsAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('ordersInfo')
-            ->add('deliveryType')
             ->add('products')
             ->add('discount')
             ->add('amount');

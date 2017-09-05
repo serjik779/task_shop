@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -27,6 +28,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('address', TextType::class)
             ->add('phone', TextType::class)
             ->add('name', TextType::class)
+            ->add('deliveryType', ModelType::class)
             ->add('orderItems', CollectionType::class, array(
                 'required' => false
             ), array(
@@ -45,6 +47,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('date')
             ->add('name')
             ->add('address')
+            ->add('deliveryType')
             ->add('phone');
     }
 
@@ -56,6 +59,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->addIdentifier('name')
             ->addIdentifier('date')
             ->addIdentifier('address')
+            ->addIdentifier('deliveryType')
             ->addIdentifier('phone');
     }
 
@@ -67,6 +71,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('date')
             ->add('name')
             ->add('address')
+            ->add('deliveryType')
             ->add('phone');
     }
 

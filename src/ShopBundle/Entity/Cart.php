@@ -31,7 +31,7 @@ class Cart
     /**
      * @var Users
      *
-     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
@@ -76,10 +76,10 @@ class Cart
     /**
      * Set user
      *
-     * @param \ShopBundle\Entity\Users $user
+     * @param \Application\Sonata\UserBundle\Entity\User $user
      * @return Cart
      */
-    public function setUser(\ShopBundle\Entity\Users $user = null)
+    public function setUser(\Application\Sonata\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -89,7 +89,7 @@ class Cart
     /**
      * Get user
      *
-     * @return \ShopBundle\Entity\Users 
+     * @return \Application\Sonata\UserBundle\Entity\User
      */
     public function getUser()
     {
