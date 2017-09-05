@@ -1,4 +1,44 @@
 <div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>
+    {#<p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>#}
+    {#<p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>#}
+    {#<p>{{ 'profile.show.firstname'|trans({}, 'FOSUserBundle') }}: {{ user.firstname }}</p>#}
+    {#<p>{{ 'profile.show.lastname'|trans({}, 'FOSUserBundle') }}: {{ user.lastname }}</p>#}
+    {#<p>{{ 'profile.show.phone'|trans({}, 'FOSUserBundle') }}: {{ user.phone }}</p>#}
+    {#<p>{{ 'profile.show.locale'|trans({}, 'FOSUserBundle') }}: {{ user.locale }}</p>#}
+    {#<p>{{ 'profile.show.website'|trans({}, 'FOSUserBundle') }}: {{ user.website }}</p>#}
+    {#<p>{{ 'profile.show.timezone'|trans({}, 'FOSUserBundle') }}: {{ user.timezone }}</p>#}
+
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                    <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
+                </div>
+                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                    <div class="container" style="border-bottom:1px solid black">
+                        <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+                    </div>
+                    <hr>
+                    <ul class="container details">
+                        <li style="list-style: none"><p><span class="glyphicon glyphicon-earphone one" style="width:50px;"></span>{{ user.phone }}</p></li>
+                        <li style="list-style: none"><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>{{ user.email }}</p></li>
+                        <li style="list-style: none"><p><span class="glyphicon glyphicon-map-marker one" style="width:50px;"></span>{{ user.timezone }}</p></li>
+                        <li style="list-style: none"><p><span class="glyphicon glyphicon-new-window one" style="width:50px;"></span>{{ user.website }}</p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary">
+        EDIT
+    </a>
+
+    {#<a href="{{ path('fos_user_resetting_reset') }} " class="btn btn-success">Forgot password ?</a>#}
+
 </div>
+</div>
+<br>

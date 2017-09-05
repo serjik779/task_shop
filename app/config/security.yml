@@ -38,6 +38,8 @@ security:
       pattern: ^/
       form_login:
         provider: fos_userbundle
+        csrf_token_generator: security.csrf.token_manager
+        require_previous_session: false
         check_path:     /login_check
         failure_path:   /login
         always_use_default_target_path: true
@@ -45,7 +47,7 @@ security:
       anonymous:  true
       remember_me:
          key: "%secret%"
-         lifetime: 8000
+         lifetime: 604800
 
   access_control:
     # Products

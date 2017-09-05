@@ -18,7 +18,7 @@ class AddingProductsCenter{
         $this->em = $em;
     }
 
-    public function addProductAction(Request $request)
+    public function addProductAction(Request $request, $serviceUrl)
     {
         $context = stream_context_create([
             'http' => [
@@ -30,10 +30,10 @@ class AddingProductsCenter{
             ],
         ]);
 
-        $token = file_get_contents('http://siteformyhard.com/api/amount?username=ustora&password=123123', false, $context);
+        $token = file_get_contents($serviceUrl . '/api/amount?username=ustora&password=123123', false, $context);
         $token = json_decode($token,true);
 
-        $products = file_get_contents('http://siteformyhard.com/api/products?token='.$token['token'], false, $context);
+        $products = file_get_contents($serviceUrl . '/api/products?token='.$token['token'], false, $context);
         $products = json_decode($products, true);
 
         if (empty($products)) {
@@ -73,5 +73,7 @@ class AddingProductsCenter{
                 }
             }
         }
+
+        return 'success';
     }
 }

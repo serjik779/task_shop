@@ -10,8 +10,6 @@
  */
 
 namespace Application\Sonata\UserBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
-use ShopBundle\Entity\Products;
 use Sonata\UserBundle\Entity\BaseUser;
 
 
@@ -42,4 +40,81 @@ class User extends BaseUser
         return $this->id;
     }
 
+    public function addRole($role)
+    { $role = strtoupper($role);
+
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+    public function __construct()
+    {
+        parent::__construct();
+        $this->roles = array('ROLE_USER');
+
+        $this->setUpdatedToken(new \DateTime());
+        $source = uniqid(uniqid(mt_rand(0, PHP_INT_MAX), true), true);
+        for ($t=0; $t<64; $t++) {
+            $source .= chr((mt_rand() ^ mt_rand()) % 256);
+        }
+        $token = sha1(hash('sha512', $source, true));
+        $this->setToken($token);
+    }
+
+    /**
+     * @var \DateTime
+     */
+    protected $updatedToken;
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedToken(): \DateTime
+    {
+        return new \DateTime();
+    }
+    /**
+     * @param \DateTime $updatedToken
+     */
+    public function setUpdatedToken(\DateTime $updatedToken)
+    {
+        $this->updatedToken = $updatedToken;
+    }
+
+
+
+    protected $username;
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * @param string $salt
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
 }
