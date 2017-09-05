@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrdersInfo
 {
+    const PENDING_STATUS = 0;
+    const SENT_STATUS = 1;
+    const DELIVERED_STATUS = 2;
     /**
      * @var integer
      *
@@ -47,6 +50,30 @@ class OrdersInfo
      * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="ordersInfo", cascade={"persist"}, orphanRemoval=true)
      */
     protected $orderItems;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer", nullable=false)
+     */
+    private $status = OrdersInfo::PENDING_STATUS;
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
     /**
      * @var DeliveryType
      *

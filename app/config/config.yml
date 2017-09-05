@@ -31,6 +31,7 @@ framework:
         # handler_id set to null will use default session handler from php.ini
         handler_id: ~
         cookie_lifetime: 0
+
     fragments: ~
     http_method_override: true
     translator: { fallbacks: [en] }
@@ -169,6 +170,8 @@ fos_user:
     db_driver:      orm # can be orm or odm
     firewall_name:  main
     user_class:     Application\Sonata\UserBundle\Entity\User
+    resetting:
+            token_ttl: 86400 # change this value, it is in seconds = 24 hours
 
 
     group:
@@ -214,6 +217,7 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/api/orders', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: '^/api/setCount', priorities: ['json'], fallback_format: json, prefer_extension: false }
             - { path: '^/', priorities: ['html'], fallback_format: json, prefer_extension: false }
     param_fetcher_listener: true
     view:
