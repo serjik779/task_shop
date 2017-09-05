@@ -21,6 +21,17 @@ services:
 #        calls:
 #            - [ setTranslationDomain, [ShopBundle]]
         public: true
+    app.admin.slider:
+        class: ShopBundle\Admin\SliderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Slider" }
+        arguments:
+            - ~
+            - ShopBundle\Entity\Slider
+            - ~
+        #        calls:
+        #            - [ setTranslationDomain, [ShopBundle]]
+        public: true
     app.admin.images:
         class: ShopBundle\Admin\ImagesAdmin
         tags:
