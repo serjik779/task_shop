@@ -146,6 +146,11 @@ class apiOrdersController extends FOSRestController
         return $restresult;
     }
 
+    /**
+     * @Rest\Get("/api/setCount")
+     * @param Request $request
+     * @return array|View
+     */
     public function setCountAction(Request $request) {
         $data = json_decode(file_get_contents("php://input"), true);
 
