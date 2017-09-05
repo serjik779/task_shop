@@ -4,6 +4,7 @@ namespace ShopBundle\Controller;
 
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Products;
+use ShopBundle\ShopBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -71,6 +72,7 @@ class ProductsController extends Controller
     public function addProductAction(Request $request)
     {
         $addProduct = $this->get('adding.product')->addProductAction($request, $this->getParameter('service_url'));
+        return $this->redirect('/');
     }
 
 }
