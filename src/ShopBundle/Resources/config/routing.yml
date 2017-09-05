@@ -30,6 +30,10 @@ api:
     path:     /api/orders
     defaults: { _controller: ShopBundle:apiOrders:getOrders }
 
+api_count:
+    path:     /api/set-count
+    defaults: { _controller: ShopBundle:apiOrders:setCount:setCount}
+
 shop_checkout:
     resource: "@ShopBundle/Resources/config/routing/checkout.yml"
     prefix:   /checkout

@@ -217,6 +217,7 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/api/orders', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: '^/api/setCount', priorities: ['json'], fallback_format: json, prefer_extension: false }
             - { path: '^/', priorities: ['html'], fallback_format: json, prefer_extension: false }
     param_fetcher_listener: true
     view:

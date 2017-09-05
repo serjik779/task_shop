@@ -36,7 +36,6 @@ class apiOrdersController extends FOSRestController
             $data['error'] = "Access denied! You dont have username or password!";
             return new View($data, Response::HTTP_NOT_FOUND);
         }
-        #return $this->render('ShopBundle:Default:index.html.twig');
     }
 
     /**
@@ -147,7 +146,13 @@ class apiOrdersController extends FOSRestController
         return $restresult;
     }
 
+    public function setCountAction(Request $request) {
+        $data = json_decode(file_get_contents("php://input"), true);
 
+        dump($data);
+
+        die();
+    }
 }
 
 

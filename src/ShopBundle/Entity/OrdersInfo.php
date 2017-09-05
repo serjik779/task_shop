@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrdersInfo
 {
+    const PENDING_STATUS = 0;
+    const SENT_STATUS = 1;
+    const DELIVERED_STATUS = 2;
     /**
      * @var integer
      *
@@ -48,11 +51,15 @@ class OrdersInfo
      */
     protected $orderItems;
 
-
-    private $status;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer", nullable=false)
+     */
+    private $status = OrdersInfo::PENDING_STATUS;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getStatus()
     {
@@ -60,7 +67,7 @@ class OrdersInfo
     }
 
     /**
-     * @param mixed $status
+     * @param int $status
      */
     public function setStatus($status)
     {
