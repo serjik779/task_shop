@@ -70,7 +70,6 @@ class ProductsController extends Controller
 
     public function addProductAction(Request $request)
     {
-
         $addProduct = $this->get('adding.product')->addProductAction($request, $this->getParameter('service_url'));
     }
 
