@@ -47,6 +47,26 @@ class OrdersInfo
      * @ORM\OneToMany(targetEntity="ShopBundle\Entity\OrderItems", mappedBy="ordersInfo", cascade={"persist"}, orphanRemoval=true)
      */
     protected $orderItems;
+
+
+    private $status;
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
     /**
      * @return ArrayCollection|OrderItems[]
      */

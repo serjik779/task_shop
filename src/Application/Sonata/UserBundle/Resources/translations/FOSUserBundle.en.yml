@@ -29,6 +29,12 @@ profile:
     show:
         username: Username
         email: Email
+        firstname: Firstname
+        lastname: Lastname
+        phone: Phone
+        locale: Locale
+        website: Website
+        timezone: Timezone
     edit:
         submit: Update
     flash:
