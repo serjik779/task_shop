@@ -1,10 +1,6 @@
 $(function () {
     $('.add_to_cart_button').click(addToCart);
     $('.add-to-cart-link').click(addToCart);
-    document.getElementById('scrool').onclick = function () {
-        window.scroolTo(0, 0);
-    };
-
 
     function addToCart() {
         var addid = $(this).attr('data-product_id');
