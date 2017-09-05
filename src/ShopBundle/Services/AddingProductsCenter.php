@@ -39,7 +39,8 @@ class AddingProductsCenter{
         if (empty($products)) {
             return new Response("Invalid json");
         }
-
+        $url = 'http://img.yandex.net/i/www/logo.png';
+        $path = './images/logo.png';
         for ($index = 0; $index < count($products); $index ++) {
             $categoryById = $this->em->getRepository(Categories::class)->findOneBy(['id' => $products[$index]['id']]);
             if ($categoryById == null ) {
@@ -47,6 +48,7 @@ class AddingProductsCenter{
                 $imageOfCategory = new Images();
                 $imageOfCategory->setFilename($products[$index]['image_name'])
                     ->refreshUpdated();
+                $this->download($serviceUrl . '/images/category/' . $products[$index]['image_name'],$imageOfCategory->getWebPath());
                 $categoryById->setTitle($products[$index]['title'])
                     ->setImage($imageOfCategory);
                 $this->em->persist($imageOfCategory);
@@ -60,6 +62,8 @@ class AddingProductsCenter{
                     $imageOfProduct = new Images();
                     $imageOfProduct->setFilename($products[$index]['products_in_category'][$key]['image_name'])
                         ->refreshUpdated();
+                    $this->download($serviceUrl . '/images/category/' . $products[$index]['products_in_category'][$key]['image_name'], $imageOfProduct->getWebPath());
+
                     $productById->setCategory($categoryById)
                         ->setTitle($products[$index]['products_in_category'][$key]['title'])
                         ->setDescription($products[$index]['products_in_category'][$key]['description'])
@@ -75,5 +79,15 @@ class AddingProductsCenter{
         }
 
         return 'success';
+    }
+
+    public function download($url, $urlTo) {
+        $ch = curl_init($url);
+        $fp = fopen($urlTo, 'wb');
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
     }
 }
