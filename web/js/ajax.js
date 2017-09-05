@@ -2,9 +2,11 @@ $(function () {
     $('.add_to_cart_button').click(addToCart);
     $('.add-to-cart-link').click(addToCart);
 
+
     function addToCart() {
         var addid = $(this).attr('data-product_id');
         var prodAmount = $('.qty').val();
+        $("body").animate({"scrollTop":0},"slow");
         $.ajax({
             type: "POST",
             url: "/cart/add",
@@ -28,6 +30,14 @@ $(function () {
             }
         });
     }
+        windows.onLoad = function () {
+            document.getElementById('scrool').onclick = function () {
+                window.scroolTo(0, 0);
+            }
+        };
+
+
+
 
     $('.add_to_wishlist_button').click(function () {
         var addid = $(this).attr('data-product_id');
