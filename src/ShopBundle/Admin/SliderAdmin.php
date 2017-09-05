@@ -81,22 +81,28 @@ class SliderAdmin extends AbstractAdmin
         $this->manageEmbeddedImageAdmins($slider);
     }
 
-    private function manageEmbeddedImageAdmins($slider)
+    private function manageEmbeddedImageAdmins($page)
     {
+        // Cycle through each field
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
-            if ($fieldDescription->getType() === 'Sonata\CoreBundle\Form\Type\CollectionType' &&
+            // detect embedded Admins that manage Images
+            if ($fieldDescription->getType() === 'Sonata\AdminBundle\Form\Type\AdminType' &&
                 ($associationMapping = $fieldDescription->getAssociationMapping()) &&
                 $associationMapping['targetEntity'] === 'ShopBundle\Entity\Images'
             ) {
-                $getter = 'get' . $fieldName;
-                $setter = 'set' . $fieldName;
-                if ($slider->getImages()) {
-                    foreach ($slider->getImages() as $image) {
-                        if ($image->getFile()) {
-                            $image->refreshUpdated();
-                        } elseif ((!$image->getFile()) && (!$image->getFilename())) {
-                            $slider->$setter(null);
-                        }
+                $getter = 'get'.$fieldName;
+                $setter = 'set'.$fieldName;
+
+                /** @var Images $image */
+                $image = $page->$getter();
+
+                if ($image) {
+                    if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->refreshUpdated();
+                    } elseif (!$image->getFile() && !$image->getFilename()) {
+                        // prevent Sf/Sonata trying to create and persist an empty Image
+                        $page->$setter(null);
                     }
                 }
             }
