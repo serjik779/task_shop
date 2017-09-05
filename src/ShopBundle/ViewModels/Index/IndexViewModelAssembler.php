@@ -13,7 +13,8 @@ class IndexViewModelAssembler extends ViewModelAssembler
             'Latest',
             'Top',
             'New',
-            'Category'
+            'Brands',
+            'Slider'
 
         );
     }
