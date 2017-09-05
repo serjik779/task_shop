@@ -14,10 +14,11 @@ class IndexViewModelAssembler extends ViewModelAssembler
             'Top',
             'New',
             'Category'
+
         );
     }
 
-    public function generateViewModel($model1, $model2, $model3, $model4, $model5)
+    public function generateViewModel($model1, $model2, $model3, $model4, $model5 , $model6)
     {
         $vm = $this->vmService->createViewModel();
 
@@ -26,6 +27,7 @@ class IndexViewModelAssembler extends ViewModelAssembler
         $vm->setTop($model3);
         $vm->setNew($model4);
         $vm->setBrands($model5);
+        $vm->setSlider($model6);
 
 
         return $vm->toArray();

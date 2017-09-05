@@ -7,6 +7,7 @@ use ShopBundle\Entity\Images;
 use ShopBundle\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductsController extends Controller
 {
@@ -38,8 +39,8 @@ class ProductsController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             $this->container->getParameter('page_limit')
         );
-        return $this->render('ShopBundle:products:category.html.twig'
-            , array(
+
+        return $this->render('ShopBundle:products:category.html.twig', array(
                 'vm' => $vm,
                 'product' => $productsPagination,
                 'category' => $categories,
@@ -59,46 +60,11 @@ class ProductsController extends Controller
         ));
     }
 
+
     public function addProductAction(Request $request)
     {
 
-        $responseJson = $this->get('data_center')->getData($request);
-        $productsArray = json_decode($responseJson, true);
-        $em = $this->get('doctrine.orm.default_entity_manager');
-        for ($index = 0; $index < count($productsArray); $index ++) {
-            $categoryById = $em->getRepository(Categories::class)->findOneBy(['id' => $productsArray[$index]['id']]);
-            if ($categoryById == null ) {
-                $categoryById = new Categories();
-                $imageOfCategory = new Images();
-                $imageOfCategory->setFilename($productsArray[$index]['image'])
-                                ->refreshUpdated();
-                $categoryById->setId($productsArray[$index]['id'])
-                    ->setTitle($productsArray[$index]['title'])
-                    ->setImage($imageOfCategory);
-                $em->persist($imageOfCategory);
-                $em->persist($categoryById);
-                $em->flush();
-            }
-            for ($key = 0; $key < count($productsArray[$index]['products_in_category']); $key ++) {
-                $productById = $em->getRepository(Products::class)->findOneBy(['id' => $productsArray[$index]['products_in_category'][$key]['id']]);
-                if ($productById == null) {
-                    $productById = new Products();
-                    $imageOfProduct = new Images();
-                    $imageOfProduct->setFilename($productsArray[$index]['products_in_category'][$key]['image_name'])
-                                   ->refreshUpdated();
-                    $productById->setId($productsArray[$index]['products_in_category'][$key]['id'])
-                        ->setCategory($categoryById)
-                        ->setTitle($productsArray[$index]['products_in_category'][$key]['title'])
-                        ->setDescription($productsArray[$index]['products_in_category'][$key]['description'])
-                        ->setCost($productsArray[$index]['products_in_category'][$key]['cost'])
-                        ->setServiceId(1)
-                        ->addImage($imageOfProduct);
-
-                    $em->persist($productById);
-                    $em->persist($imageOfProduct);
-                    $em->flush();
-                }
-            }
-        }
+        $addProduct = $this->get('adding.product')->getData($request);
     }
+
 }

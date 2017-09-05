@@ -5,6 +5,7 @@ $(function () {
     function addToCart() {
         var addid = $(this).attr('data-product_id');
         var prodAmount = $('.qty').val();
+        $("body").animate({"scrollTop":0},"slow");
         $.ajax({
             type: "POST",
             url: "/cart/add",
@@ -28,6 +29,10 @@ $(function () {
             }
         });
     }
+
+
+
+
 
     $('.add_to_wishlist_button').click(function () {
         var addid = $(this).attr('data-product_id');

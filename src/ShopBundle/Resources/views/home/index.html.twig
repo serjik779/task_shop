@@ -4,19 +4,21 @@
         <!-- Slider -->
         <div class="block-slider block-slider4">
             <ul class="" id="bxslider-home4">
-                {% if vm.product %}
-                    {% for product in vm.product %}
+                {% if vm.slider %}
+                    {% for slide in vm.slider %}
                         <li>
-                            {% if product.images|length != 0 %}
-                                <img src="{{ product.images[0].path }}" alt="">
+                            {% if slide.image|length != 0 %}
+                                <img src="{{ slide.image.path }}" alt="">
                             {% else %}
                                 <img src="/img/no-image.png" alt="">
                             {% endif %}
                             <div class="caption-group">
                                 <h2 class="caption title">
-                                    {{ product.title }}
+                                    {{ slide.name }}
                                 </h2>
-                                <a href="{{ path('products_show', { 'slug2': product.category.slug, 'slug': product.slug }) }}">Go</a>
+                                <h4 class="caption subtitle animated fadeInRight">
+                                    {{ slide.description | raw }}
+                                </h4>
                             </div>
                         </li>
                     {% endfor %}
