@@ -73,5 +73,7 @@ class AddingProductsCenter{
                 }
             }
         }
+
+        return 'success';
     }
 }
