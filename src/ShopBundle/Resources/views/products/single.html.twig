@@ -44,7 +44,7 @@
                                 <div class="product-images">
                                     {% if product.images|length != 0 %}
                                         <div class="product-main-img">
-                                            <img src="{{ product.images[0].path }}" alt="">
+                                            <img class="single-product-image" src="{{ product.images[0].path }}" alt="">
                                         </div>
                                         <div class="product-gallery">
                                             {% for image in product.images %}

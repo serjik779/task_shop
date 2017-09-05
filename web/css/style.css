@@ -449,7 +449,9 @@ z-index: 999;}
 .single-product:hover .product-hover a.view-details-link {bottom: 32%;}
 .single-product:hover .product-hover:after{left: 0}
 
-
+.single-product-image {
+    max-width: 310px;
+}
 .product-carousel {
   padding-top: 40px;
 }
@@ -890,6 +892,12 @@ text-transform: uppercase;}
   position: absolute;
   right: 0;
   top: -56px;
+}
+
+.related-products-carousel .product-f-image img {
+    height: auto;
+    width: auto;
+    max-width: 343px;
 }
 
 
