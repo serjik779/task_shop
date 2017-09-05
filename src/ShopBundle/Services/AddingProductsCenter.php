@@ -45,7 +45,7 @@ class AddingProductsCenter{
             if ($categoryById == null ) {
                 $categoryById = new Categories();
                 $imageOfCategory = new Images();
-                $imageOfCategory->setFilename($products[$index]['image'])
+                $imageOfCategory->setFilename($products[$index]['image_name'])
                     ->refreshUpdated();
                 $categoryById->setTitle($products[$index]['title'])
                     ->setImage($imageOfCategory);
