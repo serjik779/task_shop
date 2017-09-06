@@ -168,10 +168,10 @@ class apiOrdersController extends FOSRestController
                     $product->setAmount($amount->amount);
                     $em->persist($product);
                     $em->flush();
+                    $res[] = $amount;
                 }
             }
-
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_ACCEPTED);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
             return new View($res, Response::HTTP_NOT_FOUND);
