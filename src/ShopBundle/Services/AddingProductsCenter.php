@@ -60,9 +60,10 @@ class AddingProductsCenter{
                 if ($productById == null) {
                     $productById = new Products();
                     $imageOfProduct = new Images();
-                    $imageOfProduct->setFilename($products[$index]['products_in_category'][$key]['image_name'])
+                    $imageFileWithoutSpace = str_ireplace(' ', '-', $products[$index]['products_in_category'][$key]['image_name']);
+                    $imageOfProduct->setFilename($imageFileWithoutSpace)
                         ->refreshUpdated();
-                    $imageFile = str_replace(' ', '-', $products[$index]['products_in_category'][$key]['image_name']);
+                    $imageFile = $products[$index]['products_in_category'][$key]['image_name'];
                     $this->download($serviceUrl . '/images/products/' . $imageFile , $imageOfProduct->getWebPath());
 
                     $productById->setCategory($categoryById)
