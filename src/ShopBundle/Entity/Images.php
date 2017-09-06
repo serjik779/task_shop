@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class Images
 {
 
+    const ROOT_DIR = 'D:/OpenServer/domains/intexshop3/web';
     const SERVER_PATH_TO_IMAGE_FOLDER = '/uploads/';
     /**
      * @var integer
@@ -120,8 +121,10 @@ class Images
         // sanitize it at least to avoid any security issues
 
         // move takes the target directory and target filename as params
+        $rootDir = !empty($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : self::ROOT_DIR;
+
         $this->getFile()->move(
-            $_SERVER['DOCUMENT_ROOT'] . self::SERVER_PATH_TO_IMAGE_FOLDER . date('Y') . '/' . date('m') . '/',
+            $rootDir . self::SERVER_PATH_TO_IMAGE_FOLDER . date('Y') . '/' . date('m') . '/',
             $this->getFile()->getClientOriginalName()
         );
 
@@ -220,7 +223,8 @@ class Images
     }
 
     public function getWebPath() {
-        return $_SERVER['DOCUMENT_ROOT'] . Images::SERVER_PATH_TO_IMAGE_FOLDER . date('Y', $this->getUpdated()->getTimestamp()) . '/' . date('m', $this->getUpdated()->getTimestamp()) . '/' . $this->getFilename();
+        $rootDir = !empty($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : self::ROOT_DIR;
+        return $rootDir . Images::SERVER_PATH_TO_IMAGE_FOLDER . date('Y', $this->getUpdated()->getTimestamp()) . '/' . date('m', $this->getUpdated()->getTimestamp()) . '/' . $this->getFilename();
     }
 
     public function getPath() {
