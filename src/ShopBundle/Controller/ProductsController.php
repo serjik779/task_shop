@@ -71,10 +71,7 @@ class ProductsController extends Controller
 
     public function addProductAction(Request $request)
     {
-        #$addProduct = $this->get('adding.product')->addProduct();
-        dump(__DIR__);
-        dump(dirname(__FILE__));
-        dump($_SERVER['DOCUMENT_ROOT']);
+        $addProduct = $this->get('adding.product')->addProduct();
         return $this->render('ShopBundle:Default:index.html.twig');
     }
 

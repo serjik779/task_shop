@@ -35,6 +35,13 @@ class Categories
      * })
      */
     private $image;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="service_id", type="integer", nullable=true)
+     */
+    private $serviceId;
     /**
      * @var ArrayCollection|Products[]
      * @ORM\OneToMany(targetEntity="ShopBundle\Entity\Products", mappedBy="category")
@@ -156,5 +163,22 @@ class Categories
     public function setSlug(string $slug)
     {
         $this->slug = $slug;
+    }
+    /**
+     * @return int
+     */
+    public function getServiceId()
+    {
+        return $this->serviceId;
+    }
+
+    /**
+     * @param int $serviceId
+     * @return Categories
+     */
+    public function setServiceId($serviceId)
+    {
+        $this->serviceId = $serviceId;
+        return $this;
     }
 }

@@ -45,7 +45,7 @@ class AddingProductsCenter{
         $url = 'http://img.yandex.net/i/www/logo.png';
         $path = './images/logo.png';
         for ($index = 0; $index < count($products); $index ++) {
-            $categoryById = $em->getRepository(Categories::class)->findOneBy(['id' => $products[$index]['id']]);
+            $categoryById = $em->getRepository(Categories::class)->findOneBy(['serviceId' => $products[$index]['id']]);
             if ($categoryById == null ) {
                 $categoryById = new Categories();
                 $imageOfCategory = new Images();
@@ -53,13 +53,14 @@ class AddingProductsCenter{
                     ->refreshUpdated();
                 $this->download($serviceUrl . '/images/category/' . $products[$index]['image_name'],$imageOfCategory->getWebPath());
                 $categoryById->setTitle($products[$index]['title'])
+                    ->setServiceId($products[$index]['id'])
                     ->setImage($imageOfCategory);
                 $em->persist($imageOfCategory);
                 $em->persist($categoryById);
                 $em->flush();
             }
             for ($key = 0; $key < count($products[$index]['products_in_category']); $key ++) {
-                $productById = $em->getRepository(Products::class)->findOneBy(['id' => $products[$index]['products_in_category'][$key]['id']]);
+                $productById = $em->getRepository(Products::class)->findOneBy(['serviceId' => $products[$index]['products_in_category'][$key]['id']]);
                 if ($productById == null) {
                     $productById = new Products();
                     $imageOfProduct = new Images();
