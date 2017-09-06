@@ -83,7 +83,7 @@ class AddingProductsCenter{
             }
         }
 
-        return 'success';
+        return new Response("Success") ;
     }
 
     public function download($url, $urlTo) {
