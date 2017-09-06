@@ -25,7 +25,6 @@ class Products
 
     /**
      * @var string
-     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
