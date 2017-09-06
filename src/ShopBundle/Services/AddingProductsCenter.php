@@ -19,7 +19,7 @@ class AddingProductsCenter{
         $this->container = $container;
     }
 
-    public function addProductAction()
+    public function addProduct()
     {
         $serviceUrl = $this->container->getParameter('service_url');
         $em = $this->container->get('doctrine.orm.default_entity_manager');
@@ -40,7 +40,7 @@ class AddingProductsCenter{
         $products = json_decode($products, true);
 
         if (empty($products)) {
-            return new Response("Invalid json");
+            return 'Invalid json';
         }
         $url = 'http://img.yandex.net/i/www/logo.png';
         $path = './images/logo.png';
@@ -83,7 +83,7 @@ class AddingProductsCenter{
             }
         }
 
-        return new Response("Success") ;
+        return 'Success' ;
     }
 
     public function download($url, $urlTo) {
