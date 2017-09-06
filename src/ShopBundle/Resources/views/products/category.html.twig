@@ -3,6 +3,7 @@
     <head><title>{% block title %}ElectroZone | {{ category.title }}{% endblock %}</title></head>
 {% endblock %}
 {% block body %}
+    {% set countProd = 0 %}
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -58,6 +59,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% set countProd = countProd + 1 %}
+                                {% if countProd == 4 %}
+                                    {% set countProd = 0 %}
+
+                                    <div class="clear"></div>
+                                {% endif %}
                             {% endfor %}
                         {% endif %}
                     </div>
