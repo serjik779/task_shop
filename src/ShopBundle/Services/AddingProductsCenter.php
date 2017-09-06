@@ -62,7 +62,7 @@ class AddingProductsCenter{
                     $imageOfProduct = new Images();
                     $imageOfProduct->setFilename($products[$index]['products_in_category'][$key]['image_name'])
                         ->refreshUpdated();
-                    $this->download($serviceUrl . '/images/category/' . $products[$index]['products_in_category'][$key]['image_name'], $imageOfProduct->getWebPath());
+                    $this->download($serviceUrl . '/images/products/' . $products[$index]['products_in_category'][$key]['image_name'], $imageOfProduct->getWebPath());
 
                     $productById->setCategory($categoryById)
                         ->setTitle($products[$index]['products_in_category'][$key]['title'])
