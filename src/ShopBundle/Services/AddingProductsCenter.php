@@ -74,6 +74,6 @@ class AddingProductsCenter{
             }
         }
 
-        return 'success';
+        return new Response("Success") ;
     }
 }
