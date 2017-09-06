@@ -161,14 +161,12 @@ class apiOrdersController extends FOSRestController
         $username = $request->get('username');
         if ($token) {
             $res['success'] = 1;
-
             foreach ($amounts as $amount) {
-                $product = $em->getRepository(Products::class)->findOneBy(array('serviceId' => $amount->id));
+                $product = $em->getRepository(Products::class)->findOneBy(array('serviceId' => $amount['id']));
                 if (!empty($product)) {
-                    $product->setAmount($amount->amount);
+                    $product->setAmount($amount['amount']);
                     $em->persist($product);
                     $em->flush();
-                    $res[] = $amount;
                 }
             }
             return new View($res, Response::HTTP_ACCEPTED);
