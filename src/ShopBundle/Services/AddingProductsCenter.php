@@ -6,20 +6,23 @@ use Doctrine\ORM\EntityManager;
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Images;
 use ShopBundle\Entity\Products;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AddingProductsCenter{
 
-    private $em;
+    private $container;
 
-    public function __construct(EntityManager $em)
+    public function __construct(ContainerInterface $container)
     {
-        $this->em = $em;
+        $this->container = $container;
     }
 
-    public function addProductAction(Request $request, $serviceUrl)
+    public function addProductAction()
     {
+        $serviceUrl = $this->container->getParameter('service_url');
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
         $context = stream_context_create([
             'http' => [
                 'method' => 'get',
@@ -42,7 +45,7 @@ class AddingProductsCenter{
         $url = 'http://img.yandex.net/i/www/logo.png';
         $path = './images/logo.png';
         for ($index = 0; $index < count($products); $index ++) {
-            $categoryById = $this->em->getRepository(Categories::class)->findOneBy(['id' => $products[$index]['id']]);
+            $categoryById = $em->getRepository(Categories::class)->findOneBy(['id' => $products[$index]['id']]);
             if ($categoryById == null ) {
                 $categoryById = new Categories();
                 $imageOfCategory = new Images();
@@ -51,12 +54,12 @@ class AddingProductsCenter{
                 $this->download($serviceUrl . '/images/category/' . $products[$index]['image_name'],$imageOfCategory->getWebPath());
                 $categoryById->setTitle($products[$index]['title'])
                     ->setImage($imageOfCategory);
-                $this->em->persist($imageOfCategory);
-                $this->em->persist($categoryById);
-                $this->em->flush();
+                $em->persist($imageOfCategory);
+                $em->persist($categoryById);
+                $em->flush();
             }
             for ($key = 0; $key < count($products[$index]['products_in_category']); $key ++) {
-                $productById = $this->em->getRepository(Products::class)->findOneBy(['id' => $products[$index]['products_in_category'][$key]['id']]);
+                $productById = $em->getRepository(Products::class)->findOneBy(['id' => $products[$index]['products_in_category'][$key]['id']]);
                 if ($productById == null) {
                     $productById = new Products();
                     $imageOfProduct = new Images();
@@ -73,14 +76,14 @@ class AddingProductsCenter{
                         ->setServiceId($products[$index]['products_in_category'][$key]['id'])
                         ->addImage($imageOfProduct);
 
-                    $this->em->persist($productById);
-                    $this->em->persist($imageOfProduct);
-                    $this->em->flush();
+                    $em->persist($productById);
+                    $em->persist($imageOfProduct);
+                    $em->flush();
                 }
             }
         }
 
-        return 'success';
+        return new Response("Success") ;
     }
 
     public function download($url, $urlTo) {
