@@ -148,7 +148,7 @@ class apiOrdersController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/api/setCount")
+     * @Rest\Get("/api/set-count")
      * @param Request $request
      * @return array|View
      */
@@ -166,6 +166,38 @@ class apiOrdersController extends FOSRestController
                 if (!empty($product)) {
                     $product->setAmount($amount['amount']);
                     $em->persist($product);
+                    $em->flush();
+                }
+            }
+            return new View($res, Response::HTTP_ACCEPTED);
+        } elseif ($password && $username) {
+            $res = $this->passwordAuth($username, $password);
+            return new View($res, Response::HTTP_NOT_FOUND);
+        } else {
+            $data['error'] = "Access denied! You dont have username or password!";
+            return new View($data, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @Rest\Get("/api/set-order-status")
+     * @param Request $request
+     * @return array|View
+     */
+    public function setOrderStatusAction(Request $request) {
+        $status = json_decode(file_get_contents("php://input"), true);
+        $em = $this->getDoctrine()->getManager();
+
+        $token = $request->get('token');
+        $password = $request->get('password');
+        $username = $request->get('username');
+        if ($token) {
+            $res['success'] = 1;
+            foreach ($status as $st) {
+                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['id']);
+                if (!empty($product)) {
+                    $orderInfo->setStatus($st['status']);
+                    $em->persist($orderInfo);
                     $em->flush();
                 }
             }

@@ -34,6 +34,11 @@ api_count:
     path:     /api/set-count
     defaults: { _controller: ShopBundle:apiOrders:setCount}
 
+api_order_status:
+    path:     /api/set-order-status
+    defaults: { _controller: ShopBundle:apiOrders:setOrderStatus}
+
+
 api_products:
     path:     /api/get-products
     defaults: { _controller: ShopBundle:Products:addProduct}
