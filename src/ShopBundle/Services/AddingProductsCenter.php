@@ -39,14 +39,16 @@ class AddingProductsCenter{
         if (empty($products)) {
             return new Response("Invalid json");
         }
-
+        $url = 'http://img.yandex.net/i/www/logo.png';
+        $path = './images/logo.png';
         for ($index = 0; $index < count($products); $index ++) {
             $categoryById = $this->em->getRepository(Categories::class)->findOneBy(['id' => $products[$index]['id']]);
             if ($categoryById == null ) {
                 $categoryById = new Categories();
                 $imageOfCategory = new Images();
-                $imageOfCategory->setFilename($products[$index]['image'])
+                $imageOfCategory->setFilename($products[$index]['image_name'])
                     ->refreshUpdated();
+                $this->download($serviceUrl . '/images/category/' . $products[$index]['image_name'],$imageOfCategory->getWebPath());
                 $categoryById->setTitle($products[$index]['title'])
                     ->setImage($imageOfCategory);
                 $this->em->persist($imageOfCategory);
@@ -58,8 +60,12 @@ class AddingProductsCenter{
                 if ($productById == null) {
                     $productById = new Products();
                     $imageOfProduct = new Images();
-                    $imageOfProduct->setFilename($products[$index]['products_in_category'][$key]['image_name'])
+                    $imageFileWithoutSpace = str_ireplace(' ', '-', $products[$index]['products_in_category'][$key]['image_name']);
+                    $imageOfProduct->setFilename($imageFileWithoutSpace)
                         ->refreshUpdated();
+                    $imageFile = $products[$index]['products_in_category'][$key]['image_name'];
+                    $this->download($serviceUrl . '/images/products/' . $imageFile , $imageOfProduct->getWebPath());
+
                     $productById->setCategory($categoryById)
                         ->setTitle($products[$index]['products_in_category'][$key]['title'])
                         ->setDescription($products[$index]['products_in_category'][$key]['description'])
@@ -75,5 +81,15 @@ class AddingProductsCenter{
         }
 
         return new Response("Success") ;
+    }
+
+    public function download($url, $urlTo) {
+        $ch = curl_init($url);
+        $fp = fopen($urlTo, 'wb');
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
     }
 }
