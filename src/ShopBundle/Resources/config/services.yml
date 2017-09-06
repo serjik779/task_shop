@@ -140,4 +140,4 @@ services:
 
     adding.product:
          class: ShopBundle\Services\AddingProductsCenter
-         arguments: ['@doctrine.orm.default_entity_manager']
+         arguments: ['@service_container']
