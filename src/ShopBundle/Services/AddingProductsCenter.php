@@ -2,7 +2,9 @@
 
 namespace ShopBundle\Services;
 
+use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
+use FOS\RestBundle\View\View;
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Images;
 use ShopBundle\Entity\Products;
@@ -95,5 +97,39 @@ class AddingProductsCenter{
         curl_exec($ch);
         curl_close($ch);
         fclose($fp);
+    }
+
+    public function setCount($json = array()) {
+        $amounts = empty($json) ?  : $json;
+
+        if (empty($json)) {
+            $context = stream_context_create([
+                'http' => [
+                    'method' => 'get',
+                    'header' => implode('\r\n', [
+                        'Accept: */*',
+                    ]),
+                    'ignore_errors' => true,
+                ],
+            ]);
+            $serviceUrl = $this->container->getParameter('service_url');
+            $token = file_get_contents($serviceUrl . '/api/amount?username=ustora&password=123123', false, $context);
+            $token = json_decode($token, true);
+
+            $amounts = file_get_contents($serviceUrl . '/api/amount?token=' . $token['token'], false, $context);
+            $amounts = json_decode($amounts, true);
+        }
+
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+
+        foreach ($amounts as $amount) {
+            $product = $em->getRepository(Products::class)->findOneBy(array('serviceId' => $amount['id']));
+            if (!empty($product)) {
+                $product->setAmount($amount['amount']);
+                $em->persist($product);
+                $em->flush();
+            }
+        }
     }
 }

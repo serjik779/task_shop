@@ -152,23 +152,15 @@ class apiOrdersController extends FOSRestController
      * @param Request $request
      * @return array|View
      */
-    public function setCountAction(Request $request) {
-        $amounts = json_decode(file_get_contents("php://input"), true);
+    public function setCountAction(Request $request, $json = array()) {
+        $amounts = empty($json) ? json_decode(file_get_contents("php://input"), true) : $json;
         $em = $this->getDoctrine()->getManager();
 
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');
         if ($token) {
-            $res['success'] = 1;
-            foreach ($amounts as $amount) {
-                $product = $em->getRepository(Products::class)->findOneBy(array('serviceId' => $amount['id']));
-                if (!empty($product)) {
-                    $product->setAmount($amount['amount']);
-                    $em->persist($product);
-                    $em->flush();
-                }
-            }
+            $this->get('adding.product')->setCount($request);
             return new View($res, Response::HTTP_ACCEPTED);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
