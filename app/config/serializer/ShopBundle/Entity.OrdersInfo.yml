@@ -1,0 +1,17 @@
+ShopBundle\Entity\OrdersInfo:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        date:
+            expose: true
+        address:
+            expose: true
+        phone:
+            expose: true
+        name:
+            expose: true
+        orderItems:
+            expose: true
+        status:
+            expose: true

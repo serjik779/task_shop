@@ -29,7 +29,7 @@ class apiOrdersController extends FOSRestController
         $username = $request->get('username');
         if ($token) {
             $res = $this->tokenAuth($token, 'order');
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_CREATED);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
             return new View($res, Response::HTTP_NOT_FOUND);
