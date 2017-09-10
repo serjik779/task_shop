@@ -15,3 +15,5 @@ ShopBundle\Entity\OrdersInfo:
             expose: true
         status:
             expose: true
+        total:
+            expose: true

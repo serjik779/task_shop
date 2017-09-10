@@ -57,6 +57,12 @@ class OrdersInfo
      * @ORM\Column(name="status", type="integer", nullable=false)
      */
     private $status = OrdersInfo::PENDING_STATUS;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="total", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $total = 0;
 
     /**
      * @return int

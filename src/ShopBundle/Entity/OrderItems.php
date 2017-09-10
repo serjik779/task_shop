@@ -48,6 +48,14 @@ class OrderItems
      * })
      */
     private $products;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="cost", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $cost = 0;
+
     public function __construct()
     {
         $this->products = new Products();

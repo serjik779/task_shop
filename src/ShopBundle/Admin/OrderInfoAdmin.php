@@ -31,6 +31,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('name', TextType::class)
             ->add('status', NumberType::class)
             ->add('deliveryType', ModelType::class)
+            ->add('total', NumberType::class)
             ->add('orderItems', CollectionType::class, array(
                 'required' => false
             ), array(
@@ -51,6 +52,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('address')
             ->add('status')
             ->add('deliveryType')
+            ->add('total')
             ->add('phone');
     }
 
@@ -64,6 +66,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->addIdentifier('address')
             ->addIdentifier('status')
             ->addIdentifier('deliveryType')
+            ->addIdentifier('total')
             ->addIdentifier('phone');
     }
 
@@ -77,6 +80,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('address')
             ->add('status')
             ->add('deliveryType')
+            ->add('total')
             ->add('phone');
     }
 

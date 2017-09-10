@@ -29,10 +29,10 @@ class apiOrdersController extends FOSRestController
         $username = $request->get('username');
         if ($token) {
             $res = $this->tokenAuth($token, 'order');
-            return new View($res, Response::HTTP_CREATED);
+            return new View($res, Response::HTTP_OK);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_OK);
         } else {
             $data['error'] = "Access denied! You dont have username or password!";
             return new View($data, Response::HTTP_NOT_FOUND);
@@ -161,10 +161,10 @@ class apiOrdersController extends FOSRestController
         $username = $request->get('username');
         if ($token) {
             $this->get('adding.product')->setCount($request);
-            return new View($res, Response::HTTP_ACCEPTED);
+            return new View($res, Response::HTTP_OK);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_OK);
         } else {
             $data['error'] = "Access denied! You dont have username or password!";
             return new View($data, Response::HTTP_NOT_FOUND);
@@ -193,10 +193,10 @@ class apiOrdersController extends FOSRestController
                     $em->flush();
                 }
             }
-            return new View($res, Response::HTTP_ACCEPTED);
+            return new View($res, Response::HTTP_OK);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_OK);
         } else {
             $data['error'] = "Access denied! You dont have username or password!";
             return new View($data, Response::HTTP_NOT_FOUND);

@@ -29,7 +29,8 @@ class OrderItemsAdmin extends AbstractAdmin
             ))
             ->add('products', ModelType::class)
             ->add('discount', NumberType::class)
-            ->add('amount', NumberType::class);
+            ->add('amount', NumberType::class)
+            ->add('cost', NumberType::class);
     }
 
     // Fields to be shown on filter forms
@@ -39,7 +40,8 @@ class OrderItemsAdmin extends AbstractAdmin
             ->add('ordersInfo')
             ->add('products')
             ->add('discount')
-            ->add('amount');
+            ->add('amount')
+            ->add('cost');
     }
 
     // Fields to be shown on lists
@@ -49,7 +51,8 @@ class OrderItemsAdmin extends AbstractAdmin
             ->addIdentifier('ordersInfo')
             ->addIdentifier('products')
             ->addIdentifier('discount')
-            ->addIdentifier('amount');
+            ->addIdentifier('amount')
+            ->addIdentifier('cost');
     }
 
     // Fields to be shown on show action
@@ -60,6 +63,7 @@ class OrderItemsAdmin extends AbstractAdmin
             ->add('ordersInfo')
             ->add('products')
             ->add('discount')
-            ->add('amount');
+            ->add('amount')
+            ->add('cost');
     }
 }
