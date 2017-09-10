@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrdersInfo
 {
-    const PENDING_STATUS = 'pending';
+    const PENDING_STATUS = 'Not considered';
     /**
      * @var integer
      *
