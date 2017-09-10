@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrdersInfo
 {
-    const PENDING_STATUS = 0;
-    const SENT_STATUS = 1;
-    const DELIVERED_STATUS = 2;
+    const PENDING_STATUS = 'pending';
     /**
      * @var integer
      *
@@ -52,11 +50,13 @@ class OrdersInfo
     protected $orderItems;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="status", type="integer", nullable=false)
+     * @ORM\Column(name="status", type="string", nullable=false)
      */
     private $status = OrdersInfo::PENDING_STATUS;
+
+
     /**
      * @var float
      *
@@ -65,7 +65,25 @@ class OrdersInfo
     private $total = 0;
 
     /**
-     * @return int
+     * @return float
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param float $total
+     * @return OrdersInfo
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getStatus()
     {
@@ -73,11 +91,13 @@ class OrdersInfo
     }
 
     /**
-     * @param int $status
+     * @param string $status
+     * @return OrdersInfo
      */
     public function setStatus($status)
     {
         $this->status = $status;
+        return $this;
     }
 
     /**

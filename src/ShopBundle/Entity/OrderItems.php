@@ -56,6 +56,24 @@ class OrderItems
      */
     private $cost = 0;
 
+    /**
+     * @return float
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * @param float $cost
+     * @return OrderItems
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+        return $this;
+    }
+
     public function __construct()
     {
         $this->products = new Products();
