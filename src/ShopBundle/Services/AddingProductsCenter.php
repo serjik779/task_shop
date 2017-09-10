@@ -35,7 +35,7 @@ class AddingProductsCenter{
             ],
         ]);
 
-        $token = file_get_contents($serviceUrl . '/api/amount?username=ustora&password=123123', false, $context);
+        $token = file_get_contents($serviceUrl . '/api/gettoken?username=ustora&password=123123', false, $context);
         $token = json_decode($token,true);
 
         $products = file_get_contents($serviceUrl . '/api/products?token='.$token['token'], false, $context);
@@ -113,7 +113,7 @@ class AddingProductsCenter{
                 ],
             ]);
             $serviceUrl = $this->container->getParameter('service_url');
-            $token = file_get_contents($serviceUrl . '/api/amount?username=ustora&password=123123', false, $context);
+            $token = file_get_contents($serviceUrl . '/api/gettoken?username=ustora&password=123123', false, $context);
             $token = json_decode($token, true);
 
             $amounts = file_get_contents($serviceUrl . '/api/amount?token=' . $token['token'], false, $context);
