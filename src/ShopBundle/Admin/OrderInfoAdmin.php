@@ -29,7 +29,7 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('address', TextType::class)
             ->add('phone', TextType::class)
             ->add('name', TextType::class)
-            ->add('status', NumberType::class)
+            ->add('status', TextType::class)
             ->add('deliveryType', ModelType::class)
             ->add('total', NumberType::class)
             ->add('orderItems', CollectionType::class, array(
