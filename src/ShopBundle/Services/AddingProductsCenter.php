@@ -150,11 +150,9 @@ class AddingProductsCenter {
         $category->addProducts($product);
     }
 
-    public function setCount($amounts = array()) {
+    public function setCount($amounts) {
         if (empty($amounts)) {
-            $amounts = $this->getServiceContents('/api/amount', [
-                'token' => $this->token,
-            ]);
+            return 'error';
         }
         foreach ($amounts as $amount) {
             $product = $this->entityManager
@@ -166,5 +164,6 @@ class AddingProductsCenter {
                 $this->entityManager->flush();
             }
         }
+        return 'success';
     }
 }
