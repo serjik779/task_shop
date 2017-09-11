@@ -37,10 +37,10 @@
 # Build data
 /build/
 
-# Backup entities generated with doctrine:generate:entities command
-**/Entity/*~
 
 .idea/*
 /composer.phar
 vendor/
 /web/.htaccess
+!/src/ShopBundle/Resources/views/home/index.html.twig
+!/src/ShopBundle/Services/AddingProductsCenter.php

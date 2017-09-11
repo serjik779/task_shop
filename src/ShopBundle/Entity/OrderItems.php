@@ -48,6 +48,32 @@ class OrderItems
      * })
      */
     private $products;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="cost", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $cost = 0;
+
+    /**
+     * @return float
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * @param float $cost
+     * @return OrderItems
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+        return $this;
+    }
+
     public function __construct()
     {
         $this->products = new Products();
