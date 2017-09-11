@@ -2,6 +2,7 @@ $(function () {
     $('.add_to_cart_button').click(addToCart);
     $('.add-to-cart-link').click(addToCart);
 
+
     function addToCart() {
         var addid = $(this).attr('data-product_id');
         var prodAmount = $('.qty').val();
@@ -36,6 +37,7 @@ $(function () {
 
     $('.add_to_wishlist_button').click(function () {
         var addid = $(this).attr('data-product_id');
+        $(this).prop('disabled',true);
         $.ajax({
             type: "POST",
             url: "/wishlist/add-to-wishlist",
@@ -45,6 +47,32 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data['status'] === 'error') {
+                    window.location.href = "/login";
+                }
+            }
+        });
+
+    });
+
+
+
+    $('.delete_from_wishlist_button').click(function () {
+        var $button = $(this);
+        var del = $button.attr('data-product_id');
+
+
+        $.ajax({
+            type: "POST",
+            url: "/wishlist/delete-from-wishlist",
+            data: {
+                product: del
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data['status'] === 'ok') {
+                    $button.closest('.wishlist-item').remove();
+                }
+                else {
                     window.location.href = "/login";
                 }
             }

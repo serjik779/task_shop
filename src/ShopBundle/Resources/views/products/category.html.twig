@@ -30,7 +30,7 @@
                         <div class="product-breadcroumb">
                             <a href="{{ path('shop_homepage') }}">Home</a>
                             <a href="{{ path('products_index') }}">Products</a>
-                            <a class="disabled">{{ vm.product.0.category.title }}</a>
+                            <a class="disabled">{{ category.title }}</a>
                         </div>
                         {% if vm.product %}
                             {% for product in vm.product %}
@@ -54,8 +54,10 @@
                                         </div>
 
                                         <div class="product-option-shop">
-                                            <button type="button" class="add_to_cart_button" data-product_id="{{ product.id }}" rel="nofollow">Add to
-                                                cart</button>
+                                            <button type="button" class="add_to_cart_button" data-product_id="{{ product.id }}" rel="nofollow">Add to cart</button>
+
+                                            <input type="button" data-product_id="{{ product.id }}"  class="add_to_wishlist_button" value="Add to wishlist" onclick="this.value='Added'">
+
                                         </div>
                                     </div>
                                 </div>
