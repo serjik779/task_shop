@@ -193,9 +193,9 @@ class apiOrdersController extends FOSRestController
         if ($token) {
             $res['success'] = 1;
             foreach ($status as $st) {
-                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['id']);
+                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['idOrderShop']);
                 if (!empty($product)) {
-                    $orderInfo->setStatus($st['status']);
+                    $orderInfo->setStatus($st['title']);
                     $em->persist($orderInfo);
                     $em->flush();
                 }
