@@ -64,14 +64,17 @@
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                                 <h2>Product Description</h2>
-                                                {{ product.description | raw }}
+                                                <input type="button" data-product_id="{{ product.id }}"  class="add_to_wishlist_button" value="Add to wishlist" onclick="this.value='Added'">
+                                                <div>
+                                                    {{ product.description | raw }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <button data-product_id="{{ product.id }}"
-                                            class="add_to_wishlist_button"
-                                            type="button">Add to wishlist
-                                    </button>
+                                    {#<button data-product_id="{{ product.id }}"#}
+                                            {#class="add_to_wishlist_button"#}
+                                            {#type="button">Add to wishlist#}
+                                    {#</button>#}
                                 </div>
                             </div>
                         </div>

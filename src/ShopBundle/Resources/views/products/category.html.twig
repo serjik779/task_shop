@@ -50,8 +50,10 @@
                                         </div>
 
                                         <div class="product-option-shop">
-                                            <button type="button" class="add_to_cart_button" data-product_id="{{ product.id }}" rel="nofollow">Add to
-                                                cart</button>
+                                            <button type="button" class="add_to_cart_button" data-product_id="{{ product.id }}" rel="nofollow">Add to cart</button>
+
+                                            <input type="button" data-product_id="{{ product.id }}"  class="add_to_wishlist_button" value="Add to wishlist" onclick="this.value='Added'">
+
                                         </div>
                                     </div>
                                 </div>

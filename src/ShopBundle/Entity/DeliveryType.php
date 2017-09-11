@@ -28,7 +28,7 @@ class DeliveryType
      *
      * @ORM\Column(name="cost", type="float", precision=10, scale=0, nullable=false)
      */
-    private $cost;
+    private $cost = 0;
     /**
      * Get id
      *

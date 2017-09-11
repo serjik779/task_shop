@@ -34,7 +34,7 @@
 
                                         <td class="product-thumbnail">
                                             <a href="{{ path('products_show', { 'slug2': cartItem.product.category.slug, 'slug': cartItem.product.slug }) }}">
-                                                {% if cartItem.product.images %}
+                                                {% if cartItem.product.images|length != 0  %}
                                                     <img src="{{ cartItem.product.images[0].path }}" alt="">
                                                 {% else %}
                                                     <img src="/img/no-image.png" alt="">

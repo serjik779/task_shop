@@ -125,6 +125,7 @@ class Categories
      */
     public function addProducts(\ShopBundle\Entity\Products $products)
     {
+        $products->setCategory($this);
         $this->products[] = $products;
         return $this;
     }

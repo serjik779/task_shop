@@ -2,18 +2,21 @@
 
 namespace ShopBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Products;
+use ShopBundle\Entity\Wishlist;
+use ShopBundle\ShopBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductsController extends Controller
 {
     public function indexAction(Request $request)
     {
 
-        $allcategories = $this->get('doctrine')
-            ->getManager()
+        $allcategories = $this->get('doctrine.orm.entity_manager')
             ->getRepository(Categories::class)
             ->findAll();
 
@@ -87,9 +90,8 @@ class ProductsController extends Controller
         $relproduct = $this->get('doctrine')
             ->getManager()
             ->getRepository(Products::class)
-            ->findBy(['category' =>
-                $products->getCategory()->getId()], [], $this->getParameter('related_products_limit'));
-        $vm = $this->get('shop.relprod_view_model_assembler')->generateViewModel($relproduct);
+            ->findBy(['category' => $products->getCategory()->getId()], [], 10); //related products
+        $vm = $this->get('shop.relprod_view_model_assembler')->generateViewModel($model);
 
         return $this->render('ShopBundle:products:single.html.twig', array
         (
@@ -101,7 +103,10 @@ class ProductsController extends Controller
 
     public function addProductAction(Request $request)
     {
-        $addProduct = $this->get('adding.product')->addProduct();
+        $error = $this->get('adding.product')->updateProducts();
+        if (!$error){
+            return new Response('Undetermined error');
+        }
         return $this->render('ShopBundle:Default:index.html.twig');
     }
 
