@@ -156,17 +156,17 @@ class AddingProductsCenter {
         if (empty($amounts)) {
             return 'error';
         }
-        $test = '';
+        $test = '' ;
         foreach ($amounts as $amount) {
-            $test .= $amount['id'];
+            $test .= $amount->id;
             $product = $this->entityManager
                 ->getRepository(Products::class)
-                ->findOneBy(array('serviceId' => $amount['id']));
+                ->findOneBy(array('serviceId' => $amount->id));
             if (!empty($product)) {
-                $product->setAmount($amount['amount']);
+                $product->setAmount($amount->amount);
                 $this->entityManager->persist($product);
                 $this->entityManager->flush();
-                $test .= $amount['amount'];
+                $test .= $amount->amount;
             }
         }
         return 'success' . $test;
