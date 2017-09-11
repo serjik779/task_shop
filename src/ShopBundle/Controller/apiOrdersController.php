@@ -156,8 +156,8 @@ class apiOrdersController extends FOSRestController
      * @param Request $request
      * @return array|View
      */
-    public function setCountAction(Request $request, $json = array()) {
-        $amounts = empty($json) ? json_decode(file_get_contents("php://input"), true) : $json;
+    public function setCountAction(Request $request) {
+        $amounts = json_decode(file_get_contents("php://input"), true);
         $em = $this->getDoctrine()->getManager();
         $token = $request->get('token');
         $password = $request->get('password');
