@@ -13,6 +13,7 @@
                           <a href="/profile">Welcome  {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a>
                         </li>
                         <li><a href="{{ path('shop_wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
+                        <li><a href="{{ path('shop_myorders') }}"><i class="fa fa-heart"></i> My orders</a></li>
                         <li><a href="{{ path('cart_index') }}"><i class="fa fa-user"></i> My Cart</a></li>
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">
@@ -47,21 +48,25 @@
                 </div>
             </div>
 
-            <div class="col-sm-6">
-                <div class="shopping-item">
-                    <a href="{{ path('cart_index') }}">
-                        Cart - $
-                        <span class="cart-amunt">
+                <div class="col-sm-6">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="shopping-item">
+
+                        <a href="{{ path('cart_index') }}">
+                            Cart - $
+                            <span class="cart-amunt">
                             {{ getCountCartItems().cash }}
                         </span>
-                        <i class="fa fa-shopping-cart">
-                        </i>
-                        <span class="product-count">
+                            <i class="fa fa-shopping-cart">
+                            </i>
+                            <span class="product-count">
                             {{ getCountCartItems().count }}
                         </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
-            </div>
+
+            {% endif %}
         </div>
     </div>
 </div> <!-- End site branding area -->
