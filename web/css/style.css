@@ -1163,6 +1163,20 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 table.shop_table .td-right {
     text-align: right;
 }
+.account-link a {
+    background: none repeat scroll 0 0 #5a88ca;
+    color: #fff;
+    display: inline-block;
+    font-size: 18px;
+    height: 40px;
+    padding-top: 7px;
+    text-align: center;
+    width: 220px;
+    border: 1px solid #5a88ca;
+
+}
+.account-link a:hover {background-color: #222;border-color: #666;text-decoration: none;}
 .clear {
     clear: both;
 }
+

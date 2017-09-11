@@ -52,7 +52,7 @@ class OrdersInfo
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", nullable=false)
+     * @ORM\Column(name="status", type="string", length=255, nullable=false)
      */
     private $status = OrdersInfo::PENDING_STATUS;
 
