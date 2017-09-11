@@ -11,35 +11,39 @@
                 <div class="col-md-12">
                     <table class="table table-responsive table-hover">
                         <thead>
-                        <tr class="bg-success">
-                        <th>Image</th>
-                        <th>Product</th>
-                        <th>Description</th>
-                        <th>Cost</th>
-                    </tr>
+                            <tr class="bg-success">
+                                <th>Image</th>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Cost</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
                         {% for wl in wishlist %}
-                            <tr>
+                            <tr class="wishlist-item">
                                 <td>
                                     <a href="{{ path('products_show', { 'slug2': wl.product.category.slug, 'slug': wl.product.slug }) }}">
                                         {% if wl.product.images|length != 0 %}
-                                            <img src="{{ wl.product.images[0].path }}" alt="">
+                                            <img width="50" src="{{ wl.product.images[0].path }}" alt="">
                                         {% else %}
-                                            <img src="/img/no-image.png" alt="">
+                                            <img width="50" src="/img/no-image.png" alt="">
                                         {% endif %}
                                     </a>
                                 </td>
                                 <td>{{ wl.product.title }}</td>
                                 <td>{{ wl.product.description|raw }}</td>
                                 <td>{{ wl.product.cost }}</td>
+                                <td>
+                                    <button id="scroll" data-product_id="{{ wl.product.id }}" class="add_to_cart_button" type="button">To cart</button>
+                                    <button id="dell" data-product_id="{{ wl.product.id }}" class="delete_from_wishlist_button" type="button">Delete</button>
+                                </td>
+                                {% endfor %}
                             </tr>
-                        {% endfor %}
+
                         </tbody>
                     </table>
 
-                </div>
-                <div class="col-md-6">
                 </div>
             </div>
         </div>

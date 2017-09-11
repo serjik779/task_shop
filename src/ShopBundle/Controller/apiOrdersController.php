@@ -4,6 +4,7 @@ namespace ShopBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ShopBundle\Entity\OrdersInfo;
+use ShopBundle\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -28,15 +29,14 @@ class apiOrdersController extends FOSRestController
         $username = $request->get('username');
         if ($token) {
             $res = $this->tokenAuth($token, 'order');
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_OK);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_OK);
         } else {
             $data['error'] = "Access denied! You dont have username or password!";
             return new View($data, Response::HTTP_NOT_FOUND);
         }
-        #return $this->render('ShopBundle:Default:index.html.twig');
     }
 
     /**
@@ -146,7 +146,62 @@ class apiOrdersController extends FOSRestController
         return $restresult;
     }
 
+    /**
+     * @Rest\Get("/api/set-count")
+     * @param Request $request
+     * @return array|View
+     */
+    public function setCountAction(Request $request, $json = array()) {
+        $amounts = empty($json) ? json_decode(file_get_contents("php://input"), true) : $json;
+        $em = $this->getDoctrine()->getManager();
 
+        $token = $request->get('token');
+        $password = $request->get('password');
+        $username = $request->get('username');
+        if ($token) {
+            $data['success'] = "Success!";
+            $this->get('adding.product')->setCount($request);
+            return new View($data, Response::HTTP_OK);
+        } elseif ($password && $username) {
+            $res = $this->passwordAuth($username, $password);
+            return new View($res, Response::HTTP_OK);
+        } else {
+            $data['error'] = "Access denied! You dont have username or password!";
+            return new View($data, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @Rest\Get("/api/set-order-status")
+     * @param Request $request
+     * @return array|View
+     */
+    public function setOrderStatusAction(Request $request) {
+        $status = json_decode(file_get_contents("php://input"), true);
+        $em = $this->getDoctrine()->getManager();
+
+        $token = $request->get('token');
+        $password = $request->get('password');
+        $username = $request->get('username');
+        if ($token) {
+            $res['success'] = 1;
+            foreach ($status as $st) {
+                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['id']);
+                if (!empty($product)) {
+                    $orderInfo->setStatus($st['status']);
+                    $em->persist($orderInfo);
+                    $em->flush();
+                }
+            }
+            return new View($res, Response::HTTP_OK);
+        } elseif ($password && $username) {
+            $res = $this->passwordAuth($username, $password);
+            return new View($res, Response::HTTP_OK);
+        } else {
+            $data['error'] = "Access denied! You dont have username or password!";
+            return new View($data, Response::HTTP_NOT_FOUND);
+        }
+    }
 }
 
 

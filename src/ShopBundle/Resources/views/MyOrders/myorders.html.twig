@@ -1,0 +1,60 @@
+{% extends 'ShopBundle:Default:index.html.twig' %}
+{% block head %}
+    <head><title>{% block title %}ElectroZone | MyOrders{% endblock %}</title></head>
+{% endblock %}
+{% block body %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>My Orders</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-responsive table-hover">
+                        <thead>
+                        <tr class="bg-success">
+                            <th>Name</th>
+                            <th>Product</th>
+                            <th>Date</th>
+                            <th>Address</th>
+                            <th>Amount</th>
+                            <th>Price</th>
+                            <th>Total Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for order in orders  %}
+
+                            <tr>
+                                <td>{{ order.OrdersInfo.name }}</td>
+                                <td>{{ order.products.title }}</td>
+                                <td>{{ order.OrdersInfo.date|date('Y-m-d') }}</td>
+                                <td>{{ order.OrdersInfo.address }}</td>
+                                <td>{{ order.amount }}</td>
+                                <td>{{ order.products.cost }}</td>
+                                <td>{{ order.products.cost * order.amount}}</td>
+
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

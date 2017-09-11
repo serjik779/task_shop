@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrdersInfo
 {
+    const PENDING_STATUS = 'Not considered';
     /**
      * @var integer
      *
@@ -53,10 +54,36 @@ class OrdersInfo
      *
      * @ORM\Column(name="status", type="string", length=255, nullable=false)
      */
-    private $status;
+    private $status = OrdersInfo::PENDING_STATUS;
+
 
     /**
-     * @return mixed
+     * @var float
+     *
+     * @ORM\Column(name="total", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $total = 0;
+
+    /**
+     * @return float
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param float $total
+     * @return OrdersInfo
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getStatus()
     {
@@ -64,11 +91,13 @@ class OrdersInfo
     }
 
     /**
-     * @param mixed $status
+     * @param string $status
+     * @return OrdersInfo
      */
     public function setStatus($status)
     {
         $this->status = $status;
+        return $this;
     }
 
     /**

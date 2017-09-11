@@ -1,5 +1,6 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
 {% block body %}
+    {#{% include 'ShopBundle:Default:breadcrumbs.html.twig' %}#}
     <div class="slider-area">
         <!-- Slider -->
         <div class="block-slider block-slider4">
@@ -79,6 +80,7 @@
                                             {% endif %}
                                             <div class="product-hover">
                                                 <a href="#" data-product_id="{{ latest.id }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+
                                                 <a href="{{ path('products_show', { 'slug2': latest.category.slug, 'slug': latest.slug }) }}"
                                                    class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                             </div>

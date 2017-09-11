@@ -131,8 +131,8 @@ services:
                             class: ShopBundle\ViewModels\Index\IndexViewModelAssembler
                             parent: gotakk.view_model.view_model_assembler
 
-    twig.extension.getFooterCategories:
-        class: ShopBundle\Services\Twig\GetCategories
+    twig.extension.getfuctions:
+        class: ShopBundle\Services\Twig\GetFunctions
         arguments: ['@doctrine.orm.default_entity_manager', '@security.context']
         tags:
             - { name: twig.extension }
@@ -140,4 +140,4 @@ services:
 
     adding.product:
          class: ShopBundle\Services\AddingProductsCenter
-         arguments: ['@doctrine.orm.default_entity_manager']
+         arguments: ['@service_container', '@doctrine.orm.entity_manager']

@@ -16,6 +16,7 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OrderInfoAdmin extends AbstractAdmin
@@ -28,7 +29,9 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('address', TextType::class)
             ->add('phone', TextType::class)
             ->add('name', TextType::class)
+            ->add('status', TextType::class)
             ->add('deliveryType', ModelType::class)
+            ->add('total', NumberType::class)
             ->add('orderItems', CollectionType::class, array(
                 'required' => false
             ), array(
@@ -47,7 +50,9 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('date')
             ->add('name')
             ->add('address')
+            ->add('status')
             ->add('deliveryType')
+            ->add('total')
             ->add('phone');
     }
 
@@ -59,7 +64,9 @@ class OrderInfoAdmin extends AbstractAdmin
             ->addIdentifier('name')
             ->addIdentifier('date')
             ->addIdentifier('address')
+            ->addIdentifier('status')
             ->addIdentifier('deliveryType')
+            ->addIdentifier('total')
             ->addIdentifier('phone');
     }
 
@@ -71,7 +78,9 @@ class OrderInfoAdmin extends AbstractAdmin
             ->add('date')
             ->add('name')
             ->add('address')
+            ->add('status')
             ->add('deliveryType')
+            ->add('total')
             ->add('phone');
     }
 

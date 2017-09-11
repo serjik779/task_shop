@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5883267f013833532e9cb8b2a22966bf",
+    "content-hash": "ef9350a8b3bba716619a374c429eaf76",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1296,7 +1296,7 @@
                 "view-model",
                 "viewmodel"
             ],
-            "time": "2017-02-03 01:51:06"
+            "time": "2017-02-03T01:51:06+00:00"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1871,7 +1871,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -4539,6 +4539,56 @@
                 "framework"
             ],
             "time": "2017-08-28T19:21:56+00:00"
+        },
+        {
+            "name": "thormeier/breadcrumb-bundle",
+            "version": "2.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thormeier/breadcrumb-bundle.git",
+                "reference": "453c41e2e522b40136b4a65fe374b714b1eead66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thormeier/breadcrumb-bundle/zipball/453c41e2e522b40136b4a65fe374b714b1eead66",
+                "reference": "453c41e2e522b40136b4a65fe374b714b1eead66",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "2.3.*|^2.6.0|3.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "twig/twig": "1.15.*@dev"
+            },
+            "suggest": {
+                "twig/twig": "to render breadcrumbs with a twig template"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Thormeier\\BreadcrumbBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pascal Thormeier",
+                    "email": "pascal.thormeier@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony2 bundle for easy setup of breadcrumbs",
+            "time": "2017-02-03T09:18:53+00:00"
         },
         {
             "name": "twig/extensions",

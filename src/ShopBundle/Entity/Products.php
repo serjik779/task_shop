@@ -25,7 +25,6 @@ class Products
 
     /**
      * @var string
-     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
@@ -65,7 +64,7 @@ class Products
     /**
      * @var ArrayCollection|Images[]
      * Many Products have Many Images.
-     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Images", mappedBy="products", cascade={"persist"}, orphanRemoval=true)
      */
     protected $images;
     /**

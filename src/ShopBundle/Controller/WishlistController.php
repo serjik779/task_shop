@@ -5,6 +5,7 @@ use ShopBundle\Entity\Products;
 use Application\Sonata\UserBundle\Entity\User;
 use ShopBundle\Entity\Wishlist;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -60,5 +61,33 @@ class WishlistController extends Controller
 
         return new Response(json_encode($response));
     }
-}
 
+    public function deleteFromWishlistAction(Request $request)
+    {
+        $jsonResponse = [
+            'status' => 'ok',
+            'message' => '',
+        ];
+
+        $em = $this->get('doctrine.orm.default_entity_manager');
+        $user = $this->getUser();
+
+        $productId = $request->get('product', null);
+        $product = $em->getRepository(Products::class)->find($productId);
+        $productForRemoval = $em->getRepository(Wishlist::class)->findOneBy(array(
+            'user' => $user,
+            'product' => $product,
+        ));
+
+        if (!empty($productForRemoval)) {
+            $em->remove($productForRemoval);
+            $em->flush();
+        }
+
+        if ($request->isMethod('post')) {
+            return new JsonResponse($jsonResponse);
+        }
+
+        return $this->redirectToRoute('shop_wishlist');
+    }
+}

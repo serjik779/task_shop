@@ -3,6 +3,7 @@
     <head><title>{% block title %}ElectroZone | Products{% endblock %}</title></head>
 {% endblock %}
 {% block body %}
+    {% set countProd = 0 %}
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -18,10 +19,7 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <div class="product-breadcroumb">
-                    <a href="{{ path('shop_homepage') }}">Home</a>
-                    <a class="disabled">Products</a>
-                </div>
+                {{ breadcrumbs() }}
                 {% if vm.category %}
                     {% for category in vm.category %}
                         <div class="col-md-3 col-sm-6">
@@ -43,6 +41,12 @@
                                 <div class="product-option-shop"></div>
                             </div>
                         </div>
+                        {% set countProd = countProd + 1 %}
+                        {% if countProd == 4 %}
+                            {% set countProd = 0 %}
+
+                            <div class="clear"></div>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
             </div>
@@ -50,7 +54,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="navigation">
-                        {{ knp_pagination_render(category) }}
+                        {{ knp_pagination_render(vm.category) }}
                     </div>
                 </div>
             </div>

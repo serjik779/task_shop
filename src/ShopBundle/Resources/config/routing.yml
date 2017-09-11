@@ -1,10 +1,17 @@
 shop_homepage:
     path:     /
     defaults: { _controller: ShopBundle:Default:index }
+    options:
+                breadcrumb:
+                    label: 'Home'
 
 shop_contact:
     path:     /contact
     defaults: { _controller: ShopBundle:Contact:contactVendor }
+    options:
+                breadcrumb:
+                    label: 'Contact'
+                    parent_route: shop_homepage
 
 shop_products:
     resource: "@ShopBundle/Resources/config/routing/products.yml"
@@ -12,15 +19,32 @@ shop_products:
 
 shop_about:
     path:     /about_us
-    defaults: { _controller: ShopBundle:About:about }
 
+    defaults: { _controller: ShopBundle:About:about }
+    options:
+                breadcrumb:
+                    label: 'About'
+                    parent_route: shop_homepage
 shop_wishlist:
     path:     /wishlist
     defaults: { _controller: ShopBundle:Wishlist:wishlist }
+    options:
+                    breadcrumb:
+                        label: 'My Wishlist'
+                        parent_route: products_index
+
+
+shop_myorders:
+    path:     /myorders
+    defaults: { _controller: ShopBundle:MyOrders:myorders }
 
 shop_wishlist_add:
     path:     /wishlist/add-to-wishlist
     defaults: { _controller: ShopBundle:Wishlist:addWishlistProduct }
+
+shop_wishlist_delete:
+    path:     /wishlist/delete-from-wishlist
+    defaults: { _controller: ShopBundle:Wishlist:deleteFromWishlist }
 
 shop_cart:
     resource: "@ShopBundle/Resources/config/routing/cart.yml"
@@ -29,6 +53,19 @@ shop_cart:
 api:
     path:     /api/orders
     defaults: { _controller: ShopBundle:apiOrders:getOrders }
+
+api_count:
+    path:     /api/set-count
+    defaults: { _controller: ShopBundle:apiOrders:setCount}
+
+api_order_status:
+    path:     /api/set-order-status
+    defaults: { _controller: ShopBundle:apiOrders:setOrderStatus}
+
+
+api_products:
+    path:     /api/get-products
+    defaults: { _controller: ShopBundle:Products:addProduct}
 
 shop_checkout:
     resource: "@ShopBundle/Resources/config/routing/checkout.yml"
