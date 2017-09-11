@@ -151,7 +151,6 @@ class AddingProductsCenter {
     }
 
     public function setCount() {
-        $json = file_get_contents('php://input');
         $amounts = json_decode(file_get_contents("php://input"));
         #$amounts = json_decode('{"0":{"id":1,"amount":32},"1":{"id":2,"amount":23},"2":{"id":3,"amount":23},"3":{"id":4,"amount":32}}');
         if (empty($amounts)) {
@@ -159,7 +158,6 @@ class AddingProductsCenter {
         }
         $test = '' ;
         foreach ($amounts as $amount) {
-            $test .= $amount->id;
             $product = $this->entityManager
                 ->getRepository(Products::class)
                 ->findOneBy(array('serviceId' => $amount->id));
@@ -167,9 +165,8 @@ class AddingProductsCenter {
                 $product->setAmount($amount->amount);
                 $this->entityManager->persist($product);
                 $this->entityManager->flush();
-                $test .= $amount->amount;
             }
         }
-        return 'success' . $json;
+        return 'success';
     }
 }
