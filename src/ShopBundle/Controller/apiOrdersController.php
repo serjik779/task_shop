@@ -160,8 +160,9 @@ class apiOrdersController extends FOSRestController
         $password = $request->get('password');
         $username = $request->get('username');
         if ($token) {
+            $data['success'] = "Success!";
             $this->get('adding.product')->setCount($request);
-            return new View($res, Response::HTTP_OK);
+            return new View($data, Response::HTTP_OK);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
             return new View($res, Response::HTTP_OK);
