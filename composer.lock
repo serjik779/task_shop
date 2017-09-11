@@ -1296,7 +1296,7 @@
                 "view-model",
                 "viewmodel"
             ],
-            "time": "2017-02-03T01:51:06+00:00"
+            "time": "2017-02-03 01:51:06"
         },
         {
             "name": "incenteev/composer-parameter-handler",

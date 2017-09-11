@@ -47,7 +47,8 @@ class CartController extends Controller
         if ($form->isSubmitted() && $form->isValid() && !empty($cartItems)) {
             /* @var $feedback OrdersInfo */
             $ordersInfo = $form->getData();
-            $em->persist($ordersInfo);
+            $ordersInfo->setUser($this->getUser());
+
 
             foreach ($cartItems as $cartItem) {
                 $orderItems = new OrderItems();
@@ -57,7 +58,10 @@ class CartController extends Controller
                     ->setOrdersInfo($ordersInfo);
                 $em->persist($orderItems);
                 $em->remove($cartItem);
+                $total = $cartItem->getAmount() * $cartItem->getProduct()->getCost();
             }
+            $ordersInfo->setTotal($total);
+            $em->persist($ordersInfo);
             $em->flush();
             return $this->redirect($this->generateUrl('shop_homepage'));
         }
