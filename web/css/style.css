@@ -1143,21 +1143,30 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .form-group{
     max-width: 500px;
 }
+
 .form-horizontal p{
     margin-left:230px;
     color: #4169E0;
     font-weight:bold;
     font-size: 16px;
 }
+
 .product-upper {
     border: 1px solid #ccc;
     height: 20em;
     line-height: 20em;
     text-align: center;
 }
+
 table.shop_table .td-right {
     text-align: right;
 }
+
 .clear {
     clear: both;
+}
+
+#map {
+    height: 250px;
+    width: 350px;
 }
