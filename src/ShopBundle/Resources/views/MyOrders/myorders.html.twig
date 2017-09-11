@@ -18,17 +18,24 @@
                             <th>Address</th>
                             <th>Amount</th>
                             <th>Price</th>
+                            <th>Total Price</th>
                         </tr>
                         </thead>
                         <tbody>
+
                         {% for order in orders  %}
+
                             <tr>
-                                <td> {{ order.name }} </td>
-                                <td>{{ order.product.title }}</td>
-                                <td>{{ order.date }}</td>
-                                <td>{{ order.Address}}</td>
-                                <td>{{ order.amount}}</td>
+                                <td>{{ order.OrdersInfo.name }}</td>
+                                <td>{{ order.products.title }}</td>
+                                <td>{{ order.OrdersInfo.date|date('Y-m-d') }}</td>
+                                <td>{{ order.OrdersInfo.address }}</td>
+                                <td>{{ order.amount }}</td>
+                                <td>{{ order.products.cost }}</td>
+                                <td>{{ order.products.cost * order.amount}}</td>
+
                             </tr>
+
                         {% endfor %}
                         </tbody>
                     </table>

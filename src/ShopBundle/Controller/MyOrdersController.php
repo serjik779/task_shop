@@ -13,10 +13,11 @@ class MyOrdersController extends Controller
     public function myordersAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $orders = $em->getRepository(OrdersInfo::class)->findBy(array ('id'=>$this->getUser()));
+        $orders = $em->getRepository(OrderItems::class)->findall();
 
         return $this->render('ShopBundle:MyOrders:myorders.html.twig', array(
-            'orders' => $orders
+            'orders'=> $orders,
+
         ));
     }
 }
