@@ -48,7 +48,11 @@ class OrdersInfo
      */
     protected $orderItems;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     */
     private $status;
 
     /**

@@ -31,14 +31,17 @@
         </div>
 
 
+        <div class="account-link">
 
 
-    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary">
+    <a href="{{ path('fos_user_profile_edit') }}" >
         EDIT
     </a>
 
-    {#<a href="{{ path('fos_user_resetting_reset') }} " class="btn btn-success">Forgot password ?</a>#}
+        {#<input href="{{ path('fos_user_profile_edit') }}" type="submit" value="EDIT" name="proceed" class="checkout-button button alt wc-forward">#}
 
+    <a href="{{ path('fos_user_change_password') }} " >CHANGE PASSWORD</a>
+        </div>
 </div>
 </div>
 <br>

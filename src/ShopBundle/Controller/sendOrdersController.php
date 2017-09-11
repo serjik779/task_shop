@@ -17,19 +17,18 @@ class apiOrdersController extends FOSRestController
 {
 
     /**
-     * @Rest\Get("/api/orders")
+     * @Rest\Get("/api/auth")
      * @param Request $request
      * @return array|View
      */
-    public function getOrdersAction(Request $request)
+    public function getTokenAction(Request $request)
     {
-        $token = $request->get('token');
+//        $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');
-        if ($token) {
-            $res = $this->tokenAuth($token, 'order');
-            return new View($res, Response::HTTP_NOT_FOUND);
-        } elseif ($password && $username) {
+//        $date = $request->get('date');
+
+            if ($password && $username) {
             $res = $this->passwordAuth($username, $password);
             return new View($res, Response::HTTP_NOT_FOUND);
         } else {
@@ -38,6 +37,27 @@ class apiOrdersController extends FOSRestController
         }
         #return $this->render('ShopBundle:Default:index.html.twig');
     }
+
+
+    /**
+     * @Rest\Get("/api/orders")
+     * @param Request $request
+     * @return array|View
+     */
+    public function getOrdersAction(Request $request)
+    {
+        $token = $request->get('token');
+//        $password = $request->get('password');
+//        $username = $request->get('username');
+        $date = $request->get('date');
+        if ($token) {
+            $res = $this->tokenAuth($token, 'order');
+            return new View($res, Response::HTTP_NOT_FOUND);
+        }
+        #return $this->render('ShopBundle:Default:index.html.twig');
+    }
+
+
 
     /**
      * @param $username
@@ -91,7 +111,6 @@ class apiOrdersController extends FOSRestController
     }
     /**
      * @param $token
-     * @param null $date
      * @return mixed
      */
 
@@ -134,12 +153,13 @@ class apiOrdersController extends FOSRestController
     }
 
     /**
+     * @param $date
      * @return mixed
      */
-    private function order()
+    private function order($date)
     {
 
-        $restresult = $this->getDoctrine()->getRepository(OrdersInfo::class)->findAll();
+        $restresult = $this->getDoctrine()->getRepository(OrdersInfo::class)->findBy($date);
         if ($restresult === null) {
             return new View("there are no orders exist", Response::HTTP_NOT_FOUND);
         }
