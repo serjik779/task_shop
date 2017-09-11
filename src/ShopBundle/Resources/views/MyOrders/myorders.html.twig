@@ -32,6 +32,9 @@
                     <div class="col-md-3">
                         <b>Name:</b> {{ order.name }}
                     </div>
+                    <div class="col-md-3">
+                        <b>Status:</b> {{ order.status }}
+                    </div>
                     <table class="table table-responsive table-hover">
                         <thead>
                         <tr class="bg-success">
@@ -42,7 +45,7 @@
                         </thead>
                         <tbody>
 
-                        {% for orderItem in orderItems  %}
+                        {% for orderItem in order.orderItems  %}
 
                             <tr>
                                 <td>{{ orderItem.products.title }}</td>

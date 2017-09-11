@@ -30,8 +30,6 @@ class CartController extends Controller
         $cart = $em->getRepository(Cart::class)->findOneBy(array('user' => $this->getUser()));
         $cartItems = $em->getRepository(CartItems::class)->findBy(array('cart' => $cart));
         $form = $this->createFormBuilder(new OrdersInfo())
-            ->add('date', DateTimeType::class, array(
-                'label' => 'date'))
             ->add('name', TextType::class, array(
                 'label' => 'Name'))
             ->add('address', TextType::class, array(
@@ -48,8 +46,8 @@ class CartController extends Controller
             /* @var $feedback OrdersInfo */
             $ordersInfo = $form->getData();
             $ordersInfo->setUser($this->getUser());
-
-
+            $ordersInfo->setDate(new \DateTime());
+            $total = 0;
             foreach ($cartItems as $cartItem) {
                 $orderItems = new OrderItems();
                 $orderItems->setAmount($request->get('amount'.$cartItem->getProduct()->getId()))
