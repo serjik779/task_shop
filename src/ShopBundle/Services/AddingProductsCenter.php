@@ -159,9 +159,9 @@ class AddingProductsCenter {
         foreach ($amounts as $amount) {
             $product = $this->entityManager
                 ->getRepository(Products::class)
-                ->findOneBy(array('serviceId' => $amount['id']));
+                ->findOneBy(array('serviceId' => $amount->id));
             if (!empty($product)) {
-                $product->setAmount($amount['amount']);
+                $product->setAmount($amount->amount);
                 $this->entityManager->persist($product);
                 $this->entityManager->flush();
             }
