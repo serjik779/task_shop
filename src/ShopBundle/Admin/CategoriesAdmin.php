@@ -29,7 +29,8 @@ class CategoriesAdmin extends AbstractAdmin
             ))
             ->add('image', AdminType::class, array(
                 'label' => false,
-                'delete' => false
+                'delete' => false,
+                'required' => false
             ));
     }
 

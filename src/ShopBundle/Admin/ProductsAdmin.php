@@ -33,11 +33,14 @@ class ProductsAdmin extends AbstractAdmin
             ))
             ->add('title', TextType::class)
             ->add('description', SimpleFormatterType::class, array(
+                'required' => false,
                 'format' => 'richhtml', 'attr' => array(
                     'class' => 'ckeditor')
             ))
             ->add('cost', MoneyType::class)
-            ->add('amount', NumberType::class)
+            ->add('amount', NumberType::class, array(
+                'required' => false
+            ))
             ->add('serviceId', NumberType::class)
             ->add('top', CheckboxType::class, array(
                 'required' => false
@@ -53,8 +56,7 @@ class ProductsAdmin extends AbstractAdmin
                 'edit' => 'inline',
                 'inline' => 'table',
                 'sortable' => 'position',
-            ))
-        ;
+            ));
             #->add('image', 'sonata_type_admin', array( 'label' => false, 'delete' => false ));
     }
 
@@ -123,5 +125,12 @@ class ProductsAdmin extends AbstractAdmin
                 }
             }
         }
+    }
+    public function getFormTheme()
+    {
+        return array_merge(
+            parent::getFormTheme(),
+            array('ShopBundle:Admin:type_collection.html.twig')
+        );
     }
 }
