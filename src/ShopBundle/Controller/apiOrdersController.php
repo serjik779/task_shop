@@ -159,14 +159,6 @@ class apiOrdersController extends FOSRestController
     public function setCountAction(Request $request, $json = array()) {
         $amounts = empty($json) ? json_decode(file_get_contents("php://input"), true) : $json;
         $em = $this->getDoctrine()->getManager();
-        $logger = $this->container->get('logger');
-        $logger->info('I just got the logger');
-        $logger->error('An error occurred');
-
-        $logger->critical('I left the oven on!', array(
-            // include extra "context" info in your logs
-            'cause' => 'in_hurry',
-        ));
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');

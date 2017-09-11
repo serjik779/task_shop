@@ -156,8 +156,8 @@ class AddingProductsCenter {
                 'token' => $this->token,
             ]);
         }
-
-        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $logger = $this->container->get('logger');
+        $logger->critical('I just got the logger', $amounts);
 
         foreach ($amounts as $amount) {
             $product = $this->entityManager
