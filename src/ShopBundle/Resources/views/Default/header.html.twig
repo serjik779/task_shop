@@ -48,19 +48,21 @@
             </div>
 
             <div class="col-sm-6">
-                <div class="shopping-item">
-                    <a href="{{ path('cart_index') }}">
-                        Cart - $
-                        <span class="cart-amunt">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="shopping-item">
+                        <a href="{{ path('cart_index') }}">
+                            Cart - $
+                            <span class="cart-amunt">
                             {{ getCountCartItems().cash }}
                         </span>
-                        <i class="fa fa-shopping-cart">
-                        </i>
-                        <span class="product-count">
+                            <i class="fa fa-shopping-cart">
+                            </i>
+                            <span class="product-count">
                             {{ getCountCartItems().count }}
                         </span>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

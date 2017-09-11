@@ -763,20 +763,25 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
 .single-sidebar a {
     display: block;
 }
-.product-breadcroumb {
+
+.breadcrumb {
     margin-bottom: 20px;
+    background: transparent;
 }
-.product-breadcroumb > a {
+
+.breadcrumb > a {
     margin-right: 31px;
     position: relative;
 }
-.product-breadcroumb > a::before {
+
+.breadcrumb > a::before {
     content: "/";
     position: absolute;
     right: -20px;
     top: 2px;
 }
-.product-breadcroumb > a:last-child::before {
+
+.breadcrumb > a:last-child::before {
     display: none;
 }
 .product-main-img {
@@ -900,7 +905,7 @@ text-transform: uppercase;}
     height: 100%;
     width: auto;
     text-align: center;
-    display: inline;v
+    display: inline;
 }
 
 

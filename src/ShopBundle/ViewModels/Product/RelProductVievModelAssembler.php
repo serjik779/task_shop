@@ -11,15 +11,15 @@ class RelProductVievModelAssembler extends ViewModelAssembler
     public function __construct()
     {
         $this->skel = array(
-            'Product',
+            'Related',
         );
     }
 
-    public function generateViewModel($model)
+    public function generateViewModel($relproduct)
     {
         $vm = $this->vmService->createViewModel();
 
-        $vm->setRelated($model);
+        $vm->setRelated($relproduct);
 
 
 

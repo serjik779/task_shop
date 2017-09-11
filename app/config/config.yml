@@ -181,6 +181,7 @@ fos_user:
     service:
         user_manager: sonata.user.orm.user_manager
 
+# Knp Paginator Configuration
 knp_paginator:
     page_range: '%page_limit%'                      # default page range used in pagination control
     default_options:
@@ -191,14 +192,14 @@ knp_paginator:
     template:
         pagination: 'KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # sort link template
+
+# Stof Configuration
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
         default:
             sluggable : true
             timestampable: true
-
-
 
 # Nelmio CORS Configuration
 nelmio_cors:
@@ -225,6 +226,7 @@ fos_rest:
         formats:
             json: true
 
+# JMS Serializer Configuration
 jms_serializer:
     property_naming:
         separator:  _
@@ -240,3 +242,7 @@ jms_serializer:
                 namespace_prefix: ShopBundle
                 path: %kernel.root_dir%/config/serializer/ShopBundle
         auto_detection: true
+
+#Thormeier Breadcrumb Configuration
+thormeier_breadcrumb:
+    template: 'ShopBundle:Default:breadcrumbs.html.twig'

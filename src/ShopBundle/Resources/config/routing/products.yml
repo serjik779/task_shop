@@ -1,14 +1,26 @@
 products_index:
     path:     /
     defaults: { _controller: "ShopBundle:Products:index" }
+    options:
+            breadcrumb:
+                label: 'Products'
+                parent_route: shop_homepage
     methods:  GET
 
 products_category:
     path:     /{slug}
     defaults: { _controller: "ShopBundle:Products:showCategory" }
+    options:
+                breadcrumb:
+                    label: '%%name%%'
+                    parent_route: products_index
     methods:  GET
 
 products_show:
     path:     /{slug2}/{slug}
     defaults: { _controller: "ShopBundle:Products:showSingle" }
+    options:
+                breadcrumb:
+                    label: '%%name%%'
+                    parent_route: products_category
     methods:  GET
