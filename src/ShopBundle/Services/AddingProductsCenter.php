@@ -154,7 +154,9 @@ class AddingProductsCenter {
         if (empty($amounts)) {
             return 'error';
         }
+        $test = '';
         foreach ($amounts as $amount) {
+            $test .= $amount->id;
             $product = $this->entityManager
                 ->getRepository(Products::class)
                 ->findOneBy(array('serviceId' => $amount->id));
@@ -162,8 +164,9 @@ class AddingProductsCenter {
                 $product->setAmount($amount->amount);
                 $this->entityManager->persist($product);
                 $this->entityManager->flush();
+                $test .= $amount->amount;
             }
         }
-        return 'success';
+        return 'success' . $test;
     }
 }
