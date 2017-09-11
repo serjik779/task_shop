@@ -73,7 +73,15 @@ class OrdersInfo
      * })
      */
     private $user;
-
+    /**
+     * @var DeliveryType
+     *
+     * @ORM\ManyToOne(targetEntity="DeliveryType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="delivery_type_id", referencedColumnName="id")
+     * })
+     */
+    private $deliveryType;
     /**
      * @return float
      */
@@ -110,15 +118,6 @@ class OrdersInfo
         return $this;
     }
 
-    /**
-     * @var DeliveryType
-     *
-     * @ORM\ManyToOne(targetEntity="DeliveryType")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="delivery_type_id", referencedColumnName="id")
-     * })
-     */
-    private $deliveryType;
     /**
      * @return ArrayCollection|OrderItems[]
      */

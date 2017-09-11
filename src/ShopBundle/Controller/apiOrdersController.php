@@ -4,6 +4,7 @@ namespace ShopBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ShopBundle\Entity\OrdersInfo;
+use Psr\Log\LoggerInterface;
 use ShopBundle\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -27,15 +28,19 @@ class apiOrdersController extends FOSRestController
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');
+        $logger = $this->container->get('logger');
         if ($token) {
             $res = $this->tokenAuth($token, 'order');
+            #$logger->info($res);
             return new View($res, Response::HTTP_OK);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
+            #$logger->info($res);
             return new View($res, Response::HTTP_OK);
         } else {
             $data['error'] = "Access denied! You dont have username or password!";
-            return new View($data, Response::HTTP_NOT_FOUND);
+            #$logger->info($data);
+            return new View($data, Response::HTTP_FORBIDDEN);
         }
     }
 
@@ -154,7 +159,14 @@ class apiOrdersController extends FOSRestController
     public function setCountAction(Request $request, $json = array()) {
         $amounts = empty($json) ? json_decode(file_get_contents("php://input"), true) : $json;
         $em = $this->getDoctrine()->getManager();
+        $logger = $this->container->get('logger');
+        $logger->info('I just got the logger');
+        $logger->error('An error occurred');
 
+        $logger->critical('I left the oven on!', array(
+            // include extra "context" info in your logs
+            'cause' => 'in_hurry',
+        ));
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');

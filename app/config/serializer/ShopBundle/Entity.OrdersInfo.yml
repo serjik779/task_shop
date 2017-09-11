@@ -17,3 +17,5 @@ ShopBundle\Entity\OrdersInfo:
             expose: true
         total:
             expose: true
+        deliveryType:
+            expose: true
