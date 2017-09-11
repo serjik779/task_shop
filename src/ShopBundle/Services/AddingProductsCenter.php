@@ -150,21 +150,23 @@ class AddingProductsCenter {
         $category->addProducts($product);
     }
 
-    public function setCount($amounts) {
+    public function setCount() {
+        $amounts = json_decode(file_get_contents("php://input"), true);
+        $amounts = json_decode('{"0":{"id":1,"amount":32},"1":{"id":2,"amount":23},"2":{"id":3,"amount":23},"3":{"id":4,"amount":32}}');
         if (empty($amounts)) {
             return 'error';
         }
         $test = '';
         foreach ($amounts as $amount) {
-            $test .= $amount->id;
+            $test .= $amount['id'];
             $product = $this->entityManager
                 ->getRepository(Products::class)
-                ->findOneBy(array('serviceId' => $amount->id));
+                ->findOneBy(array('serviceId' => $amount['id']));
             if (!empty($product)) {
-                $product->setAmount($amount->amount);
+                $product->setAmount($amount['amount']);
                 $this->entityManager->persist($product);
                 $this->entityManager->flush();
-                $test .= $amount->amount;
+                $test .= $amount['amount'];
             }
         }
         return 'success' . $test;

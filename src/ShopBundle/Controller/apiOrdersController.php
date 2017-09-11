@@ -157,13 +157,12 @@ class apiOrdersController extends FOSRestController
      * @return array|View
      */
     public function setCountAction(Request $request) {
-        $amounts = json_decode(file_get_contents("php://input"), true);
         $em = $this->getDoctrine()->getManager();
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');
         if ($token) {
-            $status = $this->get('adding.product')->setCount($amounts);
+            $status = $this->get('adding.product')->setCount();
             if ($status == 'error') {
                 $response = Response::HTTP_NOT_FOUND;
             } else {
