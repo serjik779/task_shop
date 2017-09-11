@@ -165,7 +165,7 @@ class apiOrdersController extends FOSRestController
         if ($token) {
             $status = $this->get('adding.product')->setCount($amounts);
             if ($status == 'error') {
-                $response = Response::HTTP_NOT_FOUND);
+                $response = Response::HTTP_NOT_FOUND;
             } else {
                 $response = Response::HTTP_OK;
             }
