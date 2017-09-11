@@ -194,7 +194,7 @@ class apiOrdersController extends FOSRestController
             $res['success'] = 1;
             foreach ($status as $st) {
                 $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['idOrderShop']);
-                if (!empty($product)) {
+                if (!empty($orderInfo)) {
                     $orderInfo->setStatus($st['title']);
                     $em->persist($orderInfo);
                     $em->flush();
