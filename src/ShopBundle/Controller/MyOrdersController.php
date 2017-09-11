@@ -15,6 +15,8 @@ class MyOrdersController extends Controller
         $em = $this->getDoctrine()->getManager();
         $orders = $em->getRepository(OrderItems::class)->findall();
 
+
+
         return $this->render('ShopBundle:MyOrders:myorders.html.twig', array(
             'orders'=> $orders,
 
