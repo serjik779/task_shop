@@ -152,7 +152,7 @@ class AddingProductsCenter {
 
     public function setCount() {
         $amounts = json_decode(file_get_contents("php://input"), true);
-        $amounts = json_decode('{"0":{"id":1,"amount":32},"1":{"id":2,"amount":23},"2":{"id":3,"amount":23},"3":{"id":4,"amount":32}}');
+        #$amounts = json_decode('{"0":{"id":1,"amount":32},"1":{"id":2,"amount":23},"2":{"id":3,"amount":23},"3":{"id":4,"amount":32}}');
         if (empty($amounts)) {
             return 'error';
         }
