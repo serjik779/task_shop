@@ -13,10 +13,11 @@ class ProductViewModelAssembler extends ViewModelAssembler
             'Product',
         );
     }
-    public function generateViewModel($model)
+
+    public function generateViewModel($categoryiterms)
     {
         $vm = $this->vmService->createViewModel();
-        $vm->setProduct($model);
+        $vm->setProduct($categoryiterms);
 
         return $vm->toArray();
     }

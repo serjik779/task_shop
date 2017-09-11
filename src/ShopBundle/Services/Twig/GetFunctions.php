@@ -9,7 +9,7 @@ use ShopBundle\Entity\CartItems;
 use ShopBundle\Entity\Categories;
 use Symfony\Component\Security\Core\SecurityContext;
 
-class GetCategories extends \Twig_Extension
+class GetFunctions extends \Twig_Extension
 {
     private $em;
     private $context;

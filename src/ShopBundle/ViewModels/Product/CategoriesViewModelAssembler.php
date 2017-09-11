@@ -13,11 +13,12 @@ class CategoriesViewModelAssembler extends ViewModelAssembler
             'Category'
         );
     }
-    public function generateViewModel($model)
+
+    public function generateViewModel($allcategories)
     {
         $vm = $this->vmService->createViewModel();
 
-        $vm->setCategory($model);
+        $vm->setCategory($allcategories);
 
 
         return $vm->toArray();

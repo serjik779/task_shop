@@ -31,6 +31,7 @@ class AddingProductsCenter {
         if (!empty($token->token)) {
             $this->token = $token->token;
         }
+
     }
 
     public function getServiceContents($resource, array $parameters = array()) {

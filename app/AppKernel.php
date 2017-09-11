@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Sonata\FormatterBundle\SonataFormatterBundle(),
             new gotakk\ViewModelBundle\gotakkViewModelBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Thormeier\BreadcrumbBundle\ThormeierBreadcrumbBundle(),
 
 
             new FOS\RestBundle\FOSRestBundle(),
