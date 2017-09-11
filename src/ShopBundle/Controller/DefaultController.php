@@ -19,15 +19,15 @@ class DefaultController extends Controller
         $latestproducts = $this->get('doctrine')
             ->getManager()
             ->getRepository(Products::class)
-            ->findBy(array('onMain' => 1), ['created' => 'DESC'], $this->getParameter('lastest products limit'));
+            ->findBy(array('onMain' => 1), ['created' => 'DESC'], $this->getParameter('latest_products_limit'));
         $topsellers = $this->get('doctrine')
             ->getManager()
             ->getRepository(Products::class)
-            ->findBy(array('top' => 1), [], $this->getParameter('top block limit'));
+            ->findBy(array('top' => 1), [], $this->getParameter('top_block_limit'));
         $topnew = $this->get('doctrine')
             ->getManager()
             ->getRepository(Products::class)
-            ->findBy(array('top' => 1), ['created' => 'DESC'], $this->getParameter('top block limit'));
+            ->findBy(array('top' => 1), ['created' => 'DESC'], $this->getParameter('top_block_limit'));
         $brands = $this->get('doctrine')
             ->getManager()
             ->getRepository(Brands::class)

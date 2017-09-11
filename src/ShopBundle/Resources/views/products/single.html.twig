@@ -55,26 +55,26 @@
                                             <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                         </div>
                                         <button id="scroll" data-product_id="{{ product.id }}" class="add_to_cart_button" type="button">Add to cart</button>
+                                        <input type="button"
+                                               data-product_id="{{ product.id }}"
+                                               class="add_to_wishlist_button"
+                                               value="Add to wishlist"
+                                               onclick="this.value='Added'"
+                                        >
                                     </form>
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
                                             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            {#<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>#}
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                                 <h2>Product Description</h2>
-                                                <input type="button" data-product_id="{{ product.id }}"  class="add_to_wishlist_button" value="Add to wishlist" onclick="this.value='Added'">
                                                 <div>
                                                     {{ product.description | raw }}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {#<button data-product_id="{{ product.id }}"#}
-                                            {#class="add_to_wishlist_button"#}
-                                            {#type="button">Add to wishlist#}
-                                    {#</button>#}
                                 </div>
                             </div>
                         </div>

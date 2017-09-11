@@ -2,11 +2,8 @@
 
 namespace ShopBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use ShopBundle\Entity\Categories;
 use ShopBundle\Entity\Products;
-use ShopBundle\Entity\Wishlist;
-use ShopBundle\ShopBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,8 +42,7 @@ class ProductsController extends Controller
                 'name' => $categories->getTitle(),
             ));
 
-        $categoryiterms = $this->get('doctrine')
-            ->getManager()
+        $categoryiterms = $this->get('doctrine.orm.entity_manager')
             ->getRepository(Products::class)
             ->findBy(['category' => $categories->getId()]);
 
@@ -87,11 +83,13 @@ class ProductsController extends Controller
                 'name' => $products->getTitle(),
             ));
 
-        $relproduct = $this->get('doctrine')
-            ->getManager()
+        $relproduct = $this->get('doctrine.orm.entity_manager')
             ->getRepository(Products::class)
-            ->findBy(['category' => $products->getCategory()->getId()], [], 10); //related products
-        $vm = $this->get('shop.relprod_view_model_assembler')->generateViewModel($model);
+            ->findBy(['category' =>
+                $products->getCategory()->getId()],
+                [],
+                $this->getParameter('related_products_limit'));
+        $vm = $this->get('shop.relprod_view_model_assembler')->generateViewModel($relproduct);
 
         return $this->render('ShopBundle:products:single.html.twig', array
         (
