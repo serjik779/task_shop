@@ -19,37 +19,41 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    {% for order in orders  %}
+                    <div class="col-md-3">
+                        <b>Total:</b> {{ order.total }}
+                    </div>
+                    <div class="col-md-3">
+                        <b>Address:</b> {{ order.address }}
+                    </div>
+                    <div class="col-md-3">
+                        <b>Date:</b> {{ order.date|date('Y-m-d') }}
+                    </div>
+                    <div class="col-md-3">
+                        <b>Name:</b> {{ order.name }}
+                    </div>
                     <table class="table table-responsive table-hover">
                         <thead>
                         <tr class="bg-success">
-                            <th>Name</th>
-                            <th>Product</th>
-                            <th>Date</th>
-                            <th>Address</th>
+                            <th>Title</th>
                             <th>Amount</th>
-                            <th>Price</th>
-                            <th>Total Price</th>
+                            <th>Cost</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        {% for order in orders  %}
+                        {% for orderItem in orderItems  %}
 
                             <tr>
-                                <td>{{ order.OrdersInfo.name }}</td>
-                                <td>{{ order.products.title }}</td>
-                                <td>{{ order.OrdersInfo.date|date('Y-m-d') }}</td>
-                                <td>{{ order.OrdersInfo.address }}</td>
-                                <td>{{ order.amount }}</td>
-                                <td>{{ order.products.cost }}</td>
-                                <td>{{ order.products.cost * order.amount}}</td>
-
+                                <td>{{ orderItem.products.title }}</td>
+                                <td>{{ orderItem.amount }}</td>
+                                <td>{{ orderItem.products.cost }}</td>
                             </tr>
 
                         {% endfor %}
                         </tbody>
                     </table>
-
+                {% endfor %}
                 </div>
                 <div class="col-md-6">
                 </div>

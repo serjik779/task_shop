@@ -19,7 +19,7 @@ class GetProductsCommand extends ContainerAwareCommand {
         $logger = $this->getContainer()->get('logger');
         $logger->info('Adding information for products and categories');
         $product = $this->getContainer()->get('adding.product');
-        $product->addProduct();
+        $product->updateProducts();
 
     }
 

@@ -4,6 +4,7 @@ namespace ShopBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ShopBundle\Entity\OrdersInfo;
+use Psr\Log\LoggerInterface;
 use ShopBundle\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -27,15 +28,19 @@ class apiOrdersController extends FOSRestController
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');
+        $logger = $this->container->get('logger');
         if ($token) {
             $res = $this->tokenAuth($token, 'order');
+            #$logger->info($res);
             return new View($res, Response::HTTP_OK);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
+            #$logger->info($res);
             return new View($res, Response::HTTP_OK);
         } else {
             $data['error'] = "Access denied! You dont have username or password!";
-            return new View($data, Response::HTTP_NOT_FOUND);
+            #$logger->info($data);
+            return new View($data, Response::HTTP_FORBIDDEN);
         }
     }
 
@@ -151,17 +156,19 @@ class apiOrdersController extends FOSRestController
      * @param Request $request
      * @return array|View
      */
-    public function setCountAction(Request $request, $json = array()) {
-        $amounts = empty($json) ? json_decode(file_get_contents("php://input"), true) : $json;
+    public function setCountAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');
         if ($token) {
-            $data['success'] = "Success!";
-            $this->get('adding.product')->setCount($request);
-            return new View($data, Response::HTTP_OK);
+            $status = $this->get('adding.product')->setCount();
+            if ($status == 'error') {
+                $response = Response::HTTP_NOT_FOUND;
+            } else {
+                $response = Response::HTTP_OK;
+            }
+            return new View($status, $response);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
             return new View($res, Response::HTTP_OK);
@@ -186,9 +193,9 @@ class apiOrdersController extends FOSRestController
         if ($token) {
             $res['success'] = 1;
             foreach ($status as $st) {
-                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['id']);
-                if (!empty($product)) {
-                    $orderInfo->setStatus($st['status']);
+                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['idOrderShop']);
+                if (!empty($orderInfo)) {
+                    $orderInfo->setStatus($st['title']);
                     $em->persist($orderInfo);
                     $em->flush();
                 }

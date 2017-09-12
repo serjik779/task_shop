@@ -65,6 +65,24 @@ class OrdersInfo
     private $total = 0;
 
     /**
+     * @var \Users
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+    /**
+     * @var DeliveryType
+     *
+     * @ORM\ManyToOne(targetEntity="DeliveryType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="delivery_type_id", referencedColumnName="id")
+     * })
+     */
+    private $deliveryType;
+    /**
      * @return float
      */
     public function getTotal()
@@ -100,15 +118,6 @@ class OrdersInfo
         return $this;
     }
 
-    /**
-     * @var DeliveryType
-     *
-     * @ORM\ManyToOne(targetEntity="DeliveryType")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="delivery_type_id", referencedColumnName="id")
-     * })
-     */
-    private $deliveryType;
     /**
      * @return ArrayCollection|OrderItems[]
      */
@@ -248,5 +257,28 @@ class OrdersInfo
     public function getDeliveryType()
     {
         return $this->deliveryType;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Application\Sonata\UserBundle\Entity\User $user
+     * @return OrdersInfo
+     */
+    public function setUser(\Application\Sonata\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Application\Sonata\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
