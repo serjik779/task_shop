@@ -142,10 +142,13 @@ class AddingProductsCenter {
 
         if (empty($product)) {
             $product = new Products();
-
-
         }
-        $imageOfProduct = new Images();
+        $imageOfProduct = $this->entityManager->getRepository(Images::class)->findOneBy(array(
+            'products' => $product
+        ));
+        if (!$imageOfProduct) {
+            $imageOfProduct = new Images();
+        }
         $imageFileWithoutSpace = str_ireplace(' ', '-', $productFields->image_name);
         $imageOfProduct->setFilename($imageFileWithoutSpace)
             ->refreshUpdated();
