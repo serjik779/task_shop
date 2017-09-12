@@ -150,6 +150,7 @@ class AddingProductsCenter {
                 ->refreshUpdated();
             $imageFile = $productFields->image_name;
             $this->download($this->serviceUrl . '/images/products/' . $imageFile , $imageOfProduct->getWebPath());
+            $product->addImage($imageOfProduct);
         }
 
         $product->setServiceId($productFields->id);
@@ -157,7 +158,7 @@ class AddingProductsCenter {
         $product->setDescription($productFields->description);
         $product->setCost($productFields->cost);
         $product->setCreated(new \DateTime($productFields->created));
-        $product->addImage($imageOfProduct);
+
 
         $this->entityManager->persist($product);
 
