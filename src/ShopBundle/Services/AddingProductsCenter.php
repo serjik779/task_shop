@@ -24,7 +24,7 @@ class AddingProductsCenter {
         $this->serviceUrl = $this->container->getParameter('service_url');
         $this->token = false;
 
-        $token = $this->getServiceContents('/api/amount', [
+        $token = $this->getServiceContents('/api/gettoken', [
             'username' => 'ustora',
             'password' => '123123',
         ]);
@@ -150,25 +150,24 @@ class AddingProductsCenter {
         $category->addProducts($product);
     }
 
-    public function setCount($amounts = array()) {
+    public function setCount() {
+        $amounts = json_decode(file_get_contents("php://input"));
+        #$amounts = json_decode('{"0":{"id":1,"amount":32},"1":{"id":2,"amount":23},"2":{"id":3,"amount":23},"3":{"id":4,"amount":32}}');
         if (empty($amounts)) {
-            $amounts = $this->getServiceContents('/api/amount', [
-                'token' => $this->token,
-            ]);
+            return 'error';
         }
-
-        $request = $this->container->get('request_stack')->getCurrentRequest();
-
+        $test = '' ;
         foreach ($amounts as $amount) {
             $product = $this->entityManager
                 ->getRepository(Products::class)
-                ->findOneBy(array('serviceId' => $amount['id']));
+                ->findOneBy(array('serviceId' => $amount->id));
             if (!empty($product)) {
-                $product->setAmount($amount['amount']);
+                $product->setAmount($amount->amount);
                 $this->entityManager->persist($product);
                 $this->entityManager->flush();
             }
         }
+        return 'success';
     }
 
     public function download($url, $urlTo) {

@@ -156,24 +156,19 @@ class apiOrdersController extends FOSRestController
      * @param Request $request
      * @return array|View
      */
-    public function setCountAction(Request $request, $json = array()) {
-        $amounts = empty($json) ? json_decode(file_get_contents("php://input"), true) : $json;
+    public function setCountAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $logger = $this->container->get('logger');
-        $logger->info('I just got the logger');
-        $logger->error('An error occurred');
-
-        $logger->critical('I left the oven on!', array(
-            // include extra "context" info in your logs
-            'cause' => 'in_hurry',
-        ));
         $token = $request->get('token');
         $password = $request->get('password');
         $username = $request->get('username');
         if ($token) {
-            $data['success'] = "Success!";
-            $this->get('adding.product')->setCount($request);
-            return new View($data, Response::HTTP_OK);
+            $status = $this->get('adding.product')->setCount();
+            if ($status == 'error') {
+                $response = Response::HTTP_NOT_FOUND;
+            } else {
+                $response = Response::HTTP_OK;
+            }
+            return new View($status, $response);
         } elseif ($password && $username) {
             $res = $this->passwordAuth($username, $password);
             return new View($res, Response::HTTP_OK);
@@ -198,9 +193,9 @@ class apiOrdersController extends FOSRestController
         if ($token) {
             $res['success'] = 1;
             foreach ($status as $st) {
-                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['id']);
-                if (!empty($product)) {
-                    $orderInfo->setStatus($st['status']);
+                $orderInfo = $em->getRepository(OrdersInfo::class)->find($st['idOrderShop']);
+                if (!empty($orderInfo)) {
+                    $orderInfo->setStatus($st['title']);
                     $em->persist($orderInfo);
                     $em->flush();
                 }
