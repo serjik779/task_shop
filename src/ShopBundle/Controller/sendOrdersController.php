@@ -30,10 +30,10 @@ class apiOrdersController extends FOSRestController
 
             if ($password && $username) {
             $res = $this->passwordAuth($username, $password);
-            return new View($res, Response::HTTP_NOT_FOUND);
+            return new View($res, Response::HTTP_OK);
         } else {
             $data['error'] = "Access denied! You dont have username or password!";
-            return new View($data, Response::HTTP_NOT_FOUND);
+            return new View($data, Response::HTTP_FORBIDDEN);
         }
         #return $this->render('ShopBundle:Default:index.html.twig');
     }
