@@ -42,5 +42,3 @@
 /composer.phar
 vendor/
 /web/.htaccess
-!/src/ShopBundle/Resources/views/home/index.html.twig
-!/src/ShopBundle/Services/AddingProductsCenter.php

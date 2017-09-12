@@ -22,6 +22,7 @@
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <li><a href="/profile">My account</a></li>
                             <li><a href="{{ path('shop_wishlist') }}">Wishlist</a></li>
+                            <li><a href="{{ path ('shop_myorders') }}">My orders</a></li>
                         {% endif %}
                         <li><a href="{{ path('products_index') }}">Products</a></li>
                         <li><a href="{{ path('shop_contact') }}">Contact us</a></li>

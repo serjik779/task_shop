@@ -7,6 +7,9 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
+            {{ breadcrumbs() }}
+            <div class="form">
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
             <div class="col-xs-12 col-md-6">
                 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
@@ -19,15 +22,44 @@
                 {% if page %}
                     {{ page.content | raw }}
                 {% endif %}
-                <div class="col-xs-12 col-md-12">
-                    <iframe class="col-xs-12 col-md-12" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d992.8670017379352!2d23.
-                802688302510184!3d53.71026320562025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e078c8ff550097%3A0x2dcd8826dec111b2!
-                2z0YPQuy4g0JHQvtCz0YPRhtC60L7Qs9C-IDUsINCT0YDQvtC00L3QviAyMzAwMDI!5e0!3m2!1sru!2sby!4v1503341420067"
-                            width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>
+                <div id = "map" class="col-xs-12 col-md-12"></div>
             </div>
             </div>
-
     </div>
 </div>
+
+    <script>
+        // initMap() -map initialization
+        function initMap() {
+            // Coordinates of the center on the map.
+            var centerLatLng = new google.maps.LatLng(53.710203, 23.804123);
+
+            //map initialization options
+            var mapOptions = {
+                center: centerLatLng,
+                zoom: 14
+            };
+
+            //Create a map inside the element #map
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            var marker = new google.maps.Marker({
+                position: centerLatLng,
+                map: map,
+                title: 'Self-discharge point'
+            });
+            var secondMarker = new google.maps.Marker({
+                position: {lat:53.711585, lng:23.817268},
+                map: map,
+                title: 'ElectroZone'
+            });
+        }
+
+        //Launching the full page loading function
+        google.maps.event.addDomListener(window, "load", initMap);
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXWJ9bS2HW4i4pTB0YjyIO4qvv3zaChvM&callback=initMap"
+            type="text/javascript"></script>
+
 {% endblock %}

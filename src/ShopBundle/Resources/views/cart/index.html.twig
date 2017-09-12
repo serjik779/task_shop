@@ -1,10 +1,22 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
 {% block body %}
 {% set fullPrice = 0 %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Cart</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
+            {{ breadcrumbs() }}
             <div class="col-md-12">
                 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
