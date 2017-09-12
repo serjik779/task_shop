@@ -143,17 +143,14 @@ class AddingProductsCenter {
         if (empty($product)) {
             $product = new Products();
         }
-        $imageOfProduct = $this->entityManager->getRepository(Images::class)->findOneBy(array(
-            'products' => $product
-        ));
-        if (!$imageOfProduct) {
+        if (count($product->getImages()) == 0) {
             $imageOfProduct = new Images();
+            $imageFileWithoutSpace = str_ireplace(' ', '-', $productFields->image_name);
+            $imageOfProduct->setFilename($imageFileWithoutSpace)
+                ->refreshUpdated();
+            $imageFile = $productFields->image_name;
+            $this->download($this->serviceUrl . '/images/products/' . $imageFile , $imageOfProduct->getWebPath());
         }
-        $imageFileWithoutSpace = str_ireplace(' ', '-', $productFields->image_name);
-        $imageOfProduct->setFilename($imageFileWithoutSpace)
-            ->refreshUpdated();
-        $imageFile = $productFields->image_name;
-        $this->download($this->serviceUrl . '/images/products/' . $imageFile , $imageOfProduct->getWebPath());
 
         $product->setServiceId($productFields->id);
         $product->setTitle($productFields->title);
