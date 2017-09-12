@@ -24,7 +24,7 @@ class AddingProductsCenter {
         $this->serviceUrl = $this->container->getParameter('service_url');
         $this->token = false;
 
-        $token = $this->getServiceContents('/api/amount', [
+        $token = $this->getServiceContents('/api/gettoken', [
             'username' => 'ustora',
             'password' => '123123',
         ]);
