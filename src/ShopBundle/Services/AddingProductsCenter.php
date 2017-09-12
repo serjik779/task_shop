@@ -108,9 +108,14 @@ class AddingProductsCenter {
         if (!empty($categoryFields->products_in_category)) {
             $products = $categoryFields->products_in_category;
         }
+        $imageOfCategory = new Images();
+        $imageOfCategory->setFilename($categoryFields->image_name)
+            ->refreshUpdated();
 
         $category->setServiceId($categoryFields->id);
-        $category->setTitle($categoryFields->title);
+        $category->setTitle($categoryFields->title)
+                 ->setImage($imageOfCategory);
+        $this->download($this->serviceUrl. '/images/category/' . $categoryFields->image_name,$imageOfCategory->getWebPath());
 
         $this->entityManager->persist($category);
         $this->entityManager->flush($category);
@@ -137,13 +142,22 @@ class AddingProductsCenter {
 
         if (empty($product)) {
             $product = new Products();
+
+
         }
+        $imageOfProduct = new Images();
+        $imageFileWithoutSpace = str_ireplace(' ', '-', $productFields->image_name);
+        $imageOfProduct->setFilename($imageFileWithoutSpace)
+            ->refreshUpdated();
+        $imageFile = $productFields->image_name;
+        $this->download($this->serviceUrl . '/images/products/' . $imageFile , $imageOfProduct->getWebPath());
 
         $product->setServiceId($productFields->id);
         $product->setTitle($productFields->title);
         $product->setDescription($productFields->description);
         $product->setCost($productFields->cost);
         $product->setCreated(new \DateTime($productFields->created));
+        $product->addImage($imageOfProduct);
 
         $this->entityManager->persist($product);
 
@@ -168,5 +182,15 @@ class AddingProductsCenter {
             }
         }
         return 'success';
+    }
+
+    public function download($url, $urlTo) {
+        $ch = curl_init($url);
+        $fp = fopen($urlTo, 'wb');
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
     }
 }

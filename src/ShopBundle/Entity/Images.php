@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class Images
 {
 
-    const ROOT_DIR = 'D:/OpenServer/domains/intexshop3/web';
+    const ROOT_DIR = 'D:/OpenServer/domains/intex-shop-new.com/web';
     const SERVER_PATH_TO_IMAGE_FOLDER = '/uploads/';
     /**
      * @var integer
