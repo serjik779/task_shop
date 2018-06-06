@@ -3,7 +3,7 @@ products_index:
     defaults: { _controller: "ShopBundle:Products:index" }
     options:
             breadcrumb:
-                label: 'Products'
+                label: 'Продукты'
                 parent_route: shop_homepage
     methods:  GET
 

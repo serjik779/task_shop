@@ -46,8 +46,7 @@ class SliderAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('image')
-            ->add('name')
-            ->add('description');
+;
     }
 
     // Fields to be shown on lists
@@ -56,8 +55,7 @@ class SliderAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('id')
             ->addIdentifier('image')
-            ->addIdentifier('name')
-            ->addIdentifier('description');
+;
 
     }
 
@@ -66,9 +64,8 @@ class SliderAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('image')
-            ->add('name')
-            ->add('description');
+            ->add('image');
+
     }
 
     public function prePersist($slider)

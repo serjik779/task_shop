@@ -1,6 +1,6 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
 {% block head %}
-    <head><title>{% block title %}ElectroZone | ContactUs{% endblock %}</title></head>
+    <head><title>{% block title %}Зеленый Горизонт | Контакты{% endblock %}</title></head>
 {% endblock %}
 {% block body %}
 <div class="single-product-area">
@@ -14,7 +14,7 @@
                 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
                 {{ form_start(form) }}
-                <p>Feedback</p>
+                <p>Обратная связь</p>
                 {{ form_widget(form) }}
                 {{ form_end(form) }}
             </div>
@@ -32,7 +32,7 @@
         // initMap() -map initialization
         function initMap() {
             // Coordinates of the center on the map.
-            var centerLatLng = new google.maps.LatLng(53.710203, 23.804123);
+            var centerLatLng = new google.maps.LatLng(53.673118, 23.841613);
 
             //map initialization options
             var mapOptions = {
@@ -48,9 +48,9 @@
                 title: 'Self-discharge point'
             });
             var secondMarker = new google.maps.Marker({
-                position: {lat:53.711585, lng:23.817268},
+                position: {lat:53.673118, lng:23.841613},
                 map: map,
-                title: 'ElectroZone'
+                title: 'Зеленый мир'
             });
         }
 
@@ -59,7 +59,7 @@
 
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXWJ9bS2HW4i4pTB0YjyIO4qvv3zaChvM&callback=initMap"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1iar_tneKD9qcqs2uqifSUgrtPMqPghw&callback=initMap"
             type="text/javascript"></script>
 
 {% endblock %}

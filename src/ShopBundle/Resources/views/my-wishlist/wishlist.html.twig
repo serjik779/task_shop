@@ -12,10 +12,10 @@
                     <table class="table table-responsive table-hover">
                         <thead>
                             <tr class="bg-success">
-                                <th>Image</th>
-                                <th>Product</th>
-                                <th>Description</th>
-                                <th>Cost</th>
+                                <th>Картинка</th>
+                                <th>Продукт</th>
+                                <th>Примечание</th>
+                                <th>Цена</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -35,8 +35,8 @@
                                 <td>{{ wl.product.description|raw }}</td>
                                 <td>{{ wl.product.cost }}</td>
                                 <td>
-                                    <button id="scroll" data-product_id="{{ wl.product.id }}" class="add_to_cart_button" type="button">To cart</button>
-                                    <button id="dell" data-product_id="{{ wl.product.id }}" class="delete_from_wishlist_button" type="button">Delete</button>
+                                    <button id="scroll" data-product_id="{{ wl.product.id }}" class="add_to_cart_button" type="button">В корзину</button>
+                                    <button id="dell" data-product_id="{{ wl.product.id }}" class="delete_from_wishlist_button" type="button">Удалить</button>
                                 </td>
                                 {% endfor %}
                             </tr>

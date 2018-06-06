@@ -3,7 +3,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 
-{% block title %}Please Sign In{% endblock %}
+{% block title %}Пожалуйста войдите{% endblock %}
 
 
 {% block fos_user_content %}
@@ -20,7 +20,7 @@
     <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Пожалуйста войдите в аккаунт</h2>
 
 
         <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
@@ -43,7 +43,7 @@
                        name="_remember_me"
                        value="on" /> {{ 'security.login.remember_me'|trans }}
             </label>
-            <a href="{{ path('fos_user_resetting_request') }}" class="pull-right">Forgot password?</a>
+            <a href="{{ path('fos_user_resetting_request') }}" class="pull-right">Забыли пароль?</a>
         </div>
         <input type="submit"
                id="_submit"

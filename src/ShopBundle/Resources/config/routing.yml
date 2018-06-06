@@ -3,14 +3,14 @@ shop_homepage:
     defaults: { _controller: ShopBundle:Default:index }
     options:
                 breadcrumb:
-                    label: 'Home'
+                    label: 'Главная'
 
 shop_contact:
     path:     /contact
     defaults: { _controller: ShopBundle:Contact:contactVendor }
     options:
                 breadcrumb:
-                    label: 'Contact'
+                    label: 'Контакты'
                     parent_route: shop_homepage
 
 shop_products:
@@ -23,7 +23,7 @@ shop_about:
     defaults: { _controller: ShopBundle:About:about }
     options:
                 breadcrumb:
-                    label: 'About'
+                    label: 'О нас'
                     parent_route: shop_homepage
 shop_wishlist:
     path:     /wishlist

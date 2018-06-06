@@ -10,11 +10,10 @@
 
                         <li>
 
-                          <a href="/profile">Welcome  {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a>
+                          <a href="/profile">Добро пожаловать  {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a>
                         </li>
-                        <li><a href="{{ path('shop_wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
-                        <li><a href="{{ path('shop_myorders') }}"><i class="fa fa-heart"></i> My orders</a></li>
-                        <li><a href="{{ path('cart_index') }}"><i class="fa fa-user"></i> My Cart</a></li>
+                        <li><a href="{{ path('shop_myorders') }}"><i class="fa fa-heart"></i> Мои заказы</a></li>
+                        <li><a href="{{ path('cart_index') }}"><i class="fa fa-user"></i>Корзина</a></li>
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">
                                 {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} <i class="fa fa-sign-out"></i>
@@ -43,8 +42,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <div class="logo">
-                    <h1><a href="{{ path('shop_homepage') }}"><img src="/img/logo.png"></a></h1>
+               <div class="logo">
+                    <h1><a href="{{ path('shop_homepage') }}"><img src=""></a></h1>
                 </div>
             </div>
 
@@ -52,7 +51,7 @@
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <div class="shopping-item">
                         <a href="{{ path('cart_index') }}">
-                            Cart - $
+                            Корзина - руб.
                             <span class="cart-amunt">
                             {{ getCountCartItems().cash }}
                         </span>
@@ -83,13 +82,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li {% if app.request.attributes.get('_route') == 'shop_homepage' %}class="active"{% endif %}>
-                        <a href="{{ path('shop_homepage') }}">Home</a></li>
+                        <a href="{{ path('shop_homepage') }}">Главная</a></li>
                     <li {% if app.request.attributes.get('_route') in ['products_index', 'products_category', 'products_show'] %}class="active"{% endif %}>
-                        <a href="{{ path('products_index') }}">Products</a></li>
+                        <a href="{{ path('products_index') }}">Продукты</a></li>
                     <li {% if app.request.attributes.get('_route') == 'shop_about' %}class="active"{% endif %}>
-                        <a href="{{ path('shop_about') }}">About</a></li>
+                        <a href="{{ path('shop_about') }}">О нас</a></li>
                     <li {% if app.request.attributes.get('_route') == 'shop_contact' %}class="active"{% endif %}>
-                        <a href="{{ path('shop_contact') }}">Contact</a></li>
+                        <a href="{{ path('shop_contact') }}">Контакты</a></li>
                 </ul>
             </div>
         </div>

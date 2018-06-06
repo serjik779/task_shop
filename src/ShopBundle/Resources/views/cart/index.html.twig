@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Cart</h2>
+                        <h2>Корзина</h2>
                     </div>
                 </div>
             </div>
@@ -29,10 +29,10 @@
                             <tr>
                                 <th class="product-remove">&nbsp;</th>
                                 <th class="product-thumbnail">&nbsp;</th>
-                                <th class="product-name">Product</th>
-                                <th class="product-price">Price</th>
-                                <th class="product-quantity">Quantity</th>
-                                <th class="product-subtotal">Total</th>
+                                <th class="product-name">Продукт</th>
+                                <th class="product-price">Цена</th>
+                                <th class="product-quantity">Количество</th>
+                                <th class="product-subtotal">Итого</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -58,7 +58,7 @@
                                         </td>
 
                                         <td class="product-price">
-                                            <span class="amount">${{ cartItem.product.cost }}</span>
+                                            <span class="amount">{{ cartItem.product.cost }} руб.</span>
                                         </td>
 
                                         <td class="product-quantity">
@@ -69,7 +69,7 @@
 
                                         <td class="product-subtotal">
                                             {% set fullCost = cartItem.product.cost * cartItem.amount %}
-                                            <span class="amount">${{ fullCost }}</span>
+                                            <span class="amount">{{ fullCost }} руб.</span>
                                         </td>
                                     </tr>
                                     {% set fullPrice = fullPrice + fullCost %}
@@ -77,12 +77,12 @@
                             {% endif %}
                             <tr>
                                 <td class="td-right" colspan="6">
-                                    <strong>Total: ${{ fullPrice }}</strong>
+                                    <strong>Итого: {{ fullPrice }} руб.</strong>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="actions" colspan="6">
-                                    <input href="{{ path('Checkout_index') }}" type="submit" value="Checkout"
+                                    <input href="{{ path('Checkout_index') }}" type="submit" value="Заказать"
                                            name="proceed" class="checkout-button button alt wc-forward">
                                 </td>
                             </tr>

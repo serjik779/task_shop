@@ -13,14 +13,7 @@
                             {% else %}
                                 <img src="/img/no-image.png" alt="">
                             {% endif %}
-                            <div class="caption-group">
-                                <h2 class="caption title">
-                                    {{ slide.name }}
-                                </h2>
-                                <h4 class="caption subtitle animated fadeInRight">
-                                    {{ slide.description | raw }}
-                                </h4>
-                            </div>
+
                         </li>
                     {% endfor %}
                 {% endif %}
@@ -36,25 +29,25 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo1">
                         <i class="fa fa-refresh"></i>
-                        <p>30 Days return</p>
+                        <p>30 дней доставки</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo2">
                         <i class="fa fa-truck"></i>
-                        <p>Free shipping</p>
+                        <p>Доставка</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo3">
                         <i class="fa fa-lock"></i>
-                        <p>Secure payments</p>
+                        <p>Оплата картой</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo4">
                         <i class="fa fa-gift"></i>
-                        <p>New products</p>
+                        <p>Новые продукты</p>
                     </div>
                 </div>
             </div>
@@ -67,7 +60,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="latest-product">
-                        <h2 class="section-title">Latest Products</h2>
+                        <h2 class="section-title">Последние продукты</h2>
                         <div class="product-carousel">
                             {% if vm.latest %}
                                 {% for latest in vm.latest %}
@@ -79,10 +72,10 @@
                                                 <img src="/img/no-image.png" alt="">
                                             {% endif %}
                                             <div class="product-hover">
-                                                <a href="#" data-product_id="{{ latest.id }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                <a href="#" data-product_id="{{ latest.id }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Добавить в корзину</a>
 
                                                 <a href="{{ path('products_show', { 'slug2': latest.category.slug, 'slug': latest.slug }) }}"
-                                                   class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                                   class="view-details-link"><i class="fa fa-link"></i> Детали</a>
                                             </div>
                                         </div>
 
@@ -135,7 +128,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="single-product-widget">
-                        <h2 class="product-wid-title">Top Sellers</h2>
+                        <h2 class="product-wid-title">Топ продаж</h2>
                         {% if vm.top %}
                             {% for top in vm.top %}
                                 <div class="single-wid-product">
@@ -152,8 +145,8 @@
                                         </a>
                                     </h2>
                                     <div class="product-wid-price">
-                                        <ins>${{ top.cost }}</ins>
-                                        <del>${{ top.cost * 1.25 }}</del>
+                                        <ins>{{ top.cost }} руб.</ins>
+                                        <del>{{ top.cost * 1.25 }} руб.</del>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -162,7 +155,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="single-product-widget">
-                        <h2 class="product-wid-title">Top New</h2>
+                        <h2 class="product-wid-title">Топ новых</h2>
                         {% if vm.new %}
                             {% for new in vm.new %}
                         <div class="single-wid-product">
@@ -179,8 +172,8 @@
                                 </a>
                             </h2>
                             <div class="product-wid-price">
-                                <ins>${{ new.cost }}</ins>
-                                <del>${{ new.cost * 1.25 }}</del>
+                                <ins>{{ new.cost }} руб.</ins>
+                                <del>{{ new.cost * 1.25 }} руб.</del>
                             </div>
                         </div>
                             {% endfor %}

@@ -1,6 +1,6 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
 {% block head %}
-    <head><title>{% block title %}ElectroZone | {{ category.title }}{% endblock %}</title></head>
+    <head><title>{% block title %}Зеленый мир | {{ category.title }}{% endblock %}</title></head>
 {% endblock %}
 {% block body %}
     {% set countProd = 0 %}
@@ -13,7 +13,7 @@
                             {% if category %}
                                 {{ category.title }}
                             {% else %}
-                                Products
+                                Продукты
                             {% endif %}
                         </h2>
                     </div>
@@ -45,17 +45,16 @@
                                             <a href="{{ path('products_show', { 'slug2': category.slug, 'slug': product.slug}) }}">{{ product.title }}</a>
                                         </h2>
                                         <div class="product-carousel-price">
-                                            <ins>${{ product.cost }}</ins>
-                                            <del>${{ product.cost * 1.25 }}</del>
+                                            <ins>{{ product.cost }} руб.</ins>
+                                            <del>{{ product.cost * 1.25 }} руб.</del>
                                         </div>
 
                                         <div class="product-option-shop">
-                                            <button type="button" class="add_to_cart_button" data-product_id="{{ product.id }}" rel="nofollow">Add to cart</button>
+                                            <button type="button" class="add_to_cart_button" data-product_id="{{ product.id }}" rel="nofollow">Добавить в корзину</button>
                                         </div>
-                                        <div class="product-option-shop">
-                                            <input type="button" data-product_id="{{ product.id }}"  class="add_to_wishlist_button" value="Add to wishlist" onclick="this.value='Added'">
 
-                                        </div>
+
+
                                     </div>
                                 </div>
                                 {% set countProd = countProd + 1 %}

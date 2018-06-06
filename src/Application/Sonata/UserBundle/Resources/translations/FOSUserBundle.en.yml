@@ -1,105 +1,105 @@
 # Group
 group:
     edit:
-        submit: Update group
+        submit: Обновление группы
     show:
-        name: Group name
+        name: Имя группы
     new:
-        submit: Create group
+        submit: Создать группу
     flash:
-        updated: The group has been updated
-        created: The group has been created
-        deleted: The group has been deleted
+        updated: Группа обновлена
+        created: Группа создана
+        deleted: Группа удалена
 
 # Security
-"Bad credentials": Invalid username or password
+"Bad credentials": Неправильное имя пользователя или пароль
 
 # Since Symfony 2.6 the error message has changed
-"Bad credentials.": Invalid username or password.
+"Bad credentials.": Неправильное имя пользователя или пароль
 
 security:
     login:
-        username: Username
-        password: Password
-        remember_me: Remember me
-        submit: Login
+        username: Логин
+        password: Пароль
+        remember_me: Запомнить меня
+        submit: Войти
 
 # Profile
 profile:
     show:
-        username: Username
-        email: Email
-        firstname: Firstname
-        lastname: Lastname
-        phone: Phone
-        locale: Locale
-        website: Website
-        timezone: Timezone
+        username: Логин
+        email: email
+        firstname: Имя
+        lastname: Фамилия
+        phone: Телефон
+        locale: Город
+        website: Сайт
+        timezone: часовой пояс
     edit:
-        submit: Update
+        submit: Обновить
     flash:
-        updated: The profile has been updated
+        updated: Профиль был обновлен
 
 # Password change
 change_password:
-    submit: Change password
+    submit: Изменить пароль
     flash:
-        success: The password has been changed
+        success: Пароль был изменен
 
 # Registration
 registration:
-    check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
-    confirmed: Congrats %username%, your account is now activated.
-    back: Back to the originating page.
-    submit: Register
+    check_email: Email был отправлен на %email%. Он содержит ссылку активации, которую вы должны нажать, чтобы активировать свою учетную запись.
+    confirmed: Поздравляю %username%, ваш аккаунт был активирован.
+    back: Вернуться на исходную страницу.
+    submit: Зарегистрироваться
     flash:
-        user_created: The user has been created successfully
+        user_created: Пользователь был успешно создан
     email:
-        subject: Welcome %username%!
+        subject: Добро пожаловать %username%!
         message: |
-            Hello %username%!
+            Привет %username%!
 
-            To finish activating your account - please visit %confirmationUrl%
+            Для завершения регистрации - пожалуйста посетите %confirmationUrl%
 
-            Regards,
-            the Team.
+            Спасибо,
+            Зеленый мир.
 
 # Password resetting
 resetting:
-    password_already_requested: The password for this user has already been requested within the last 24 hours.
-    check_email: An email has been sent to %email%. It contains a link you must click to reset your password.
+    password_already_requested: Пароль для этого пользователя уже запрошен в течение последних 24 часов.
+    check_email: Email был отправлен на  %email%. Он содержит ссылку, которую вы должны нажать, чтобы сбросить пароль..
     request:
-        invalid_username: The username or email address "%username%" does not exist.
-        username: Username or email address
-        submit: Reset password
+        invalid_username: Имя пользователя или email "%username%" не был найден.
+        username: Имя пользователя или пароль
+        submit: Сбросить пароль
     reset:
-        submit: Change password
+        submit: Изменить пароль
     flash:
-        success: The password has been reset successfully
+        success: Пароль был успешно сброшен
     email:
-        subject: Reset Password
+        subject: Сбросить пароль
         message: |
-            Hello %username%!
+            Привет %username%!
 
-            To reset your password - please visit %confirmationUrl%
+            Для сброса пароля - пожалуйста посетите %confirmationUrl%
 
-            Regards,
-            the Team.
+            Спасибо,
+            Зеленый мир.
 
 # Global strings
 layout:
-    logout: Logout
-    login: Login
-    register: Register
+    logout: Выйти
+    login: Войти
+    register: Зарегистрироваться
     logged_in_as: %username%
 
 # Form field labels
 form:
-    group_name: Group name
-    username: Username
+    group_name: Имя группы
+    username: Имя пользователя
     email: Email
-    current_password: Current password
-    password: Password
-    password_confirmation: Repeat password
-    new_password: New password
-    new_password_confirmation: Repeat new password
+    current_password: Текущий пароль
+    password: Пароль
+    password_confirmation: повторить пароль
+    new_password: Новый пароль
+    new_password_confirmation: Повторите новый пароль

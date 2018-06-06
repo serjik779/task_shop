@@ -3,7 +3,7 @@ cart_index:
     defaults: { _controller: "ShopBundle:Cart:index" }
     options:
                         breadcrumb:
-                            label: 'My Cart'
+                            label: 'Корзина'
                             parent_route: products_index
 cart_add:
     path:     /add

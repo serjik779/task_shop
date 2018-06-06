@@ -31,15 +31,15 @@ class CartController extends Controller
         $cartItems = $em->getRepository(CartItems::class)->findBy(array('cart' => $cart));
         $form = $this->createFormBuilder(new OrdersInfo())
             ->add('name', TextType::class, array(
-                'label' => 'Name'))
+                'label' => 'Имя'))
             ->add('address', TextType::class, array(
-                'label' => 'Address'))
+                'label' => 'Адрес'))
             ->add('phone', TextType::class, array(
-                'label' => 'Phone'))
+                'label' => 'Телефон'))
             ->add('deliveryType', EntityType::class, array(
-                'label' => 'Delivery', 'class' => DeliveryType::class))
+                'label' => 'Доставка', 'class' => DeliveryType::class))
             ->add('Checkout', SubmitType::class, array(
-                'label' => 'Send'))
+                'label' => 'Отправить'))
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid() && !empty($cartItems)) {

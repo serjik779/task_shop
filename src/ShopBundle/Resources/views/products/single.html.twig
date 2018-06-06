@@ -1,6 +1,6 @@
 {% extends 'ShopBundle:Default:index.html.twig' %}
 {% block head %}
-    <head><title>{% block title %}ElectroZone | {{ product.title }}{% endblock %}</title></head>
+    <head><title>{% block title %}Зеленый мир | {{ product.title }}{% endblock %}</title></head>
 {% endblock %}
 {% block body %}
     <div class="product-big-title-area">
@@ -47,28 +47,23 @@
                                 <div class="product-inner">
                                     <h2 class="product-name">{{ product.title }}</h2>
                                     <div class="product-inner-price">
-                                        <ins>${{ product.cost }}</ins> <del>${{ product.cost * 1.25 }}</del>
+                                        <ins>{{ product.cost }} руб.</ins> <del>{{ product.cost * 1.25 }}руб </del>
                                     </div>
 
                                     <form action="" class="cart">
                                         <div class="quantity">
                                             <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                         </div>
-                                        <button id="scroll" data-product_id="{{ product.id }}" class="add_to_cart_button" type="button">Add to cart</button>
-                                        <input type="button"
-                                               data-product_id="{{ product.id }}"
-                                               class="add_to_wishlist_button"
-                                               value="Add to wishlist"
-                                               onclick="this.value='Added'"
-                                        >
+                                        <button id="scroll" data-product_id="{{ product.id }}" class="add_to_cart_button" type="button">Добавить в корзину</button>
+
                                     </form>
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Информация</a></li>
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                                <h2>Product Description</h2>
+                                                <h2>Информация о товаре</h2>
                                                 <div>
                                                     {{ product.description | raw }}
                                                 </div>
@@ -81,7 +76,7 @@
 
 
                         <div class="related-products-wrapper">
-                            <h2 class="related-products-title">Related Products</h2>
+                            <h2 class="related-products-title">Прошлые продукты</h2>
                             <div class="related-products-carousel">
                                 {% if vm.related %}
                                     {% for product in vm.related %}
@@ -95,9 +90,9 @@
                                                     {% endif %}
                                                 </a>
                                                 <div class="product-hover">
-                                                    <a href="#" data-product_id="{{ product.id }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                    <a href="#" data-product_id="{{ product.id }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
                                                     <a href="{{ path('products_show', { 'slug2': product.category.slug, 'slug': product.slug }) }}"
-                                                       class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                                       class="view-details-link"><i class="fa fa-link"></i> Детали</a>
                                                 </div>
                                             </div>
 
